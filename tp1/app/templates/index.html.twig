@@ -1,0 +1,43 @@
+<h1>Connexion</h1>
+
+
+{% if msg %}
+<div> {{msg}}</div>
+{% endif %}
+
+<form action="" method="post">
+<div>
+  <label for="email">Email</label>
+  <input
+     type="email"
+     id="email"
+     name="email"
+     required="required"
+     placeholder="Entrez votre email"
+/>
+</div>
+<br>
+
+ <br>
+
+ <div>
+   <label for="password">password</label>
+   <input
+      type="password"
+      id="password"
+      name="password"
+      required="required"
+      placeholder="Entrez votre password"
+ />
+ </div>
+ <br>
+ 
+
+  <div>
+   <input type="submit" value="Connexion" name="send"/>
+  </div>
+</form>
+
+<p>
+    <a href="register.php">Pas encore de compte?</a>
+</p>
