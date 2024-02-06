@@ -25,6 +25,12 @@ class Session
 
     public function isConnected()
     {
-        return isset($_SESSION['user']);
+        //return isset($_SESSION['user']);
+        return isset($this->get['user']);
+    }
+
+    public function hasRole(string $role)
+    {
+        return $_SESSION['user']['role'] == $role ? true : false;
     }
 }
