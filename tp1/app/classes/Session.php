@@ -18,7 +18,7 @@ class Session
         return isset($_SESSION[$key]) ? $_SESSION[$key] : false;
     }
 
-    public function destroy(string $key)
+    public function destroy()
     {
         unset($_SESSION);
         session_destroy();
@@ -27,7 +27,7 @@ class Session
     public function isConnected()
     {
         //return isset($_SESSION['user']);
-        return isset($this->get['user']);
+        return isset($this->get['email']);
     }
 
     public function hasRole(string $role)
@@ -37,6 +37,6 @@ class Session
         }else{
             return false;
         }*/
-        return $_SESSION['user']['role'] == $role ? true : false;
+        return $_SESSION['email']['role'] == $role ? true : false;
     }
 }

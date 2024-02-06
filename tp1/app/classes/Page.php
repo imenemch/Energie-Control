@@ -11,7 +11,7 @@ class Page
 
     function __construct()
     {
-        $this -> session = new Session();
+        $this-> session = new Session();
         try {
             $this->pdo = new \PDO('mysql:host=mysql;dbname=b2-paris', "root", "");
         } catch (\PDOException $e) {

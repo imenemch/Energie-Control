@@ -9,11 +9,11 @@ $page->session -> get('user');
 $msg =false;
 
 if (isset($_POST['send'])) {
-   var_dump($_POST);
+   
    $user = $page->getUserByEmail([
     'email' => $_POST['email']
    ]);
-   var_dump($user);
+   
 
    if (!$user) {
     $msg = "Email ou mot de passe incorrect !";
@@ -21,7 +21,8 @@ if (isset($_POST['send'])) {
     if (!password_verify($_POST['password'], $user['password'])){
         $msg = "Email ou mot de passe incorrect !";
     }else{
-        var_dump('compte ok !');
+        $page->session->add('email', $_POST['email']);
+        header('location:login.php');
     }
    }
 }
