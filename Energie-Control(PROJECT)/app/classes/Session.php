@@ -1,5 +1,6 @@
 <?php
 
+namespace App;
 class Session
 {
     function __construct()
@@ -14,7 +15,7 @@ class Session
 
     public function get(string $key)
     {
-        return $_SESSION[$key];
+        return isset($_SESSION[$key]) ? $_SESSION[$key] : false;
     }
 
     public function destroy(string $key)
@@ -31,6 +32,11 @@ class Session
 
     public function hasRole(string $role)
     {
+        /*if ($_SESSION)['user']['role'] == $role{
+            return true
+        }else{
+            return false;
+        }*/
         return $_SESSION['user']['role'] == $role ? true : false;
     }
 }

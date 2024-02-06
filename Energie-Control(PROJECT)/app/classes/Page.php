@@ -1,14 +1,17 @@
 <?php
 
 namespace App;
+use App\Session;
 
 class Page
 {
     private \Twig\Environment $twig;
     private $pdo;
+    public $session;
 
     function __construct()
     {
+        $this -> session = new Session();
         try {
             $this->pdo = new \PDO('mysql:host=mysql;dbname=b2-paris', "root", "");
         } catch (\PDOException $e) {
