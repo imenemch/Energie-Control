@@ -1,0 +1,139 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+
+<form action="" method="post">
+<h2>Informations sur le client :</h2>
+
+<!-- Nom du client -->
+<div>
+<label for="nom">Nom du client : </label>
+<input type="text" 
+name="nom" 
+id="nom" 
+required="required">
+</div>
+
+<!-- Prenom client -->
+<div>
+<label for="prenom">Prenom du client : </label>
+<input type="text" 
+name="prenom" 
+id="prenom" 
+required="required">
+</div>
+
+<!-- Email -->
+<div>
+<label for="email">Email : </label>
+<input type="email" 
+name="email" 
+id="email" 
+placeholder="exemple@gmail.com" 
+
+required="required">
+</div>
+
+<!-- Adresse -->
+ <div>
+<label for="adresse">Adresse : </label>
+<input type="text" 
+name="adresse" 
+id="adresse" 
+placeholder="10 rue du chameau" 
+required="required">
+</div>
+
+<!-- Tel -->
+<div>
+ <label for="tel">Tel : </label>
+<input type="tel" 
+name="tel" 
+id="tel" 
+required="required">
+</div>
+
+ <h2>Informations sur l'intervention : </h2>
+
+<!-- Description -->
+<div>
+ <label for="description"> Description : </label>
+<textarea name="description" 
+id="description" 
+cols="30" 
+rows="3"
+required="required"></textarea>
+</div><br>
+<!-- Type d'intervention -->
+<div>
+<label for="typeIntervention">Type d'intervention :</label>
+<select id="typeIntervention" name="types">
+{% for type in types %}
+ <option value="{{type.id_type}}">{{type.libelle}}</option>
+{% endfor %}
+
+</select>
+
+</div><br>
+
+<!-- Les intervenants -->
+<div>
+<label for="intervenant">Choisir un intervenant :</label>
+<select id="intervenant" name="intervenants[]" multiple required>
+{% for intervenant in intervenants %}
+<option value="{{ intervenant.id }}">
+ {{ intervenant.prenom }} {{intervenant.nom}}</option>
+{% endfor %}
+</select>
+
+</div><br>
+
+{# Choix de la date #}
+<div>
+ <label for="date">Date de l'intervention : </label>
+<input type="date" 
+name="date" 
+id="date" 
+required="required">
+</div><br>
+
+<!-- Heure de l'intervention -->
+<div>
+<label for="heure">Heure prévue pour l'intervention : </label>
+<input type="time" name="heure" id="heure">
+</div>
+
+<!-- Commentaires supplémentaires -->
+<div>
+<p>Commentaires supplémentaires : </p>
+<textarea name="commentaires" cols="30" rows="3"></textarea>
+</div><br>
+
+<!-- Degre d'urgence -->
+ <div>
+<label for="degre">Degré d'urgence :</label>
+<select id="degre" name="degres" required>
+{% for degre in degres %}
+<option value="{{ degre.id_degre }}">
+{{ degre.libelle }} </option>
+{% endfor %}
+</select>
+
+</div><br>
+
+<!-- Statut -->
+<div>
+<label for="statut">Statut :</label>
+<select id="statut" name="statuts" required>
+{% for statut in statuts %}
+<option value="{{statut.id_statut}}">{{statut.statut}}</option>
+{% endfor %}
+</select>
+
+</div><br>
+
+<input type="submit" value="Créer l'intervention" name="send">
+
+</form>
+
+{% endblock %}

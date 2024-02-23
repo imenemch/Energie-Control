@@ -7,4 +7,3 @@ $page = new Page();
 
     $page->session->destroy();
     header('Location: index.php');
-
