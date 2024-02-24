@@ -1,3 +1,74 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FFFFFF; /* blanc */
+  color: #000000; /* noir */
+}
+
+/*formulaire */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/*titre */
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* tt les inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="submit"] {
+  background-color: #0F4882;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/*options des sélecteurs */
+option {
+  padding: 5px;
+}
+
+/*  commentaire supplémentaire */
+textarea {
+  resize: vertical; /* Permet le redimensionnement vertical */
+}
+
+div {
+  margin-bottom: 20px;
+}
+
+/*les étiquettes */
+label {
+  font-weight: bold;
+}
+
+/*les messages d'erreur */
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+
 /* Styles pour le tableau */
 .table {
     width: 100%;
@@ -23,3 +94,60 @@
     border: 1px solid #0F4882; /* Bordure */
   }
   
+  /* la partie de toute la partie login */
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #0F4882; /* bleu */
+}
+
+.message {
+    color: red;
+    text-align: center;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #D9D9D9; /* gris */
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #BACEBE; /* vert */
+    color: #FFFFFF; /* blanc */
+    cursor: pointer;
+}
+
+a {
+    color: #0F4882; /* bleu */
+}
+
+a:hover {
+    text-decoration: underline;
+}
