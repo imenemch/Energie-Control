@@ -1,0 +1,96 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+<h1> Créez votre compte</h1>
+
+<form action="" method="post">
+
+    <!-- E-mail -->
+    <div>
+        <label for="email">Email : </label>
+        <input type="email" 
+               name="email" 
+               id="email" 
+               placeholder="Entrez votre mail" 
+               required="required">
+    </div>
+
+    <div>
+        <label for="email-cfg">Email confirmation : </label>
+        <input type="email" 
+               name="email-cfg" 
+               id="email-cfg" 
+               placeholder="Confirmez votre mail" 
+               required="required">
+    </div>
+
+      <!-- Nom -->
+      <div>
+        <label for="nom">Nom : </label>
+        <input type="text" 
+               name="nom" 
+               id="nom" 
+               placeholder="Entrez votre nom*" 
+               required="required">
+    </div>
+
+    <!-- Prenom -->
+    <div>
+        <label for="prenom">Prenom : </label>
+        <input type="text" 
+               name="prenom" 
+               id="prenom" 
+               placeholder="Votre prénom*" 
+               required="required">
+    </div>
+
+    <!-- Adresse -->
+    <div>
+        <label for="adresse">Adresse </label>
+        <input type="text" 
+               name="adresse" 
+               id="adresse" 
+               placeholder="Ex:7 Quai de grennelle*" 
+               required="required">
+    </div>
+
+    <!-- Tel -->
+    <div>
+        <label for="tel">Tel : </label>
+        <input type="tel" 
+               name="tel" 
+               id="tel" 
+               placeholder="Ex:065678990*" 
+               required="required">
+    </div>
+
+    <!-- Password -->
+    <div>
+        <label for="password">Password : </label>
+        <input type="password" 
+               name="password" 
+               id="password" 
+               placeholder="Entrez votre mot de passe" 
+               required="required">
+    </div>
+
+    <div>
+        <label for="password-cfg">Confirmez votre password :  </label>
+        <input type="password" 
+               name="password-cfg" 
+               id="password-cfg" 
+               placeholder="Confirmez votre password" 
+               required="required">
+    </div><br><br>
+    
+
+    <div>
+        <input type="submit" value="Créer" name="send">
+    </div>
+   
+</form>
+
+<p>
+    <a href="index.php">Déjà un compte ?</a>
+</p>
+{% endblock %}
