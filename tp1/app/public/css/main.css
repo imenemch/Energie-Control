@@ -1,3 +1,25 @@
-body {
-    background-color: #D5E1D8;
-}
+/* Styles pour le tableau */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Styles pour les en-têtes de colonnes */
+  .table th {
+    background-color: #0F4882; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    padding: 10px; /* Espacement intérieur */
+    border: 1px solid #0F4882; /* Bordure */
+  }
+  
+  /* Styles pour toutes les lignes du tableau */
+  .table tbody td {
+    background-color: #BACEBE; /* Couleur de fond pour toutes les lignes */
+  }
+  
+  /* Styles pour les cellules du corps du tableau */
+  .table td {
+    padding: 10px; /* Espacement intérieur */
+    border: 1px solid #0F4882; /* Bordure */
+  }
+  
