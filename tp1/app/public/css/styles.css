@@ -18,6 +18,7 @@ form {
 h2 {
   font-size: 1.2rem;
   margin-bottom: 10px;
+  color:#BACEBE ;
 }
 
 /* tt les inputs */
@@ -104,7 +105,7 @@ label {
 
 h1 {
     text-align: center;
-    color: #0F4882; /* bleu */
+    color: #BACEBE; /* bleu */
 }
 
 .message {
@@ -139,13 +140,13 @@ input[type="submit"] {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #BACEBE; /* vert */
+    background-color:  #0F4882; 
     color: #FFFFFF; /* blanc */
     cursor: pointer;
 }
 
 a {
-    color: #0F4882; /* bleu */
+    color:#0F4882; /* bleu */
 }
 
 a:hover {
