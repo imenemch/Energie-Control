@@ -9,11 +9,14 @@
     if(isset($_POST['send'])){
         $id = $_GET['id'];
         $commentaire = $_POST['commentaire'];
+if(isset($_POST['send'])){
+    $id = $_GET['id'];
+    $commentaire = $_POST['commentaire'];
 
-        $page->insertCommentaire('commentaire', [
-            'id_intervention' => $id,
-            'infos' => $commentaire
-        ]);
-    }
-   
-    echo $page->render('addCommentaire.html.twig', []);
+    $page->insertCommentaire('commentaire' ,[
+        'id_intervention' => $id,
+        'infos' => $commentaire
+    ]);
+}
+
+echo $page->render('addCommentaire.html',[]);
