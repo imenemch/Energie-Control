@@ -74,6 +74,7 @@ label {
 .table {
     width: 100%;
     border-collapse: collapse;
+    text-align: center;
   }
   
   /* Styles pour les en-têtes de colonnes */

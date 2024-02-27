@@ -67,7 +67,7 @@ require_once '../vendor/autoload.php';
             ]);
         }
         
-        if(isset($_POST['commentaires']) && !empty($_POST['commentaires']))
+        if(isset($_POST['commentaires']) && $_POST['commentaires']= " ")
         {
            $id_commentaire = $page->insertCommentaire('commentaire',[
                'id_intervention' => $id_intervention,
