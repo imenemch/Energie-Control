@@ -6,8 +6,8 @@
     
     $page = new Page();
 
-    $allUsers = $page->getAllUsers();
+   
     
     
    
-    echo $page->render('listeUser.html', ['allUsers' => $allUsers]);
+    echo $page->render('infoUser.html', []);
