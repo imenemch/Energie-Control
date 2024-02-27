@@ -17,7 +17,7 @@ $client_id = $page->session->get('id');
 
 // Récupérer les interventions en cours du client
 $client_interventions = $page->getClientInterventions($client_id);
-var_dump($client_interventions);
+
 
 // // Récupérer les commentaires pour chaque intervention
 // foreach ($client_interventions as &$intervention) {

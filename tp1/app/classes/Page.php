@@ -85,7 +85,7 @@ class Page
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public static function getClientInterventions()
+    public function getClientInterventions()
 {
     // Récupérer l'ID de l'utilisateur connecté depuis la session
     $id_client = $_SESSION['id'];
@@ -98,7 +98,7 @@ class Page
             WHERE intervention.id_client = :id_client";
 
     // Préparation de la requête
-    $stmt = prepare($sql);
+    $stmt = $this->pdo->prepare($sql);
 
     // Liaison de la valeur de l'identifiant client à la requête préparée
     $stmt->bindParam(':id_client', $id_client);
@@ -107,7 +107,7 @@ class Page
     $stmt->execute();
 
     // Récupération des résultats sous forme de tableau associatif
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
 
