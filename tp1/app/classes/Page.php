@@ -101,7 +101,6 @@ public function getAllInterventionsStandardiste()
 }
 
 
-
     public function getAllClient()
     {
         $sql = "SELECT * FROM users WHERE role = 'client'";
@@ -157,6 +156,8 @@ public function getAllInterventionsStandardiste()
         $templateName = $name . '.twig';
         return $this->twig->render($name, $data);// Rendu du template Twig avec les données fournies
     }
+
+    
 
     
 }
