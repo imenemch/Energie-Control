@@ -85,38 +85,58 @@ class Page
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    
+
     public function getClientInterventions()
+    {
+        $sql = "SELECT i.*, 
+                       u.nom AS nom_client, 
+                       u.prenom AS prenom_client, 
+                       u_intervenant.nom AS nom_intervenant, 
+                       u_intervenant.prenom AS prenom_intervenant,
+                       s.statut AS nom_statut, 
+                       d.libelle AS nom_degre, 
+                       c.infos AS commentaire
+                FROM intervention AS i
+                LEFT JOIN users AS u ON i.id_client = u.id
+                LEFT JOIN intervention_user AS iu ON i.id_intervention = iu.id_intervention
+                LEFT JOIN users AS u_intervenant ON iu.id_intervenant = u_intervenant.id
+                LEFT JOIN statut AS s ON i.id_statut = s.id_statut
+                LEFT JOIN commentaire AS c ON i.id_intervention = c.id_intervention
+                LEFT JOIN degre AS d ON i.id_degre = d.id_degre
+                WHERE i.id_client = :id_client";
+                
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id_client' => $this->session->get('id')]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+// Cette méthode prendra l'ID de l'intervention 
+// Elle exécutera une requête SQL pour récupérer les commentaires correspondants à cet ID d'intervention.
+// Elle renverra ensuite les commentaires récupérés.
+
+    public function getCommentsForIntervention($interventionId)
 {
-    // Récupérer l'ID de l'utilisateur connecté depuis la session
-    $id_client = $_SESSION['id'];
-
-    // Requête SQL avec un paramètre de substitution pour l'identifiant du client
-    $sql = "SELECT intervention.*, statut.statut AS status, commentaire.infos AS comment
-            FROM intervention
-            LEFT JOIN statut ON intervention.id_statut = statut.id_statut
-            LEFT JOIN commentaire ON intervention.id_intervention = commentaire.id_intervention
-            WHERE intervention.id_client = :id_client";
-
-    // Préparation de la requête
+    $sql = "SELECT infos FROM commentaire WHERE id_intervention = :interventionId";
     $stmt = $this->pdo->prepare($sql);
-
-    // Liaison de la valeur de l'identifiant client à la requête préparée
-    $stmt->bindParam(':id_client', $id_client);
-
-    // Exécution de la requête
-    $stmt->execute();
-
-    // Récupération des résultats sous forme de tableau associatif
+    $stmt->execute([':interventionId' => $interventionId]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
-
-
-
-    public function getAllInterventions() {
-        $query = "SELECT * FROM intervention";
-        $interventions = $this->executeQuery($query);
-        return $interventions;
+public function getInterventionInfo($interventionId)
+    {
+        $sql = "SELECT intervention.*, 
+                       statut.statut AS nom_statut, 
+                       degre.libelle AS nom_degre
+                FROM intervention
+                LEFT JOIN statut ON intervention.id_statut = statut.id_statut
+                LEFT JOIN degre ON intervention.id_degre = degre.id_degre
+                WHERE intervention.id_intervention = :interventionId";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':interventionId' => $interventionId]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+
 // Fonction pour récupérer toutes les interventions avec les détails nécessaires
 public function getAllInterventionsStandardiste()
 {
@@ -190,7 +210,7 @@ public function getAllInterventionsStandardiste()
         return $this->twig->render($name, $data);// Rendu du template Twig avec les données fournies
     }
 
-    
+   
 
     
 }

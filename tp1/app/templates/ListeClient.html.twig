@@ -7,18 +7,29 @@
     <table>
         <thead>
             <tr>
-                <th>ID Intervention</th>
+                <th>Description</th>
+                <th>intervenant</th>
                 <th>Date</th>
                 <th>Statut</th>
+                <th>Degré</th>
+                {# <th>commentaire</th> #}
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             {% for intervention in interventions %}
                 <tr>
-                    <td>{{ intervention.id_intervention }}</td>
+                    <td>{{ intervention.description}}</td>
+                    <td>{{ intervention.nom_intervenant }} {{ intervention.prenom_intervenant }}</td>
                     <td>{{ intervention.date }}</td>
-                    <td>{{ intervention.statut }}</td>
+                    <td>{{ intervention.nom_statut }}</td>
+                    <td>{{ intervention.nom_degre }}</td>
+                    {# <td>{{ intervention.commentaire }}</td> #}
+                    <td>
+                    <a href="addCommentaire.php?id={{ intervention.id_intervention}}"><i class="bi bi-chat-dots"></i></a> 
+                    <a href="addEdit.php?id={{ intervention.id_intervention}}"><i class="bi bi-eye-fill"></i></a> 
+                    
+                    </td>
                     <td>
                         <ul>
                             {% for commentaire in intervention.commentaires %}

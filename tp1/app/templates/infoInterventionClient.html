@@ -1,0 +1,17 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+    <h2>Infos du commentaire</h2>
+
+    {% for intervention in interventions %}
+        <p><strong>Description :</strong> {{ intervention.description }}</p>
+        <p><strong>Date :</strong> {{ intervention.date }}</p>
+        <p><strong>Degré :</strong> {{ intervention.nom_degre }}</p>
+        <p><strong>Statut :</strong> {{ intervention.nom_statut }}</p>
+    {% endfor %}
+    
+    <h3>Commentaires :</h3>
+    {% for commentaire in commentaires %}
+        <p>{{ commentaire.infos }}</p>
+    {% endfor %}
+{% endblock %}

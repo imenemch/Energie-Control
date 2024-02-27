@@ -19,12 +19,22 @@ $client_id = $page->session->get('id');
 $client_interventions = $page->getClientInterventions($client_id);
 
 
-// // Récupérer les commentaires pour chaque intervention
-// foreach ($client_interventions as &$intervention) {
-//     $intervention['commentaires'] = ClientIntervention::getCommentaires($intervention['id_intervention']);
-// }
+
+// Récupérer les commentaires pour chaque intervention
+foreach ($client_interventions as &$intervention) {
+    
+}
+
+// Vérifier si un tri a été demandé
+if (isset($_GET['sort'])) {
+    $sortField = $_GET['sort'];
+    // Trier les interventions en fonction du champ spécifié
+    usort($client_interventions, function($a, $b) use ($sortField) {
+        return $a[$sortField] <=> $b[$sortField];
+    });
+}
 
 // Afficher la page d'accueil des clients
-echo $page->render('home.html.twig', [
+echo $page->render('ListeClient.html.twig', [
     'interventions' => $client_interventions
 ]);
