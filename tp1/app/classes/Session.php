@@ -33,7 +33,7 @@ class Session
 
     public function hasRole(string $role)
     {
-        return $_SESSION['email']['role'] == $role; //? true : false; // test ternaire 3 partie si c'est vrai si c'est faux. if en 1 ligne
+        return $_SESSION['email']['role'] == $role ? true : false; // test ternaire 3 partie si c'est vrai si c'est faux. if en 1 ligne
     }
 
 }

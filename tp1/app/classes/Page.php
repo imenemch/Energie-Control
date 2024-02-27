@@ -13,6 +13,7 @@ class Page
     function __construct()
     {
         $this->session = new Session();
+        
 
         try {
             $this->pdo = new \PDO('mysql:host=mysql;dbname=b2-paris', "root", "");
@@ -28,11 +29,11 @@ class Page
         ]);
     }
 
-    public function executeQuery(string $query) {
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    }
+    // public function executeQuery(string $query) {
+    //     $stmt = $this->pdo->prepare($query);
+    //     $stmt->execute();
+    //     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    // }
 
     public function insertUsers(string $table_name, array $data) 
     {
@@ -84,6 +85,38 @@ class Page
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function getClientInterventions()
+{
+    // Récupérer l'ID de l'utilisateur connecté depuis la session
+    $id_client = $_SESSION['id'];
+
+    // Requête SQL avec un paramètre de substitution pour l'identifiant du client
+    $sql = "SELECT intervention.*, statut.statut AS status, commentaire.infos AS comment
+            FROM intervention
+            LEFT JOIN statut ON intervention.id_statut = statut.id_statut
+            LEFT JOIN commentaire ON intervention.id_intervention = commentaire.id_intervention
+            WHERE intervention.id_client = :id_client";
+
+    // Préparation de la requête
+    $stmt = $this->pdo->prepare($sql);
+
+    // Liaison de la valeur de l'identifiant client à la requête préparée
+    $stmt->bindParam(':id_client', $id_client);
+
+    // Exécution de la requête
+    $stmt->execute();
+
+    // Récupération des résultats sous forme de tableau associatif
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+
+
+    public function getAllInterventions() {
+        $query = "SELECT * FROM intervention";
+        $interventions = $this->executeQuery($query);
+        return $interventions;
+    }
 // Fonction pour récupérer toutes les interventions avec les détails nécessaires
 public function getAllInterventionsStandardiste()
 {
