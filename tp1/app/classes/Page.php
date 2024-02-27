@@ -154,9 +154,9 @@ public function getAllInterventionsStandardiste()
 }
 
 
-    public function getAllClient()
+     public function getAllUsers()
     {
-        $sql = "SELECT * FROM users WHERE role = 'client'";
+        $sql = "SELECT * FROM users WHERE role != 'admin'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);

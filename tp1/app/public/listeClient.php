@@ -18,6 +18,7 @@ $client_id = $page->session->get('id');
 // Récupérer les interventions en cours du client
 $client_interventions = $page->getClientInterventions($client_id);
 
+<<<<<<< HEAD:tp1/app/public/ListeClient.php
 
 
 // Récupérer les commentaires pour chaque intervention
@@ -36,5 +37,9 @@ if (isset($_GET['sort'])) {
 
 // Afficher la page d'accueil des clients
 echo $page->render('ListeClient.html.twig', [
+=======
+// Afficher la page d'accueil des clients
+echo $page->render('listeClient.html.twig', [
+>>>>>>> 1c37972790a28446050bbe0a186c68347ca5f36e:tp1/app/public/listeClient.php
     'interventions' => $client_interventions
 ]);
