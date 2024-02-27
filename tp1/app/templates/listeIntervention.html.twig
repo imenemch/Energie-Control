@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Interventions</title>
-  <head>
+    <title>Liste de toutes les interventions </title>
     <link rel="stylesheet" href="../css/styles.css">
-</head>
 </head>
 <body>
 
@@ -16,28 +14,22 @@
     <thead>
         <tr>
             <th>ID Intervention</th>
-            <th>ID Client</th>
-            <th>ID Standardiste</th>
-            <th>ID Statut</th>
-            <th>ID Degré</th>
-            <th>ID Type</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Heure</th>
+            <th>Nom du Client</th>
+            <th>Statut de l'intervention</th>
+            <th>Degré de l'intervention</th>
+            <th>Description de l'intervention</th>
+            <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
         </tr>
     </thead>
     <tbody>
         {% for intervention in interventions %}
         <tr>
             <td>{{ intervention.id_intervention }}</td>
-            <td>{{ intervention.id_client }}</td>
-            <td>{{ intervention.id_standardiste }}</td>
-            <td>{{ intervention.id_statut }}</td>
-            <td>{{ intervention.id_degre }}</td>
-            <td>{{ intervention.id_type }}</td>
-            <td>{{ intervention.description }}</td>
-            <td>{{ intervention.date }}</td>
-            <td>{{ intervention.heure }}</td>
+            <td>{{ intervention.nom_client }} {{ intervention.prenom_client }}</td>
+            <td>{{ intervention.nom_statut }}</td>
+            <td>{{ intervention.nom_degre }}</td>
+            <td>{{ intervention.description_intervention }}</td>
+            <td><a href="addCommentaire.php?id={{ intervention.id_intervention }}">Ajouter un commentaire</a></td>
         </tr>
         {% endfor %}
     </tbody>
