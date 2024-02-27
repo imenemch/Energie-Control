@@ -18,13 +18,7 @@ $client_id = $page->session->get('id');
 // Récupérer les interventions en cours du client
 $client_interventions = $page->getClientInterventions($client_id);
 
-
-// // Récupérer les commentaires pour chaque intervention
-// foreach ($client_interventions as &$intervention) {
-//     $intervention['commentaires'] = ClientIntervention::getCommentaires($intervention['id_intervention']);
-// }
-
 // Afficher la page d'accueil des clients
-echo $page->render('home.html.twig', [
+echo $page->render('listeClient.html.twig', [
     'interventions' => $client_interventions
 ]);

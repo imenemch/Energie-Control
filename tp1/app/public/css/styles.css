@@ -74,6 +74,7 @@ label {
 .table {
     width: 100%;
     border-collapse: collapse;
+    text-align: center;
   }
   
   /* Styles pour les en-têtes de colonnes */
@@ -152,32 +153,60 @@ a {
 a:hover {
     text-decoration: underline;
 }
+/*style de la partie des interventions des standaristes */
 
-/*la partie la liste des interventions*/
+body {
+  font-family: Arial, sans-serif;
+  background-color: #D5E1D8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
 h2 {
-  color: #0F4882; /* Bleu */
   text-align: center;
+  color: #0F4882;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  background-color: white;
 }
 
-thead th {
-  background-color: #BACEBE; /* Vert */
-  color: #FFFFFF; /* Blanc */
-  padding: 10px;
-  text-align: left;
-  border-bottom: 2px solid #000000; /* Noir */
+th, td {
+  padding: 12px;
+  text-align: center;
 }
 
-tbody td {
-  padding: 10px;
-  border-bottom: 1px solid #D9D9D9; /* Gris */
+thead {
+  background-color: #0F4882;
+  color: white;
 }
 
-tbody tr:last-child td {
-  border-bottom: none;
+tbody tr:nth-child(even) {
+  background-color: #D5E1D8;
+}
+
+tbody tr:hover {
+  background-color: #BFD3C1;
+}
+
+.actions {
+  text-align: center;
+}
+
+.actions img {
+  width: 24px;
+  height: 24px;
+}
+
+@media only screen and (max-width: 600px) {
+  table {
+      width: 100%;
+  }
 }

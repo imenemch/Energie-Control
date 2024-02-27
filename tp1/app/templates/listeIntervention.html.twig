@@ -5,35 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste de toutes les interventions </title>
     <link rel="stylesheet" href="../css/styles.css">
+    
 </head>
 <body>
 
-<h2>Liste des Interventions</h2>
+<div class="container">
+    <h2>Liste des Interventions</h2>
+    <a href="addIntervention.php" 
+  style=
+  "background-color: #0F4882;
+  border-radius: 30px;
+  color: white;
+  padding: 15px 32px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);" >Ajouter une nouvelle intervention</a>
 
-<table>
-    <thead>
-        <tr>
-            <th>ID Intervention</th>
-            <th>Nom du Client</th>
-            <th>Statut de l'intervention</th>
-            <th>Degré de l'intervention</th>
-            <th>Description de l'intervention</th>
-            <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
-        </tr>
-    </thead>
-    <tbody>
-        {% for intervention in interventions %}
-        <tr>
-            <td>{{ intervention.id_intervention }}</td>
-            <td>{{ intervention.nom_client }} {{ intervention.prenom_client }}</td>
-            <td>{{ intervention.nom_statut }}</td>
-            <td>{{ intervention.nom_degre }}</td>
-            <td>{{ intervention.description_intervention }}</td>
-           <td><a href="addCommentaire.php?id={{ intervention.id_intervention }}">Ajouter un commentaire</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+    <table class="interventions-table">
+        <thead>
+            <tr>
+                <th class="id-intervention">ID Intervention</th>
+                <th class="nom-client">Nom du Client</th>
+                <th class="statut-intervention">Statut de l'intervention</th>
+                <th class="degre-intervention">Degré de l'intervention</th>
+                <th class="description-intervention">Description de l'intervention</th>
+                <th class="actions">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for intervention in interventions %}
+            <tr>
+                <td>{{ intervention.id_intervention }}</td>
+                <td>{{ intervention.nom_client }} {{ intervention.prenom_client }}</td>
+                <td>{{ intervention.nom_statut }}</td>
+                <td>{{ intervention.nom_degre }}</td>
+                <td>{{ intervention.description_intervention }}</td>
+               <td><a href="addCommentaire.php?id={{ intervention.id_intervention }}"><img src="../img/commentaire.png" alt="Ajouter un commentaire" style="width: 24px; height: 24px;" ></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
