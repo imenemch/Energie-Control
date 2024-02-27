@@ -84,11 +84,23 @@ class Page
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function getAllInterventions() {
-        $query = "SELECT * FROM intervention";
-        $interventions = $this->executeQuery($query);
-        return $interventions;
-    }
+// Fonction pour récupérer toutes les interventions avec les détails nécessaires
+public function getAllInterventionsStandardiste()
+{
+    $sql = "SELECT i.id_intervention, u.nom AS nom_client, u.prenom AS prenom_client, 
+                   s.statut AS nom_statut, d.libelle AS nom_degre, 
+                   i.description AS description_intervention
+            FROM intervention AS i
+            JOIN users AS u ON i.id_client = u.id
+            JOIN statut AS s ON i.id_statut = s.id_statut
+            JOIN degre AS d ON i.id_degre = d.id_degre";
+            
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+
 
     public function getAllClient()
     {

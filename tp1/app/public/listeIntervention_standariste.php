@@ -6,6 +6,6 @@ use App\Page;
 
 $page = new Page();
 
-$interventions = $page->getAllInterventions();
+$interventions = $page->getAllInterventionsStandardiste();
 
 echo $page->render('listeIntervention.html.twig', ['interventions' => $interventions]);

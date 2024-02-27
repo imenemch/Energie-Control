@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Interventions</title>
+    <title>Liste de toutes les interventions </title>
   <head>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
@@ -16,30 +16,29 @@
     <thead>
         <tr>
             <th>ID Intervention</th>
-            <th>ID Client</th>
-            <th>ID Standardiste</th>
-            <th>ID Statut</th>
-            <th>ID Degré</th>
-            <th>ID Type</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Heure</th>
+            <th>Nom du Client</th>
+            <th>Statut de l'intervention</th>
+            <th>Degré de l'intervention</th>
+            <th>Description de l'intervention</th>
         </tr>
     </thead>
     <tbody>
-        {% for intervention in interventions %}
-        <tr>
-            <td>{{ intervention.id_intervention }}</td>
-            <td>{{ intervention.id_client }}</td>
-            <td>{{ intervention.id_standardiste }}</td>
-            <td>{{ intervention.id_statut }}</td>
-            <td>{{ intervention.id_degre }}</td>
-            <td>{{ intervention.id_type }}</td>
-            <td>{{ intervention.description }}</td>
-            <td>{{ intervention.date }}</td>
-            <td>{{ intervention.heure }}</td>
-        </tr>
-        {% endfor %}
+       <tbody>
+  <tbody>
+    {% for intervention in interventions %}
+    <tr>
+        <td>{{ intervention.id_intervention }}</td>
+        <td>{{ intervention.nom_client }} {{ intervention.prenom_client }}</td>
+        <td>{{ intervention.nom_statut }}</td>
+        <td>{{ intervention.nom_degre }}</td>
+        <td>{{ intervention.description_intervention }}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+
+</tbody>
+
     </tbody>
 </table>
 
