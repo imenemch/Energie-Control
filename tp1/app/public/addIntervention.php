@@ -16,7 +16,6 @@ require_once '../vendor/autoload.php';
     {
          $description = $_POST['description'];
          $id_intervenants = $_POST['intervenants'];
-         var_dump($id_intervenants);
          $id_degre = $_POST['degres'];
          $id_statut = $_POST['statuts'];
          $id_type = $_POST['types'];
@@ -42,12 +41,11 @@ require_once '../vendor/autoload.php';
                 'adresse' => $_POST['adresse'],
                 'tel' => $_POST['tel']
             ]);
-            var_dump($id_client);
 
         }else
         {
             $id_client = $user['id'];
-            var_dump($id_client);
+           
         }
        
         $id_intervention = $page->insertIntervention('intervention', [
@@ -75,7 +73,7 @@ require_once '../vendor/autoload.php';
                'id_intervention' => $id_intervention,
                'infos' => $_POST['commentaires']
            ]);
-           var_dump($id_commentaire);
+         
         }
 
         
