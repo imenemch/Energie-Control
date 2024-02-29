@@ -136,6 +136,14 @@ public function getInterventionInfo($interventionId)
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    // Méthode pour ajouter un commentaire à une intervention
+    public function ajouterCommentaire($interventionId, $commentaire)
+    {
+        $sql = "INSERT INTO commentaire (id_intervention, infos) VALUES (:interventionId, :commentaire)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':interventionId' => $interventionId, ':commentaire' => $commentaire]);
+    }
+
 
 // Fonction pour récupérer toutes les interventions avec les détails nécessaires
 public function getAllInterventionsStandardiste()

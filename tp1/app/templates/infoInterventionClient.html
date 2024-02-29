@@ -1,17 +1,42 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-    <h2>Infos du commentaire</h2>
-
-    {% for intervention in interventions %}
-        <p><strong>Description :</strong> {{ intervention.description }}</p>
-        <p><strong>Date :</strong> {{ intervention.date }}</p>
-        <p><strong>Degré :</strong> {{ intervention.nom_degre }}</p>
-        <p><strong>Statut :</strong> {{ intervention.nom_statut }}</p>
-    {% endfor %}
-    
-    <h3>Commentaires :</h3>
-    {% for commentaire in commentaires %}
-        <p>{{ commentaire.infos }}</p>
-    {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Infos du commentaire</h2>
+                {% for intervention in interventions %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text"><strong>Description :</strong> {{ intervention.description }}</p>
+                            <p class="card-text"><strong>Date :</strong> {{ intervention.date }}</p>
+                            <p class="card-text"><strong>Degré :</strong> {{ intervention.nom_degre }}</p>
+                            <p class="card-text"><strong>Statut :</strong> {{ intervention.nom_statut }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 offset-md-2"> <!-- Décalage de 2 colonnes vers la droite -->
+                <h3>Commentaires :</h3>
+                {% for commentaire in commentaires %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">{{ commentaire.infos }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="row">
+                <h3>Ajouter un commentaire :</h3>
+                <form method="post" action="">
+                    <div class="form-group">
+                        <textarea class="form-control" name="comment" placeholder="Ajouter un commentaire"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
