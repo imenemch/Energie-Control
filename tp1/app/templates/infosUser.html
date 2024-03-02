@@ -1,0 +1,27 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Infos de l'utilisateur : </h2>
+           
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p class="card-text"><strong>Email :</strong> {{infosUsers.email}}</p>
+                        <p class="card-text"><strong>Nom :</strong> {{infosUsers.nom}}</p>
+                        <p class="card-text"><strong>Prenom :</strong> {{infosUsers.prenom}}</p>
+                        <p class="card-text"><strong>Adresse :</strong> {{infosUsers.adresse}}</p>
+                        <p class="card-text"><strong>Tel :</strong> {{infosUsers.tel}}</p>
+                        <p class="card-text"><strong>Rôle :</strong> {{infosUsers.role}}</p>
+                        <p class="card-text"><strong>A rejoint le :</strong> {{infosUsers.created_at}}</p>
+                        <p class="card-text"><strong>Dernière modification :</strong> {{infosUsers.updated_at}}</p>
+                        
+                    </div>
+                </div>
+           
+        </div>
+    </div>
+
+{% endblock %}
