@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Session;
+use PDO; // Ajoutez cette ligne pour importer la classe PDO
 
 class Page
 {
@@ -14,9 +15,9 @@ class Page
     {
         $this->session = new Session();
         
-
         try {
-            $this->pdo = new \PDO('mysql:host=mysql;dbname=b2-paris', "root", "");
+            // Utilisez la classe PDO avec le chemin complet
+            $this->pdo = new PDO('mysql:host=mysql;dbname=b2-paris', "root", "");
         } catch (\PDOException $e) {
             var_dump($e->getMessage());
             die();
@@ -165,6 +166,28 @@ public function deleteIntervention($id_intervention)
     }
 // fin de la méthode ; oui j'ai pas envie que ça se mélange mdr
 
+// méthode pour update une intervention
+
+
+public function getInterventionDetails($id_intervention)
+{
+    $sql = "SELECT * FROM intervention WHERE id_intervention = :id_intervention";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':id_intervention', $id_intervention, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+public function updateIntervention($id_intervention, $description)
+{
+    $sql = "UPDATE intervention SET description = :description WHERE id_intervention = :id_intervention";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':id_intervention', $id_intervention, PDO::PARAM_INT);
+    $stmt->bindParam(':description', $description);
+    return $stmt->execute();
+}
+
+// fin de la méthode les loulous
      public function getAllUsers()
     {
         $sql = "SELECT * FROM users WHERE role != 'admin'";

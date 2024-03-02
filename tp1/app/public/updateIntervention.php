@@ -6,29 +6,48 @@ use App\Page;
 
 $page = new Page();
 
-// Vérifiez d'abord si un formulaire a été soumis
-if(isset($_POST['update']))
-{
-    // Récupérez les données du formulaire
-    $id_intervention = $_POST['id_intervention'];
-    $description = $_POST['description'];
-    $id_intervenants = $_POST['intervenants'];
-    $id_degre = $_POST['degres'];
-    $id_statut = $_POST['statuts'];
-    $id_type = $_POST['types'];
-    $date = $_POST['date'];
-    $heure = $_POST['heure'];
+if(isset($_GET['id'])) {
+    $id_intervention = $_GET['id'];
 
-    // Mettre à jour l'intervention dans la base de données
-    $page->updateIntervention($id_intervention, [
-        'description' => $description,
-        'id_intervenants' => $id_intervenants,
-        'id_degre' => $id_degre,
-        'id_statut' => $id_statut,
-        'id_type' => $id_type,
-        'date' => $date,
-        'heure' => $heure
-    ]);
+    $intervention = $page->getInterventionDetails($id_intervention);
 
+    if($intervention) {
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $description = $_POST['description'];
 
+            $page->updateIntervention($id_intervention, $description);
+            header('Location: listeInterventions.php');
+            exit();
+        }
+    } else {
+        header('Location: erreur.php');
+        exit();
+    }
+} else {
+    header('Location: erreur.php');
+    exit();
 }
+
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier Intervention</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Modifier Intervention</h2>
+        <form action="" method="POST">
+            <div>
+                <label for="description">Description de l'intervention :</label><br>
+                <textarea id="description" name="description" rows="4" cols="50" required><?php echo $intervention['description']; ?></textarea>
+            </div>
+            <button type="submit">Modifier</button>
+        </form>
+    </div>
+</body>
+</html>
