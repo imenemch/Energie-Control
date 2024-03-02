@@ -133,6 +133,37 @@ public function getAllInterventionsStandardiste()
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+//Fonction des interventions de chaque standariste (propre à lui )
+public function getInterventionsOfStandardiste($id_standardiste)
+{
+    $sql = "SELECT i.id_intervention, u.nom AS nom_client, u.prenom AS prenom_client, 
+                   s.statut AS nom_statut, d.libelle AS nom_degre, 
+                   i.description AS description_intervention
+            FROM intervention AS i
+            JOIN users AS u ON i.id_client = u.id
+            JOIN statut AS s ON i.id_statut = s.id_statut
+            JOIN degre AS d ON i.id_degre = d.id_degre
+            WHERE i.id_standardiste = :id_standardiste";
+            
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['id_standardiste' => $id_standardiste]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+//méthode pour supprimer une intervention
+public function deleteIntervention($id_intervention)
+    {
+        try {
+            $sql = "DELETE FROM intervention WHERE id_intervention = :id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':id', $id_intervention, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            // Gérer l'erreur, par exemple en affichant un message ou en enregistrant dans un fichier de logs
+            echo "Erreur lors de la suppression de l'intervention : " . $e->getMessage();
+        }
+    }
+// fin de la méthode ; oui j'ai pas envie que ça se mélange mdr
 
      public function getAllUsers()
     {
