@@ -172,16 +172,16 @@ public function getInterventionInfo($interventionId)
 public function getAllInterventionsStandardiste()
 {
     $sql = "SELECT i.id_intervention, u.nom AS nom_client, u.prenom AS prenom_client, 
-                   s.statut AS nom_statut, d.libelle AS nom_degre, 
-                   i.description AS description_intervention
-            FROM intervention AS i
-            JOIN users AS u ON i.id_client = u.id
-            JOIN statut AS s ON i.id_statut = s.id_statut
-            JOIN degre AS d ON i.id_degre = d.id_degre";
-            
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    s.statut AS nom_statut, d.libelle AS nom_degre, 
+    i.description AS description_intervention
+FROM intervention AS i
+JOIN users AS u ON i.id_client = u.id
+JOIN statut AS s ON i.id_statut = s.id_statut
+JOIN degre AS d ON i.id_degre = d.id_degre";
+
+$stmt = $this->pdo->prepare($sql);
+$stmt->execute();
+return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
 //Fonction des interventions de chaque standariste (propre à lui )
