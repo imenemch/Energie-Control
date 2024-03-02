@@ -1,7 +1,86 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
+<h1> Modification des infos</h1>
 
-<p>MODIIIIIIIFFFFF</p>
+<form action="" method="post">
+
+    <!-- E-mail -->
+    <div>
+        <label for="email">Email : </label>
+        <input type="email" 
+               name="email" 
+               id="email"
+               value="{{infosUser.email}}" 
+               placeholder="Entrez votre mail" >
+    </div>
+
+
+      <!-- Nom -->
+      <div>
+        <label for="nom">Nom : </label>
+        <input type="text" 
+               name="nom" 
+               id="nom" 
+               value="{{infosUser.nom}}" 
+               placeholder="Entrez votre nom*" >
+    </div>
+
+    <!-- Prenom -->
+    <div>
+        <label for="prenom">Prenom : </label>
+        <input type="text" 
+               name="prenom" 
+               id="prenom" 
+               value="{{infosUser.prenom}}" 
+               placeholder="Votre prénom*" >
+    </div>
+
+    <!-- Adresse -->
+    <div>
+        <label for="adresse">Adresse </label>
+        <input type="text" 
+               name="adresse" 
+               id="adresse" 
+               value="{{infosUser.adresse}}" 
+               placeholder="Ex:7 Quai de grennelle*">
+    </div>
+
+    <!-- Tel -->
+    <div>
+        <label for="tel">Tel : </label>
+        <input type="tel" 
+               name="tel" 
+               id="tel" 
+               value="{{infosUser.tel}}" 
+               placeholder="Ex:065678990*">
+    </div>
+
+    <!-- Role -->
+    <div>
+        <label for="role">Rôle</label>
+        <input type="text" 
+               name="role" 
+               id="role" 
+               value="{{infosUser.role}}">
+    </div>
+
+    <!-- Password -->
+    <div>
+        <label for="password">Password : </label>
+        <input type="password" 
+               name="password" 
+               id="password" 
+               value="{{infosUser.password}}" 
+               placeholder="Entrez votre mot de passe" >
+    </div>
+
+
+    <div>
+        <input type="submit" value="Modifier" name="send" onclick="return confirm('Êtes-vous sûr de vouloir faire cette modification?')">
+    </div>
+   
+</form>
+
 
 {% endblock %}
