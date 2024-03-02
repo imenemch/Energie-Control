@@ -3,7 +3,7 @@
 {% block body %}
 
 <h1>Liste de tous les users</h1><br>
-  
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -30,8 +30,8 @@
                 <td>{{allUser.role}}</td>
                 <td>
                     <a href="modificationUser.php?id={{ allUser.id }}"><i class="bi bi-pencil-square" title="Modifier"></i></a>
-                    <a href="suppUser.php?id={{ allUser.id }}"> <i class="bi bi-trash" title="Supprimer"></i></a>
-                    <a href="infoUser.php?id={{ allUser.id }}"> <i class="bi bi-eye-fill"></i></a>
+                    <a href="suppUser.php?id={{ allUser.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"> <i class="bi bi-trash" title="Supprimer"></i></a>
+                    <a href="infosUser.php?id={{ allUser.id }}"> <i class="bi bi-eye-fill"></i></a>
                    
                 </td>
                 

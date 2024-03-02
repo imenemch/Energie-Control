@@ -85,7 +85,29 @@ class Page
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    
+
+    public function getInfosUser($id)
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateUserInfos(array $data)
+    {
+        $sql = "UPDATE users SET email = :email, nom = :nom, prenom =:prenom, adresse = :adresse, tel =:tel, 
+        password = :password, role= :role WHERE id = :id"; 
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($data);
+    }
+
+    public function suppUser($id)
+    {
+        $sql = "DELETE FROM users WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id' => $id]);
+    }
 
     public function getClientInterventions()
     {
