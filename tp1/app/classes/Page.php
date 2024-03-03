@@ -140,9 +140,10 @@ class Page
                        d.libelle AS nom_degre, 
                        c.infos AS commentaire
                 FROM intervention AS i
-                LEFT JOIN users AS u ON i.id_client = u.id
+                LEFT JOIN users AS u ON i.id_client = u.id 
                 LEFT JOIN intervention_user AS iu ON i.id_intervention = iu.id_intervention
                 LEFT JOIN users AS u_intervenant ON iu.id_intervenant = u_intervenant.id
+                LEFT JOIN users AS u_standardiste ON i.id_standardiste = u_standardiste.id
                 LEFT JOIN statut AS s ON i.id_statut = s.id_statut
                 LEFT JOIN commentaire AS c ON i.id_intervention = c.id_intervention
                 LEFT JOIN degre AS d ON i.id_degre = d.id_degre
@@ -165,18 +166,41 @@ class Page
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 public function getInterventionInfo($interventionId)
-    {
-        $sql = "SELECT intervention.*, 
-                       statut.statut AS nom_statut, 
-                       degre.libelle AS nom_degre
-                FROM intervention
-                LEFT JOIN statut ON intervention.id_statut = statut.id_statut
-                LEFT JOIN degre ON intervention.id_degre = degre.id_degre
-                WHERE intervention.id_intervention = :interventionId";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':interventionId' => $interventionId]);
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+{
+    $sql = "SELECT intervention.*, 
+                   statut.statut AS nom_statut, 
+                   degre.libelle AS nom_degre,
+                   CONCAT(users.nom, ' ', users.prenom) AS nom_intervenant
+            FROM intervention
+            LEFT JOIN statut ON intervention.id_statut = statut.id_statut
+            LEFT JOIN degre ON intervention.id_degre = degre.id_degre
+            LEFT JOIN intervention_user ON intervention.id_intervention = intervention_user.id_intervention
+            LEFT JOIN users ON intervention_user.id_intervenant = users.id
+            WHERE intervention.id_intervention = :interventionId";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([':interventionId' => $interventionId]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+public function getInterventionsByID($interventions)
+{
+    // Tableau pour stocker les interventions par ID
+    $interventionsByID = [];
+
+    // Parcourir le tableau d'interventions
+    foreach ($interventions as $intervention) {
+        $interventionId = $intervention['id_intervention'];
+        // Vérifier si l'intervention n'existe pas déjà dans le tableau $interventionsByID
+        if (!isset($interventionsByID[$interventionId])) {
+            // Ajouter l'intervention au tableau avec son ID comme clé
+            $interventionsByID[$interventionId] = $intervention;
+        }
     }
+
+    // Retourner le tableau des interventions par ID
+    return $interventionsByID;
+}
+
 
     // Méthode pour ajouter un commentaire à une intervention
     public function ajouterCommentaire($interventionId, $commentaire)
@@ -222,17 +246,16 @@ public function getInterventionsOfStandardiste($id_standardiste)
 
 //méthode pour supprimer une intervention
 public function deleteIntervention($id_intervention)
-    {
-        try {
-            $sql = "DELETE FROM intervention WHERE id_intervention = :id";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':id', $id_intervention, PDO::PARAM_INT);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            // Gérer l'erreur, par exemple en affichant un message ou en enregistrant dans un fichier de logs
-            echo "Erreur lors de la suppression de l'intervention : " . $e->getMessage();
-        }
+{
+    try {
+        $sql = "DELETE FROM intervention WHERE id_intervention = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id_intervention]);
+    } catch (PDOException $e) {
+        // Gérer l'erreur, par exemple en affichant un message ou en enregistrant dans un fichier de logs
+        echo "Erreur lors de la suppression de l'intervention : " . $e->getMessage();
     }
+}
 // fin de la méthode ; oui j'ai pas envie que ça se mélange mdr
 
 // méthode pour update une intervention
@@ -240,20 +263,29 @@ public function deleteIntervention($id_intervention)
 
 public function getInterventionDetails($id_intervention)
 {
-    $sql = "SELECT * FROM intervention WHERE id_intervention = :id_intervention";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindParam(':id_intervention', $id_intervention, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    try {
+        $sql = "SELECT * FROM intervention WHERE id_intervention = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id_intervention]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Erreur lors de la récupération des détails de l'intervention : " . $e->getMessage();
+        return null; 
+    }
 }
+
 
 public function updateIntervention($id_intervention, $description)
 {
-    $sql = "UPDATE intervention SET description = :description WHERE id_intervention = :id_intervention";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindParam(':id_intervention', $id_intervention, PDO::PARAM_INT);
-    $stmt->bindParam(':description', $description);
-    return $stmt->execute();
+    try {
+        $sql = "UPDATE intervention SET description = ? WHERE id_intervention = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$description, $id_intervention]);
+        return true; // Retourner true si la mise à jour a réussi
+    } catch (PDOException $e) {
+        echo "Erreur lors de la mise à jour de l'intervention : " . $e->getMessage();
+        return false; // et false dans le cas contraire c'est simple non?? :)
+    }
 }
 
 // fin de la méthode les loulous
