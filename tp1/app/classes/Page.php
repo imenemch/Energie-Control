@@ -30,11 +30,6 @@ class Page
         ]);
     }
 
-    // public function executeQuery(string $query) {
-    //     $stmt = $this->pdo->prepare($query);
-    //     $stmt->execute();
-    //     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    // }
 
     public function insertUsers(string $table_name, array $data) 
     {
@@ -109,6 +104,30 @@ class Page
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([':id' => $id]);
     }
+
+    public function getAllInterventions()
+    {
+        $sql = "SELECT DISTINCT i.*,
+                              u.nom AS nomClient,
+                              u.prenom AS prenomClient,
+                              u_intervenant.nom AS nomIntervenant,
+                              u_intervenant.prenom AS penomIntervenant,
+                              u_standardiste.nom AS nomStandardiste,
+                              u_standardiste.prenom AS prenomStandardiste, 
+                              s.statut AS statutIntervention,
+                              d.libelle AS degreIntervention
+                FROM intervention AS i
+                LEFT JOIN users AS u ON i.id_client = u.id 
+                LEFT JOIN intervention_user AS iu ON i.id_intervention = iu.id_intervention
+                LEFT JOIN users AS u_intervenant ON iu.id_intervenant = u_intervenant.id
+                LEFT JOIN users AS u_standardiste ON i.id_standardiste = u_standardiste.id
+                LEFT JOIN statut AS s ON i.id_statut = s.id_statut
+                LEFT JOIN degre AS d ON i.id_degre = d.id_degre";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
 
     public function getClientInterventions()
     {
