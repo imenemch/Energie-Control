@@ -203,17 +203,16 @@ public function getInterventionsOfStandardiste($id_standardiste)
 
 //méthode pour supprimer une intervention
 public function deleteIntervention($id_intervention)
-    {
-        try {
-            $sql = "DELETE FROM intervention WHERE id_intervention = :id";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':id', $id_intervention, PDO::PARAM_INT);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            // Gérer l'erreur, par exemple en affichant un message ou en enregistrant dans un fichier de logs
-            echo "Erreur lors de la suppression de l'intervention : " . $e->getMessage();
-        }
+{
+    try {
+        $sql = "DELETE FROM intervention WHERE id_intervention = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id_intervention]);
+    } catch (PDOException $e) {
+        // Gérer l'erreur, par exemple en affichant un message ou en enregistrant dans un fichier de logs
+        echo "Erreur lors de la suppression de l'intervention : " . $e->getMessage();
     }
+}
 // fin de la méthode ; oui j'ai pas envie que ça se mélange mdr
 
 // méthode pour update une intervention
@@ -221,20 +220,29 @@ public function deleteIntervention($id_intervention)
 
 public function getInterventionDetails($id_intervention)
 {
-    $sql = "SELECT * FROM intervention WHERE id_intervention = :id_intervention";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindParam(':id_intervention', $id_intervention, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    try {
+        $sql = "SELECT * FROM intervention WHERE id_intervention = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id_intervention]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Erreur lors de la récupération des détails de l'intervention : " . $e->getMessage();
+        return null; 
+    }
 }
+
 
 public function updateIntervention($id_intervention, $description)
 {
-    $sql = "UPDATE intervention SET description = :description WHERE id_intervention = :id_intervention";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindParam(':id_intervention', $id_intervention, PDO::PARAM_INT);
-    $stmt->bindParam(':description', $description);
-    return $stmt->execute();
+    try {
+        $sql = "UPDATE intervention SET description = ? WHERE id_intervention = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$description, $id_intervention]);
+        return true; // Retourner true si la mise à jour a réussi
+    } catch (PDOException $e) {
+        echo "Erreur lors de la mise à jour de l'intervention : " . $e->getMessage();
+        return false; // et false dans le cas contraire c'est simple non?? :)
+    }
 }
 
 // fin de la méthode les loulous
