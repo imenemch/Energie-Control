@@ -6,7 +6,8 @@
     
     $page = new Page();
 
-    $allInterventions = $page->getAllInterventions();
+    $allInterventions = $page->getAllInterventionsAdmin();
     var_dump($allInterventions);
+   
    
     echo $page->render('listeInterventionAdmin.html.twig', ['allInterventions' => $allInterventions]);

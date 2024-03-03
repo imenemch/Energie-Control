@@ -128,30 +128,38 @@ class Page
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
-    // public function getClientInterventions()
-    // {
-    //     $sql = "SELECT i.*, 
-    //                    u.nom AS nom_client, 
-    //                    u.prenom AS prenom_client, 
-    //                    u_intervenant.nom AS nom_intervenant, 
-    //                    u_intervenant.prenom AS prenom_intervenant,
-    //                    s.statut AS nom_statut, 
-    //                    d.libelle AS nom_degre, 
-    //                    c.infos AS commentaire
-    //             FROM intervention AS i
-    //             LEFT JOIN users AS u ON i.id_client = u.id 
-    //             LEFT JOIN intervention_user AS iu ON i.id_intervention = iu.id_intervention
-    //             LEFT JOIN users AS u_intervenant ON iu.id_intervenant = u_intervenant.id
-    //             LEFT JOIN users AS u_standardiste ON i.id_standardiste = u_standardiste.id
-    //             LEFT JOIN statut AS s ON i.id_statut = s.id_statut
-    //             LEFT JOIN commentaire AS c ON i.id_intervention = c.id_intervention
-    //             LEFT JOIN degre AS d ON i.id_degre = d.id_degre
-    //             WHERE i.id_client = :id_client";
-                
-    //     $stmt = $this->pdo->prepare($sql);
-    //     $stmt->execute([':id_client' => $this->session->get('id')]);
-    //     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    // }
+public function getAllInterventionsAdmin()
+{
+    $sql = "SELECT i.id_intervention, 
+                   i.id_client, 
+                   i.id_standardiste, 
+                   i.id_statut, 
+                   i.id_degre, 
+                   i.id_type, 
+                   i.description, 
+                   i.date, 
+                   i.heure, 
+                   u.nom AS nomClient, 
+                   u.prenom AS prenomClient, 
+                   GROUP_CONCAT(DISTINCT CONCAT(u_intervenant.nom, ' ', u_intervenant.prenom) SEPARATOR ', ') AS intervenants, 
+                   u_standardiste.nom AS nomStandardiste, 
+                   u_standardiste.prenom AS prenomStandardiste, 
+                   s.statut AS statutIntervention, 
+                   d.libelle AS degreIntervention
+            FROM intervention AS i
+            LEFT JOIN users AS u ON i.id_client = u.id 
+            LEFT JOIN intervention_user AS iu ON i.id_intervention = iu.id_intervention
+            LEFT JOIN users AS u_intervenant ON iu.id_intervenant = u_intervenant.id
+            LEFT JOIN users AS u_standardiste ON i.id_standardiste = u_standardiste.id
+            LEFT JOIN statut AS s ON i.id_statut = s.id_statut
+            LEFT JOIN degre AS d ON i.id_degre = d.id_degre
+            GROUP BY i.id_intervention";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
 
 // Cette méthode prendra l'ID de l'intervention 
 // Elle exécutera une requête SQL pour récupérer les commentaires correspondants à cet ID d'intervention.
