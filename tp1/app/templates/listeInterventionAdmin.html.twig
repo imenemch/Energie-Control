@@ -1,9 +1,12 @@
 {% extends 'base_auth.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Interventions-Admin{% endblock %}
 
 {% block body %}
     <h1>Interventions en cours</h1>
+    <div class="button-wrapper">
+        <a href="addIntervention.php" class="btn">Nouvelle Intervention</a>
+    </div><br><br>
     <table>
         <thead>
             <tr>
@@ -28,7 +31,7 @@
                     <td>{{ allIntervention.statutIntervention}}</td>
                     <td>{{ allIntervention.degreIntervention }}</td>
                     <td>
-                    <a href="addCommentaire.php?id={{ intervention.id_intervention}}"><i class="bi bi-chat-dots"></i></a> 
+                    <a href="addCommentaire.php?id={{ allIntervention.id_intervention}}"><i class="bi bi-chat-dots"></i></a> 
                     <a href="addEdit.php?id={{ intervention.id_intervention}}"><i class="bi bi-eye-fill"></i></a> 
                     
                     </td>
