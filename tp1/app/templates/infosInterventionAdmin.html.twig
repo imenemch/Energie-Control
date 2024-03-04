@@ -1,0 +1,46 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Infos sur l'intervention : </h2>
+                {% for intervention in interventions %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text"><strong>Description :</strong> {{ intervention.description }}</p>
+                            <p class="card-text"><strong>Client :</strong> {{ intervention.nomClient }} {{ intervention.prenomClient }}</p>
+                            <p class="card-text"><strong>intervenants :</strong> {{ intervention.intervenants }}</p>
+                            <p class="card-text"><strong>Standardiste :</strong> {{ intervention.nomStandardiste }} {{ intervention.prenomStandardiste }}</p>
+                            <p class="card-text"><strong>Adresse :</strong> {{ intervention.adresse }}</p>
+                            <p class="card-text"><strong>Date :</strong> {{ intervention.date }}</p>
+                            <p class="card-text"><strong>Degré :</strong> {{ intervention.degreIntervention }}</p>
+                            <p class="card-text"><strong>Statut :</strong> {{ intervention.statutIntervention }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 offset-md-2"> 
+                <h3>Commentaires :</h3>
+                {% for commentaire in commentaires %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">{{ commentaire.infos }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="row">
+                <h3>Ajouter un commentaire :</h3>
+                <form method="post" action="">
+                    <div class="form-group">
+                        <textarea class="form-control" name="comment" placeholder="Ajouter un commentaire"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

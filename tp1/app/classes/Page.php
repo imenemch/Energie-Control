@@ -160,6 +160,39 @@ public function getAllInterventionsAdmin()
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+public function getInterventionInfoAdmin($id)
+{
+    $sql = "SELECT i.id_intervention, 
+                   i.id_client, 
+                   i.id_standardiste, 
+                   i.id_statut, 
+                   i.id_degre, 
+                   i.id_type, 
+                   i.description, 
+                   i.date, 
+                   i.heure, 
+                   u.nom AS nomClient, 
+                   u.prenom AS prenomClient,
+                   u.adresse AS adresse, 
+                   GROUP_CONCAT(DISTINCT CONCAT(u_intervenant.nom, ' ', u_intervenant.prenom) SEPARATOR ', ') AS intervenants, 
+                   u_standardiste.nom AS nomStandardiste, 
+                   u_standardiste.prenom AS prenomStandardiste, 
+                   s.statut AS statutIntervention, 
+                   d.libelle AS degreIntervention
+            FROM intervention AS i
+            LEFT JOIN users AS u ON i.id_client = u.id 
+            LEFT JOIN intervention_user AS iu ON i.id_intervention = iu.id_intervention
+            LEFT JOIN users AS u_intervenant ON iu.id_intervenant = u_intervenant.id
+            LEFT JOIN users AS u_standardiste ON i.id_standardiste = u_standardiste.id
+            LEFT JOIN statut AS s ON i.id_statut = s.id_statut
+            LEFT JOIN degre AS d ON i.id_degre = d.id_degre
+            WHERE i.id_intervention = :id_intervention
+            GROUP BY i.id_intervention";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([':id_intervention' => $id]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
 
 // Cette méthode prendra l'ID de l'intervention 
 // Elle exécutera une requête SQL pour récupérer les commentaires correspondants à cet ID d'intervention.
