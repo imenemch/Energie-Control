@@ -1,41 +1,44 @@
 <?php
 require_once '../vendor/autoload.php';
 
+
 use App\Page;
-// use App\ClientIntervention;
 
 $page = new Page();
 
 // Vérifier si l'utilisateur est connecté en tant que client
-if (!$page->session->isConnected() ) {
+if (!$page->session->isConnected()) {
     header('location: login.php');
     exit();
 }
 
-// Obtenir l'ID de l'utilisateur connecté
-$client_id = $page->session->get('id');
+// Récupérer toutes les interventions clients de la base de données
+$client_interventions = $page->getAllInterventions();
 
-// Récupérer les interventions en cours du client
-$client_interventions = $page->getClientInterventions($client_id);
+// Créer un tableau associatif pour stocker les interventions par ID
+$interventionsByID = [];
 
-
-
-// Récupérer les commentaires pour chaque intervention
-foreach ($client_interventions as &$intervention) {
+// Récupérer les commentaires pour chaque intervention et les associer
+foreach ($client_interventions as $intervention) {
+    // Récupérer les informations de l'intervention
+    $interventionInfo = $page->getInterventionInfo($intervention['id_intervention']);
     
+    // Récupérer les commentaires pour l'intervention
+    $interventionComments = $page->getCommentsForIntervention($intervention['id_intervention']);
+
+    // Ajouter les informations de l'intervention au tableau
+    $interventionsByID[$intervention['id_intervention']] = $interventionInfo[0]; 
+
+    // Ajouter les commentaires à l'intervention
+    $interventionsByID[$intervention['id_intervention']]['comments'] = $interventionComments;
 }
 
-// Vérifier si un tri a été demandé
-if (isset($_GET['sort'])) {
-    $sortField = $_GET['sort'];
-    // Trier les interventions en fonction du champ spécifié
-    usort($client_interventions, function($a, $b) use ($sortField) {
-        return $a[$sortField] <=> $b[$sortField];
-    });
-}
-
+// Convertir le tableau associatif en un simple tableau pour l'affichage
+$client_interventions = array_values($interventionsByID);
 
 // Afficher la page d'accueil des clients
 echo $page->render('listeClient.html.twig', [
     'interventions' => $client_interventions
 ]);
+
+?>

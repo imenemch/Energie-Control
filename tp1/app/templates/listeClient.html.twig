@@ -30,13 +30,6 @@
                     <a href="addEdit.php?id={{ intervention.id_intervention}}"><i class="bi bi-eye-fill"></i></a> 
                     
                     </td>
-                    <td>
-                        <ul>
-                            {% for commentaire in intervention.commentaires %}
-                                <li>{{ commentaire.infos }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
                 </tr>
             {% endfor %}
         </tbody>

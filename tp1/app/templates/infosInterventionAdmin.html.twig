@@ -9,10 +9,13 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <p class="card-text"><strong>Description :</strong> {{ intervention.description }}</p>
-                            <p class="card-text"><strong>nom_intervenant :</strong> {{ intervention.nom_intervenant }}</p>
+                            <p class="card-text"><strong>Client :</strong> {{ intervention.nomClient }} {{ intervention.prenomClient }}</p>
+                            <p class="card-text"><strong>intervenants :</strong> {{ intervention.intervenants }}</p>
+                            <p class="card-text"><strong>Standardiste :</strong> {{ intervention.nomStandardiste }} {{ intervention.prenomStandardiste }}</p>
+                            <p class="card-text"><strong>Adresse :</strong> {{ intervention.adresse }}</p>
                             <p class="card-text"><strong>Date :</strong> {{ intervention.date }}</p>
-                            <p class="card-text"><strong>Degré :</strong> {{ intervention.nom_degre }}</p>
-                            <p class="card-text"><strong>Statut :</strong> {{ intervention.nom_statut }}</p>
+                            <p class="card-text"><strong>Degré :</strong> {{ intervention.degreIntervention }}</p>
+                            <p class="card-text"><strong>Statut :</strong> {{ intervention.statutIntervention }}</p>
                         </div>
                     </div>
                 {% endfor %}
