@@ -11,7 +11,7 @@
     if($id)
     {
         $interventions = $page->getInterventionInfoAdmin($id);
-        $commentaires = $page->getCommentsForIntervention($id);
+        $commentaires = $page->getCommentsForInterventionAdmin($id);
         $idSession = $page->session->get('id');
 
         if(isset($_POST['send']))

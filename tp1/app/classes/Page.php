@@ -243,7 +243,7 @@ public function getIntervenantByIntervention($id)
 // Elle exécutera une requête SQL pour récupérer les commentaires correspondants à cet ID d'intervention.
 // Elle renverra ensuite les commentaires récupérés.
 
-public function getCommentsForIntervention($interventionId)
+public function getCommentsForInterventionAdmin($interventionId)
 {
     $sql = "SELECT c.*, u.nom AS user_nom, u.prenom AS user_prenom, u.role AS user_role
             FROM commentaire c
