@@ -1,3 +1,6 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -42,6 +45,7 @@
                         <a href="javascript:void(0);" onclick="confirmDelete('{{ intervention.id_intervention }}')"><img src="../img/delete.png" alt="Supprimer" style="width: 24px; height: 24px;"></a>
                         <a href="updateIntervention.php?id={{ intervention.id_intervention }}"><img src="../img/update.png" alt="Modifier" style="width: 24px; height: 24px;"></a>
                         <a href="addCommentaire.php?id={{ intervention.id_intervention }}"><img src="../img/commentaire.png" alt="Ajouter un commentaire" style="width: 24px; height: 24px;"></a>
+                        <a href="infosInterventionStandariste.php?id={{ intervention.id_intervention }}"><img src="../img/vue.png" alt="Voir l'intervention" style="width: 24px; height: 24px;"></a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -58,3 +62,4 @@
     </script>
 </body>
 </html>
+{% endblock %}

@@ -12,7 +12,6 @@
             <div>
                 <label for="statut_intervention">Statut de l'intervention :</label><br>
                 <select id="statut_intervention" name="statut_intervention"  required>
-                    <option value="   " {% if intervention.statut_intervention == '  ' %}selected{% endif %}>     </option>
                     <option value="en cours" {% if intervention.statut_intervention == 'en cours' %}selected{% endif %}>En cours</option>
                     <option value="en attente" {% if intervention.statut_intervention == 'en attente' %}selected{% endif %}>En attente</option>
                     <option value="terminé" {% if intervention.statut_intervention == 'terminé' %}selected{% endif %}>Terminée</option>
@@ -23,7 +22,6 @@
             <div>
                 <label for="degre_intervention">Degré de l'intervention :</label><br>
                 <select id="degre_intervention" name="degre_intervention" required>
-                    <option value="   " {% if intervention.degre_intervention == '  ' %}selected{% endif %}>     </option>
                     <option value="faible" {% if intervention.degre_intervention == 'faible' %}selected{% endif %}>Faible</option>
                     <option value="moyen" {% if intervention.degre_intervention == 'moyen' %}selected{% endif %}>Moyen</option>
                     <option value="élevé" {% if intervention.degre_intervention == 'élevé' %}selected{% endif %}>Élevé</option>
