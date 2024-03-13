@@ -323,19 +323,24 @@ public function getInterventionDetails($id_intervention)
     }
 }
 
-
-public function updateIntervention($id_intervention, $description)
+public function updateInterventionStandariste($id_intervention, $nom_client, $statut_intervention, $degre_intervention, $description_intervention)
 {
     try {
-        $sql = "UPDATE intervention SET description = ? WHERE id_intervention = ?";
+        $sql = "UPDATE intervention SET 
+                                    nom_client = ?, 
+                                    statut_intervention = ?, 
+                                    degre_intervention = ?, 
+                                    description_intervention = ? 
+                                    WHERE id_intervention = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$description, $id_intervention]);
+        $stmt->execute([$nom_client, $statut_intervention, $degre_intervention, $description_intervention, $id_intervention]);
         return true; // Retourner true si la mise à jour a réussi
     } catch (PDOException $e) {
         echo "Erreur lors de la mise à jour de l'intervention : " . $e->getMessage();
         return false; // et false dans le cas contraire c'est simple non?? :)
     }
 }
+
 
 // fin de la méthode les loulous
      public function getAllUsers()

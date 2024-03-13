@@ -9,14 +9,17 @@ $page = new Page();
 if(isset($_GET['id'])) {
     $id_intervention = $_GET['id'];
 
-    $intervention = $page->getInterventionDetails($id_intervention);
+    $interventionDetails = $page->getInterventionDetails($id_intervention);
 
-    if($intervention) {
+    if($interventionDetails) {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $description = $_POST['description'];
+            $nom_client = $_POST['nom_client'];
+            $statut_intervention = $_POST['statut_intervention'];
+            $degre_intervention = $_POST['degre_intervention'];
+            $description_intervention = $_POST['description_intervention'];
 
-            $page->updateIntervention($id_intervention, $description);
-            header('Location: listeInterventions.php');
+            $page->updateInterventionStandariste($id_intervention, $nom_client, $statut_intervention, $degre_intervention, $description_intervention);
+            header('Location: interventionStandaristes.php');
             exit();
         }
     } else {
@@ -27,27 +30,6 @@ if(isset($_GET['id'])) {
     header('Location: erreur.php');
     exit();
 }
+echo $page->render('updateIntervention.html', ['id_intervention' => $id_intervention]);
 
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier Intervention</title>
-    <link rel="stylesheet" href="../css/styles.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Modifier Intervention</h2>
-        <form action="" method="POST">
-            <div>
-                <label for="description">Description de l'intervention :</label><br>
-                <textarea id="description" name="description" rows="4" cols="50" required><?php echo $intervention['description']; ?></textarea>
-            </div>
-            <button type="submit">Modifier</button>
-        </form>
-    </div>
-</body>
-</html>
