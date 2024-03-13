@@ -6,6 +6,13 @@
     
     $page = new Page();
 
-    $allInterventions = $page->getAllInterventionsAdmin();
-   
-    echo $page->render('listeInterventionAdmin.html.twig', ['allInterventions' => $allInterventions]);
+    if($page->session->hasRole('admin'))
+    {
+        $allInterventions = $page->getAllInterventionsAdmin();
+        echo $page->render('listeInterventionAdmin.html.twig', ['allInterventions' => $allInterventions]);
+
+    }
+    else
+    {
+        header('Location: index.php');
+    }
