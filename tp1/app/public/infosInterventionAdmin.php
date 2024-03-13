@@ -6,31 +6,40 @@
     
     $page = new Page();
 
-    $id = $_GET['id'];
-
-    if($id)
+    if($page->session->hasRole('role'))
     {
-        $interventions = $page->getInterventionInfoAdmin($id);
-        $commentaires = $page->getCommentsForInterventionAdmin($id);
-        $idSession = $page->session->get('id');
-
-        if(isset($_POST['send']))
-        {
-            $comment = $_POST['comment'];
-            $page->insertCommentaire('commentaire', [
-                'id_intervention' => $id,
-                'id_user' => $idSession,
-                'infos' => $comment
-            ] );
-           
-            header("Location: infosInterventionAdmin.php?id=$id");
-            exit();
-        }
+        $id = $_GET['id'];
+   
+       if($id)
+       {
+           $interventions = $page->getInterventionInfoAdmin($id);
+           $commentaires = $page->getCommentsForInterventionAdmin($id);
+           $idSession = $page->session->get('id');
+   
+           if(isset($_POST['send']))
+           {
+               $comment = $_POST['comment'];
+               $page->insertCommentaire('commentaire', [
+                   'id_intervention' => $id,
+                   'id_user' => $idSession,
+                   'infos' => $comment
+               ] );
+              
+               header("Location: infosInterventionAdmin.php?id=$id");
+               exit();
+           }
+       }
+       else
+       {
+           header('Location: index.php');
+       }    
+      
+       echo $page->render('infosInterventionAdmin.html.twig', ['interventions' => $interventions, 
+                           'commentaires' => $commentaires]);
     }
     else
     {
         header('Location: index.php');
-    }    
+    }
+       
    
-    echo $page->render('infosInterventionAdmin.html.twig', ['interventions' => $interventions, 
-                        'commentaires' => $commentaires]);
