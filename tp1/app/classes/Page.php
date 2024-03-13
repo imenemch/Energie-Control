@@ -89,9 +89,7 @@ class Page
         return $lastInsertedId = $this->pdo->lastInsertId();
     }
 
-<<<<<<< HEAD
     // ajouter un commentaire
-=======
     public function updateInterventionInfosAdmin(array $data)
     {
         $sql = "UPDATE intervention SET id_standardiste = :id_standardiste,
@@ -131,7 +129,6 @@ class Page
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
->>>>>>> 58792ef584400f502ae91171aff805ce3e7aa891
     public function insertCommentaire(string $table_name, array $data)
     {
         $sql = "INSERT INTO " . $table_name . " (id_intervention, id_user, infos) VALUES (:id_intervention , :id_user , :infos)";
@@ -158,31 +155,7 @@ class Page
     }
 
 
-<<<<<<< HEAD
-=======
-    public function getInfosUser($id)
-    {
-        $sql = "SELECT * FROM users WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':id' => $id]);
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
-    }
-
-    public function updateUserInfos(array $data)
-    {
-        $sql = "UPDATE users SET email = :email, nom = :nom, prenom =:prenom, adresse = :adresse, tel =:tel, role= :role WHERE id = :id"; 
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($data);
-    }
-
-    public function suppUser($id)
-    {
-        $sql = "DELETE FROM users WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':id' => $id]);
-    }
->>>>>>> 58792ef584400f502ae91171aff805ce3e7aa891
-
+   
     // méthode pour récuperer les informations de toutes les interventions
     public function getAllInterventions()
 {
@@ -272,7 +245,6 @@ public function getInterventionInfoAdmin($id)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
-<<<<<<< HEAD
 // méthode pour afficher les infos des interventions de chaque standariste
 public function getInterventionInfoStandariste($id)
 {
@@ -300,7 +272,6 @@ public function getInterventionInfoStandariste($id)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
-=======
 public function getIntervenantByIntervention($id)
 {
     $sql = "SELECT id_intervenant FROM intervention_user WHERE id_intervention = :id_intervention";
@@ -308,7 +279,6 @@ public function getIntervenantByIntervention($id)
     $stmt->execute(['id_intervention' => $id]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
->>>>>>> 58792ef584400f502ae91171aff805ce3e7aa891
 // Cette méthode prendra l'ID de l'intervention 
 // Elle exécutera une requête SQL pour récupérer les commentaires correspondants à cet ID d'intervention.
 // Elle renverra ensuite les commentaires récupérés.
@@ -324,7 +294,6 @@ public function getCommentsForInterventionAdmin($interventionId)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
-<<<<<<< HEAD
 
 //méthode pour afficher les commentaires qui sont associés au standardiste
 public function getCommentsForInterventionStandardiste($interventionId)
@@ -346,8 +315,6 @@ public function getCommentsForInterventionStandardiste($interventionId)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
-=======
->>>>>>> 58792ef584400f502ae91171aff805ce3e7aa891
 public function getInterventionInfo($interventionId)
 {
     $sql = "SELECT intervention.*, 
@@ -365,8 +332,6 @@ public function getInterventionInfo($interventionId)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
-<<<<<<< HEAD
-=======
 public function getCommentsForIntervention($interventionId)
 {
     $sql = "SELECT commentaire.*, 
@@ -381,7 +346,6 @@ public function getCommentsForIntervention($interventionId)
 }
 
 
->>>>>>> 58792ef584400f502ae91171aff805ce3e7aa891
 
 public function getInterventionsByID($interventions)
 {
