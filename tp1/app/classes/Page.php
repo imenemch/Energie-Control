@@ -5,6 +5,7 @@ namespace App;
 use App\Session;
 use PDO; // Ajoutez cette ligne pour importer la classe PDO
 
+
 class Page
 {
     private \Twig\Environment $twig;
@@ -88,10 +89,52 @@ class Page
         return $lastInsertedId = $this->pdo->lastInsertId();
     }
 
+<<<<<<< HEAD
     // ajouter un commentaire
+=======
+    public function updateInterventionInfosAdmin(array $data)
+    {
+        $sql = "UPDATE intervention SET id_standardiste = :id_standardiste,
+                id_statut = :id_statut, id_degre = :id_degre, description = :description,
+                date = :date, heure = :heure WHERE id_intervention = :id_intervention";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($data);
+    }
+
+    public function updateClientInfosAdmin(array $data)
+    {
+        $sql = "UPDATE users SET nom = :nom, prenom =:prenom, adresse = :adresse WHERE id = :id"; 
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($data);
+    }
+
+    public function updateIntervenantInfosAdmin(array $data)
+    {
+        $sql = "UPDATE intervention_user SET id_intervenant = :id_intervenant WHERE id_inter_user = :id_inter_user";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($data);
+    }
+
+    public function getIdInterUserForIntervention($id)
+    {
+        $sql = "SELECT id_inter_user FROM intervention_user WHERE id_intervention = :id_intervention";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id_intervention' => $id]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getIdUserByCommentaire($interventionId)
+    {
+        $sql = "SELECT id_user FROM commentaire WHERE id_intervention = :interventionId";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':interventionId' => $interventionId]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+>>>>>>> 58792ef584400f502ae91171aff805ce3e7aa891
     public function insertCommentaire(string $table_name, array $data)
     {
-        $sql = "INSERT INTO " . $table_name . " (id_intervention, infos) VALUES (:id_intervention , :infos)";
+        $sql = "INSERT INTO " . $table_name . " (id_intervention, id_user, infos) VALUES (:id_intervention , :id_user , :infos)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($data);
         return $lastInsertedId = $this->pdo->lastInsertId();
@@ -115,6 +158,30 @@ class Page
     }
 
 
+<<<<<<< HEAD
+=======
+    public function getInfosUser($id)
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateUserInfos(array $data)
+    {
+        $sql = "UPDATE users SET email = :email, nom = :nom, prenom =:prenom, adresse = :adresse, tel =:tel, role= :role WHERE id = :id"; 
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($data);
+    }
+
+    public function suppUser($id)
+    {
+        $sql = "DELETE FROM users WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id' => $id]);
+    }
+>>>>>>> 58792ef584400f502ae91171aff805ce3e7aa891
 
     // méthode pour récuperer les informations de toutes les interventions
     public function getAllInterventions()
@@ -185,7 +252,7 @@ public function getInterventionInfoAdmin($id)
                    i.heure, 
                    u.nom AS nomClient, 
                    u.prenom AS prenomClient,
-                   u.adresse AS adresse, 
+                   u.adresse AS adresse,
                    GROUP_CONCAT(DISTINCT CONCAT(u_intervenant.nom, ' ', u_intervenant.prenom) SEPARATOR ', ') AS intervenants, 
                    u_standardiste.nom AS nomStandardiste, 
                    u_standardiste.prenom AS prenomStandardiste, 
@@ -205,6 +272,7 @@ public function getInterventionInfoAdmin($id)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+<<<<<<< HEAD
 // méthode pour afficher les infos des interventions de chaque standariste
 public function getInterventionInfoStandariste($id)
 {
@@ -232,18 +300,31 @@ public function getInterventionInfoStandariste($id)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+=======
+public function getIntervenantByIntervention($id)
+{
+    $sql = "SELECT id_intervenant FROM intervention_user WHERE id_intervention = :id_intervention";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['id_intervention' => $id]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+>>>>>>> 58792ef584400f502ae91171aff805ce3e7aa891
 // Cette méthode prendra l'ID de l'intervention 
 // Elle exécutera une requête SQL pour récupérer les commentaires correspondants à cet ID d'intervention.
 // Elle renverra ensuite les commentaires récupérés.
 
-    public function getCommentsForIntervention($interventionId)
+public function getCommentsForInterventionAdmin($interventionId)
 {
-    $sql = "SELECT infos FROM commentaire WHERE id_intervention = :interventionId";
+    $sql = "SELECT c.*, u.nom AS user_nom, u.prenom AS user_prenom, u.role AS user_role
+            FROM commentaire c
+            INNER JOIN users u ON c.id_user = u.id
+            WHERE c.id_intervention = :interventionId";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute([':interventionId' => $interventionId]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+<<<<<<< HEAD
 
 //méthode pour afficher les commentaires qui sont associés au standardiste
 public function getCommentsForInterventionStandardiste($interventionId)
@@ -265,6 +346,8 @@ public function getCommentsForInterventionStandardiste($interventionId)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+=======
+>>>>>>> 58792ef584400f502ae91171aff805ce3e7aa891
 public function getInterventionInfo($interventionId)
 {
     $sql = "SELECT intervention.*, 
@@ -282,6 +365,23 @@ public function getInterventionInfo($interventionId)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+<<<<<<< HEAD
+=======
+public function getCommentsForIntervention($interventionId)
+{
+    $sql = "SELECT commentaire.*, 
+                   CONCAT(users.nom, ' ', users.prenom) AS nom_auteur_commentaire,
+                   users.role AS role_auteur_commentaire
+            FROM commentaire
+            LEFT JOIN users ON commentaire.id_user = users.id
+            WHERE commentaire.id_intervention = :interventionId";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([':interventionId' => $interventionId]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+
+>>>>>>> 58792ef584400f502ae91171aff805ce3e7aa891
 
 public function getInterventionsByID($interventions)
 {
@@ -298,18 +398,20 @@ public function getInterventionsByID($interventions)
         }
     }
 
-    // Retourner le tableau des interventions par ID
+    // Retourner le tableau des interventions par
     return $interventionsByID;
 }
 
 
-    // Méthode pour ajouter un commentaire à une intervention
-    public function ajouterCommentaire($interventionId, $commentaire)
-    {
-        $sql = "INSERT INTO commentaire (id_intervention, infos) VALUES (:interventionId, :commentaire)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':interventionId' => $interventionId, ':commentaire' => $commentaire]);
-    }
+public function ajouterCommentaire($interventionId, $commentaire, $userId, $date)
+{
+    // Insérer le commentaire avec la date et l'ID de l'utilisateur dans la base de données
+    $sql = "INSERT INTO commentaire (id_intervention, id_user, infos, date) VALUES (:interventionId, :id_user, :commentaire, :date)";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([':interventionId' => $interventionId, ':id_user' => $userId, ':commentaire' => $commentaire, ':date' => $date]);
+}
+
+
 
 
 // Fonction pour récupérer toutes les interventions avec les détails nécessaires

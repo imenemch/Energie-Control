@@ -1,0 +1,133 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+<h1> Modification des infos</h1>
+
+<form action="" method="post">
+
+{% for infosIntervention in infosInterventions %}
+
+
+    <!-- Description -->
+    <div>
+        <label for="description">Description : </label>
+        <textarea name="description" 
+                  id="description" 
+                  cols="30" 
+                  rows="3">{{infosIntervention.description}}</textarea>
+    </div>
+
+
+      <!-- Nom client-->
+      <div>
+        <label for="clientNom">Client : </label>
+        <input type="text" 
+               name="clientNom" 
+               id="clientNom" 
+               value="{{infosIntervention.nomClient}}">
+    </div>
+
+    <div>
+         <!-- Champ caché pour stocker l'ID du client -->
+         <input type="hidden"
+         name="clientId"
+         id="clientId"
+         value="{{infosIntervention.id_client}}"readonly>
+    </div>
+    
+
+    <!-- Prénoms client -->
+
+    <div>
+        <label for="clientPrenom"></label>
+        <input type="text" 
+               name="clientPrenom"  
+               id="clientPrenom"
+               value="{{infosIntervention.prenomClient}}">
+    </div>
+
+    <!-- Nom Prénom intervenants -->
+    <div>
+        
+        <label for="intervenant">Choisir un intervenant :</label>
+        <select id="intervenant" name="intervenants[]" multiple>
+            {% for intervenant in intervenants %}
+                    <option value="{{ intervenant.id }}"
+                    {% for intervenantForIntevention in intervenantForInteventions %}  
+                        {% if intervenant.id == intervenantForIntevention.id_intervenant %}selected
+                        {% endif %}
+                    {% endfor %}
+                    >
+                        {{ intervenant.prenom }} {{intervenant.nom}}</option>
+          {% endfor %}
+        </select>
+    </div>
+
+    <!-- Nom prénom standardiste -->
+    <div>
+        <label for="standardiste">Choisir un standardiste :</label>
+        <select id="standardiste" name="standardistes[]" multiple >
+          {% for standardiste in standardistes %}
+                <option value="{{ standardiste.id }}" {% if standardiste.id == infosIntervention.id_standardiste %}selected{% endif %}>
+                {{ standardiste.prenom }} {{standardiste.nom}}</option>
+          {% endfor %}
+        </select>
+    </div>
+
+    <!-- Adresse -->
+    <div>
+        <label for="adresse">Adresse </label>
+        <input type="text" 
+               name="adresse" 
+               id="adresse" 
+               value="{{infosIntervention.adresse}}">
+    </div>
+    <!-- Date -->
+    <div>
+        <label for="date">Date de  l'intervention : </label>
+        <input type="date" 
+               name="date" 
+               id="date" 
+               value="{{infosIntervention.date}}">
+    </div>
+    
+    <!-- Heure -->
+    <div>
+        <label for="heure">Heure prévue pour l'intervention : </label>
+        <input type="time" 
+               name="heure" 
+               id="heure"
+               value="{{infosIntervention.heure}}">
+    </div>
+
+    <!-- Degre -->
+    <div>
+        <label for="degre">Degré d'urgence :</label>
+        <select id="degre" name="degre">
+            {% for degre in degres %}
+                <option value="{{ degre.id_degre }}"{% if degre.id_degre == infosIntervention.id_degre %}selected{% endif %}>
+                {{ degre.libelle }} </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Statut -->
+    <div>
+        <label for="statut">Statut :</label>
+        <select id="statut" name="statut">
+            {% for statut in statuts %}
+                <option value="{{statut.id_statut}}" {% if statut.id_statut == infosIntervention.id_statut %}selected{% endif %}>{{statut.statut}}</option>
+            {% endfor %}
+        </select>
+
+    </div>
+
+{% endfor %}
+<div>
+    <input type="submit" value="Modifier" name="send" onclick="return confirm('Êtes-vous sûr de vouloir faire cette modification?')">
+</div>
+
+
+  </form>
+
+{% endblock %}

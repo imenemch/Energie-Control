@@ -26,17 +26,25 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <p class="card-text">{{ commentaire.infos }}</p>
+                            <!-- Affichage du nom de l'utilisateur -->
+                            <p class="card-text"><small class="text-muted">{{ commentaire.date }}</small></p>
+                            <p class="card-text"><strong>Utilisateur :</strong> {{ commentaire.nom_auteur_commentaire }} ({{ commentaire.role_auteur_commentaire }})</p>
+
+
                         </div>
                     </div>
                 {% endfor %}
                 <div class="row">
-                <h3>Ajouter un commentaire :</h3>
-                <form method="post" action="">
-                    <div class="form-group">
-                        <textarea class="form-control" name="comment" placeholder="Ajouter un commentaire"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
-                </form>
+                    <h3>Ajouter un commentaire :</h3>
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <textarea class="form-control" name="comment" placeholder="Ajouter un commentaire"></textarea>
+                        </div>
+                        <!-- Affichage de la date actuelle -->
+                        <p><small class="text-muted">Date : {{ "now"|date("Y-m-d H:i:s") }}</small></p>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

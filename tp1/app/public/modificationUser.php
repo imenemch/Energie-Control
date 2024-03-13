@@ -26,7 +26,6 @@
             'prenom' => $_POST['prenom'],
             'adresse' => $_POST['adresse'],
             'tel' => $_POST['tel'],
-            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
             'role' => $_POST['role']
         ]);
 
