@@ -14,8 +14,10 @@
                             <p class="card-text"><strong>Standardiste :</strong> {{ intervention.nomStandardiste }} {{ intervention.prenomStandardiste }}</p>
                             <p class="card-text"><strong>Adresse :</strong> {{ intervention.adresse }}</p>
                             <p class="card-text"><strong>Date :</strong> {{ intervention.date }}</p>
+                            <p class="card-text"><strong>Heure :</strong> {{ intervention.heure }}</p>
                             <p class="card-text"><strong>Degré :</strong> {{ intervention.degreIntervention }}</p>
                             <p class="card-text"><strong>Statut :</strong> {{ intervention.statutIntervention }}</p>
+                            <a href="listeInterventionAdmin.php" class="btn btn-secondary">Retour</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -28,17 +30,18 @@
                 {% for commentaire in commentaires %}
                     <div class="card mb-3">
                         <div class="card-body">
-                            <p class="card-text">{{ commentaire.infos }}</p>
+                            <p>{{commentaire.user_nom}} {{commentaire.user_prenom}} ({{commentaire.user_role}}) : {{ commentaire.infos }}</p>
+                            <p>{{commentaire.date}}</p>
                         </div>
                     </div>
                 {% endfor %}
                 <div class="row">
                 <h3>Ajouter un commentaire :</h3>
-                <form method="post" action="">
+                <form action="" method="POST">
                     <div class="form-group">
                         <textarea class="form-control" name="comment" placeholder="Ajouter un commentaire"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                    <input type="submit" value="Ajouter" name="send">
                 </form>
             </div>
         </div>

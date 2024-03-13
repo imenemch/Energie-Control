@@ -71,7 +71,8 @@ require_once '../vendor/autoload.php';
         {
            $id_commentaire = $page->insertCommentaire('commentaire',[
                'id_intervention' => $id_intervention,
-               'infos' => $_POST['commentaires']
+               'id_user' => $id_standardiste,
+               'infos' => $_POST['commentaires'],
            ]);
          
         }

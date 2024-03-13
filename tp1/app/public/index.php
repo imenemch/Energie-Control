@@ -24,6 +24,8 @@
             {
                 $page->session->add('email', $_POST['email']);
                 $page->session->add('id', $user['id']);
+                $page->session->add('role', $user['role']);
+
                 header('location: login.php');
             }
         }
