@@ -5,6 +5,7 @@ namespace App;
 use App\Session;
 use PDO; // Ajoutez cette ligne pour importer la classe PDO
 
+
 class Page
 {
     private \Twig\Environment $twig;
@@ -270,6 +271,21 @@ public function getInterventionInfo($interventionId)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+public function getCommentsForIntervention($interventionId)
+{
+    $sql = "SELECT commentaire.*, 
+                   CONCAT(users.nom, ' ', users.prenom) AS nom_auteur_commentaire,
+                   users.role AS role_auteur_commentaire
+            FROM commentaire
+            LEFT JOIN users ON commentaire.id_user = users.id
+            WHERE commentaire.id_intervention = :interventionId";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([':interventionId' => $interventionId]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+
+
 public function getInterventionsByID($interventions)
 {
     // Tableau pour stocker les interventions par ID
@@ -285,18 +301,20 @@ public function getInterventionsByID($interventions)
         }
     }
 
-    // Retourner le tableau des interventions par ID
+    // Retourner le tableau des interventions par
     return $interventionsByID;
 }
 
 
-    // Méthode pour ajouter un commentaire à une intervention
-    public function ajouterCommentaire($interventionId, $commentaire)
-    {
-        $sql = "INSERT INTO commentaire (id_intervention, infos) VALUES (:interventionId, :commentaire)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':interventionId' => $interventionId, ':commentaire' => $commentaire]);
-    }
+public function ajouterCommentaire($interventionId, $commentaire, $userId, $date)
+{
+    // Insérer le commentaire avec la date et l'ID de l'utilisateur dans la base de données
+    $sql = "INSERT INTO commentaire (id_intervention, id_user, infos, date) VALUES (:interventionId, :id_user, :commentaire, :date)";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([':interventionId' => $interventionId, ':id_user' => $userId, ':commentaire' => $commentaire, ':date' => $date]);
+}
+
+
 
 
 // Fonction pour récupérer toutes les interventions avec les détails nécessaires
@@ -362,19 +380,24 @@ public function getInterventionDetails($id_intervention)
     }
 }
 
-
-public function updateIntervention($id_intervention, $description)
+public function updateInterventionStandariste($id_intervention, $nom_client, $statut_intervention, $degre_intervention, $description_intervention)
 {
     try {
-        $sql = "UPDATE intervention SET description = ? WHERE id_intervention = ?";
+        $sql = "UPDATE intervention SET 
+                                    nom_client = ?, 
+                                    statut_intervention = ?, 
+                                    degre_intervention = ?, 
+                                    description_intervention = ? 
+                                    WHERE id_intervention = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$description, $id_intervention]);
+        $stmt->execute([$nom_client, $statut_intervention, $degre_intervention, $description_intervention, $id_intervention]);
         return true; // Retourner true si la mise à jour a réussi
     } catch (PDOException $e) {
         echo "Erreur lors de la mise à jour de l'intervention : " . $e->getMessage();
         return false; // et false dans le cas contraire c'est simple non?? :)
     }
 }
+
 
 // fin de la méthode les loulous
      public function getAllUsers()

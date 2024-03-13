@@ -1,0 +1,42 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+
+    <div class="container">
+        <h2>Modifier Intervention</h2>
+        <form action="update.php" method="POST">
+            <div>
+                <label for="nom_client">Nom du Client :</label><br>
+                <input type="text" id="nom_client" name="nom_client" value="{{ intervention.nom_client }}" required>
+            </div>
+            <div>
+                <label for="statut_intervention">Statut de l'intervention :</label><br>
+                <select id="statut_intervention" name="statut_intervention"  required>
+                    <option value="   " {% if intervention.statut_intervention == '  ' %}selected{% endif %}>     </option>
+                    <option value="en cours" {% if intervention.statut_intervention == 'en cours' %}selected{% endif %}>En cours</option>
+                    <option value="en attente" {% if intervention.statut_intervention == 'en attente' %}selected{% endif %}>En attente</option>
+                    <option value="terminé" {% if intervention.statut_intervention == 'terminé' %}selected{% endif %}>Terminée</option>
+                    <option value="en retard" {% if intervention.statut_intervention == 'en retard' %}selected{% endif %}>En retard</option>
+                    <option value="annulé" {% if intervention.statut_intervention == 'annulé' %}selected{% endif %}>Annulée</option>
+                </select>     
+            </div>
+            <div>
+                <label for="degre_intervention">Degré de l'intervention :</label><br>
+                <select id="degre_intervention" name="degre_intervention" required>
+                    <option value="   " {% if intervention.degre_intervention == '  ' %}selected{% endif %}>     </option>
+                    <option value="faible" {% if intervention.degre_intervention == 'faible' %}selected{% endif %}>Faible</option>
+                    <option value="moyen" {% if intervention.degre_intervention == 'moyen' %}selected{% endif %}>Moyen</option>
+                    <option value="élevé" {% if intervention.degre_intervention == 'élevé' %}selected{% endif %}>Élevé</option>
+                    <option value="très faible" {% if intervention.degre_intervention == 'très faible' %}selected{% endif %}>Très faible</option>
+                    <option value="critique" {% if intervention.degre_intervention == 'critique' %}selected{% endif %}>Critique</option>
+                </select>
+            </div>
+            <div>
+                <label for="description_intervention">Description de l'intervention :</label><br>
+                <textarea id="description_intervention" name="description_intervention" rows="4" cols="50" required>{{ intervention.description_intervention }}</textarea>
+            </div>
+            <input type="hidden" name="id_intervention" value="{{ intervention.id_intervention }}">
+            <button type="submit">Modifier</button>
+        </form>
+    </div>
+{% endblock %}
