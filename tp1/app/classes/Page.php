@@ -485,6 +485,14 @@ public function updateInterventionStandariste($id_intervention, $nom_client, $st
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getAllClient()
+    {
+        $sql = "SELECT * FROM users WHERE role = 'client'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function getStatut()
     {
         $sql = "SELECT * FROM statut";

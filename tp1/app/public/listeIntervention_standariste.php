@@ -6,7 +6,7 @@ use App\Page;
 
 $page = new Page();
 
-if($page->session->hasRole('standardiste'))
+if($page->session->isConnected() && $page->session->hasRole('standardiste'))
 {
     $interventions = $page->getAllInterventionsStandardiste();
     echo $page->render('listeIntervention.html.twig', ['interventions' => $interventions]);

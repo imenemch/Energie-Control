@@ -6,7 +6,7 @@
     
     $page = new Page();
 
-if(isset($_POST['send']))
+if(isset($_GET['id']))
 {
     if(isset($_POST['send'])){
         $id = $_GET['id'];
