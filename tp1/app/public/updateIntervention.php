@@ -26,8 +26,10 @@ if(isset($_GET['id'])) {
         header('Location: erreur.php');
         exit();
     }
-} else {
-    header('Location: erreur.php');
+} 
+else
+ {
+    header('Location: index.php');
     exit();
 }
 echo $page->render('updateIntervention.html', ['id_intervention' => $id_intervention]);

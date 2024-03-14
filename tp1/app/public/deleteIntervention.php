@@ -13,3 +13,7 @@ if(isset($_GET['id']))
     $page->deleteIntervention($id_intervention);
 
 }
+else
+{
+    header('Location: index.php');
+}

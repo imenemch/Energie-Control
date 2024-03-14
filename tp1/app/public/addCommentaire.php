@@ -6,6 +6,8 @@
     
     $page = new Page();
 
+if(isset($_POST['send']))
+{
     if(isset($_POST['send'])){
         $id = $_GET['id'];
         $commentaire = $_POST['commentaire'];
@@ -19,3 +21,10 @@
     }
 
 echo $page->render('addCommentaire.html',[]);
+
+}
+else
+{
+    header('Location : index.php');
+}
+    
