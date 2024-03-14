@@ -6,5 +6,12 @@ use App\Page;
 
 $page = new Page();
 
- $interventions = $page->getAllInterventionsStandardiste();
-echo $page->render('listeIntervention.html.twig', ['interventions' => $interventions]);
+if($page->session->isConnected() && $page->session->hasRole('standardiste'))
+{
+    $interventions = $page->getAllInterventionsStandardiste();
+    echo $page->render('listeIntervention.html.twig', ['interventions' => $interventions]);
+}
+else
+{
+    header('Location : index.php');
+}

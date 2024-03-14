@@ -36,4 +36,6 @@ class Session
         return isset($_SESSION['role']) && $_SESSION['role'] === $role;
     }
    
+        
+
 }

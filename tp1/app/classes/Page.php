@@ -31,7 +31,7 @@ class Page
         ]);
     }
 
-
+   // méthode pour insérer des users
     public function insertUsers(string $table_name, array $data) 
     {
         $sql = "INSERT INTO " . $table_name. " (email, nom, prenom, adresse, tel, password) VALUES 
@@ -40,6 +40,35 @@ class Page
         $stmt->execute($data);
     }
 
+    
+    // méthode pour récuperer les informations des users
+    public function getInfosUser($id)
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+
+    // méthode pour modifier les informations des users
+    public function updateUserInfos(array $data)
+    {
+        $sql = "UPDATE users SET email = :email, nom = :nom, prenom =:prenom, adresse = :adresse, tel =:tel, 
+        password = :password, role= :role WHERE id = :id"; 
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($data);
+    }
+
+    // méthode pour supprimer un user
+    public function suppUser($id)
+    {
+        $sql = "DELETE FROM users WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id' => $id]);
+    }
+
+     // inserer des clients
     public function insertClient(string $table_name, array $data)
     {
         $sql = "INSERT INTO " . $table_name . " (email, nom, prenom, adresse, tel) VALUES 
@@ -49,6 +78,7 @@ class Page
         return $lastInsertedId = $this->pdo->lastInsertId();
     }
 
+    // insérer une intervention
     public function insertIntervention(string $table_name, array $data)
     {
         $sql = "INSERT INTO " . $table_name . " (id_client, id_standardiste, id_statut, id_degre,
@@ -59,6 +89,7 @@ class Page
         return $lastInsertedId = $this->pdo->lastInsertId();
     }
 
+    // ajouter un commentaire
     public function updateInterventionInfosAdmin(array $data)
     {
         $sql = "UPDATE intervention SET id_standardiste = :id_standardiste,
@@ -106,6 +137,7 @@ class Page
         return $lastInsertedId = $this->pdo->lastInsertId();
     }
 
+    // méthode intervention user
     public function insertInterUser(string $table_name, array $data)
     {
         $sql = "INSERT INTO ". $table_name ." (id_intervenant, id_intervention) VALUES (:id_intervenant, :id_intervention)";
@@ -113,6 +145,7 @@ class Page
         $stmt->execute($data);
     }
 
+    // méthode récupération d'un user par son mail
     public function getUserByEmail(array $data)
     {
         $sql = "SELECT * FROM users WHERE email = :email";
@@ -122,28 +155,8 @@ class Page
     }
 
 
-    public function getInfosUser($id)
-    {
-        $sql = "SELECT * FROM users WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':id' => $id]);
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
-    }
-
-    public function updateUserInfos(array $data)
-    {
-        $sql = "UPDATE users SET email = :email, nom = :nom, prenom =:prenom, adresse = :adresse, tel =:tel, role= :role WHERE id = :id"; 
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($data);
-    }
-
-    public function suppUser($id)
-    {
-        $sql = "DELETE FROM users WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':id' => $id]);
-    }
-
+   
+    // méthode pour récuperer les informations de toutes les interventions
     public function getAllInterventions()
 {
     $sql = "SELECT DISTINCT i.*,
@@ -166,8 +179,8 @@ class Page
     $stmt->execute();
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
-
-public function getAllInterventionsAdmin()
+    // méthode pour récupérer les interventions (admin)
+    public function getAllInterventionsAdmin()
 {
     $sql = "SELECT i.id_intervention, 
                    i.id_client, 
@@ -232,6 +245,33 @@ public function getInterventionInfoAdmin($id)
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+// méthode pour afficher les infos des interventions de chaque standariste
+public function getInterventionInfoStandariste($id)
+{
+    $sql = "SELECT i.id_intervention, 
+                   i.id_client,
+                   i.id_statut, 
+                   i.id_degre, 
+                   i.description, 
+                   u.nom AS nomClient, 
+                   u.prenom AS prenomClient,
+                   u.adresse AS adresse, 
+                   GROUP_CONCAT(DISTINCT CONCAT(u_intervenant.nom, ' ', u_intervenant.prenom) SEPARATOR ', ') AS intervenants, 
+                   s.statut AS statutIntervention, 
+                   d.libelle AS degreIntervention
+            FROM intervention AS i
+            LEFT JOIN users AS u ON i.id_client = u.id 
+            LEFT JOIN intervention_user AS iu ON i.id_intervention = iu.id_intervention
+            LEFT JOIN users AS u_intervenant ON iu.id_intervenant = u_intervenant.id
+            LEFT JOIN statut AS s ON i.id_statut = s.id_statut
+            LEFT JOIN degre AS d ON i.id_degre = d.id_degre
+            WHERE i.id_intervention = :id_intervention
+            GROUP BY i.id_intervention";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([':id_intervention' => $id]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
 public function getIntervenantByIntervention($id)
 {
     $sql = "SELECT id_intervenant FROM intervention_user WHERE id_intervention = :id_intervention";
@@ -251,6 +291,27 @@ public function getCommentsForInterventionAdmin($interventionId)
             WHERE c.id_intervention = :interventionId";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute([':interventionId' => $interventionId]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+
+//méthode pour afficher les commentaires qui sont associés au standardiste
+public function getCommentsForInterventionStandardiste($interventionId)
+{
+    // Récupérer l'ID du standardiste associé à l'intervention
+    $sql = "SELECT id_standardiste FROM intervention WHERE id_intervention = :interventionId";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([':interventionId' => $interventionId]);
+    $standardisteId = $stmt->fetchColumn();
+
+    // Maintenant, récupérer tous les commentaires associés à l'intervention
+    // et filtrer par l'ID du standardiste
+    $sql = "SELECT infos FROM commentaire 
+            INNER JOIN intervention ON commentaire.id_intervention = intervention.id_intervention
+            WHERE commentaire.id_intervention = :interventionId
+            AND intervention.id_standardiste = :standardisteId";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([':interventionId' => $interventionId, ':standardisteId' => $standardisteId]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
@@ -419,6 +480,14 @@ public function updateInterventionStandariste($id_intervention, $nom_client, $st
     public function getIntervenant()
     {
         $sql = "SELECT * FROM users WHERE role = 'intervenant'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getAllClient()
+    {
+        $sql = "SELECT * FROM users WHERE role = 'client'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);

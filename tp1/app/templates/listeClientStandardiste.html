@@ -1,0 +1,32 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+
+<h1>Liste de tous les clients</h1><br>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>E-mail</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Adresse</th>
+            <th>Tel</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for allClient in allClients %}
+            <tr>
+                <td>{{allClient.id}}</td>
+                <td>{{allClient.email}}</td>
+                <td>{{allClient.nom}}</td>
+                <td>{{allClient.prenom}}</td>
+                <td>{{allClient.adresse}}</td>
+                <td>{{allClient.tel}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

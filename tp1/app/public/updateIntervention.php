@@ -6,12 +6,18 @@ use App\Page;
 
 $page = new Page();
 
-if(isset($_GET['id'])) {
+if(isset($_GET['id'])) 
+{
     $id_intervention = $_GET['id'];
 
-    $interventionDetails = $page->getInterventionDetails($id_intervention);
+    $infosInterventions = $page->getInterventionInfoAdmin($id_intervention);
+    $intervenantForIntevention = $page->getIntervenantByIntervention($id_intervention);
+    $intervenants =$page->getIntervenant();
+    $degres = $page->getDegre();
+    $statuts = $page->getStatut();
 
-    if($interventionDetails) {
+    if($infosInterventions) {
+        // Je te laisse modifier la partie update en fonction des nouvelles variables dans le .html
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom_client = $_POST['nom_client'];
             $statut_intervention = $_POST['statut_intervention'];
@@ -26,10 +32,13 @@ if(isset($_GET['id'])) {
         header('Location: erreur.php');
         exit();
     }
-} else {
-    header('Location: erreur.php');
+} 
+else
+ {
+    header('Location: index.php');
     exit();
 }
-echo $page->render('updateIntervention.html', ['id_intervention' => $id_intervention]);
+echo $page->render('updateIntervention.html', ['infosInterventions' => $infosInterventions,'intervenants' => $intervenants, 'degres' => $degres,
+'statuts' => $statuts, 'intervenantForInterventions' => $intervenantForIntevention]);
 
 ?>
