@@ -35,14 +35,5 @@ class Session
 
         return isset($_SESSION['role']) && $_SESSION['role'] === $role;
     }
-    //pour gérer l'ID de l'utilisateur dans la session. , permet de stocker l'ID de l'utilisateur dans la session, permet de récupérer cet ID depuis la session.
-    public function setUserId($userId) {
-        $_SESSION['user_id'] = $userId;
-    }
-    
-    public function getUserId() {
-        return isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-    }
-    
-
+   
 }
