@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Les informations sur l'intervention : </h2>
+                <h2>Informations sur l'intervention : </h2>
                 {% for intervention in interventions %}
                     <div class="card mb-3">
                         <div class="card-body">
@@ -14,6 +14,7 @@
                             <p class="card-text"><strong>Adresse :</strong> {{ intervention.adresse }}</p>
                             <p class="card-text"><strong>Degré :</strong> {{ intervention.degreIntervention }}</p>
                             <p class="card-text"><strong>Statut :</strong> {{ intervention.statutIntervention }}</p>
+                            <a href="listeInterventionStandariste.php" class="btn btn-secondary">Retour</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -22,16 +23,23 @@
         
         <div class="row">
             <div class="col-md-8 offset-md-2"> 
-      
-                <h3>Historique des commentaires:</h3>
+                <h3>Commentaires :</h3>
                 {% for commentaire in commentaires %}
                     <div class="card mb-3">
                         <div class="card-body">
-                            <p class="card-text">{{ commentaire.infos }}</p>
+                            <p>{{commentaire.user_nom}} {{commentaire.user_prenom}} ({{commentaire.user_role}}) : {{ commentaire.infos }}</p>
+                            <p>{{commentaire.date}}</p>
                         </div>
                     </div>
                 {% endfor %}
-               
+                <div class="row">
+                <h3>Ajouter un commentaire :</h3>
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <textarea class="form-control" name="comment" placeholder="Ajouter un commentaire"></textarea>
+                    </div>
+                    <input type="submit" value="Ajouter" name="send">
+                </form>
             </div>
         </div>
     </div>

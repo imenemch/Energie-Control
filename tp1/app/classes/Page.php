@@ -295,25 +295,6 @@ public function getCommentsForInterventionAdmin($interventionId)
 }
 
 
-//méthode pour afficher les commentaires qui sont associés au standardiste
-public function getCommentsForInterventionStandardiste($interventionId)
-{
-    // Récupérer l'ID du standardiste associé à l'intervention
-    $sql = "SELECT id_standardiste FROM intervention WHERE id_intervention = :interventionId";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute([':interventionId' => $interventionId]);
-    $standardisteId = $stmt->fetchColumn();
-
-    // Maintenant, récupérer tous les commentaires associés à l'intervention
-    // et filtrer par l'ID du standardiste
-    $sql = "SELECT infos FROM commentaire 
-            INNER JOIN intervention ON commentaire.id_intervention = intervention.id_intervention
-            WHERE commentaire.id_intervention = :interventionId
-            AND intervention.id_standardiste = :standardisteId";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute([':interventionId' => $interventionId, ':standardisteId' => $standardisteId]);
-    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-}
 
 public function getInterventionInfo($interventionId)
 {
@@ -517,7 +498,20 @@ public function updateInterventionStandariste($id_intervention, $nom_client, $st
         return $this->twig->render($name, $data);// Rendu du template Twig avec les données fournies
     }
 
-   
+    // méthode pour la partie intervenants
+    public function getInterventionsByIntervenant(int $idIntervenant): array
+{
+    $sql = "SELECT intervention.*, degre.libelle AS degreIntervention, statut.statut AS statutIntervention 
+            FROM intervention 
+            JOIN degre ON intervention.id_degre = degre.id_degre 
+            JOIN statut ON intervention.id_statut = statut.id_statut 
+            JOIN intervention_user ON intervention.id_intervention = intervention_user.id_intervention 
+            WHERE intervention_user.id_intervenant = :idIntervenant";
+    
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['idIntervenant' => $idIntervenant]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
     
 }

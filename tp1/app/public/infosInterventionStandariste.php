@@ -11,9 +11,8 @@
     if($id)
     {
         $interventions = $page->getInterventionInfoStandariste($id);
-        $commentaires = $page->getCommentsForInterventionStandardiste($id);
+        $commentaires = $page->getCommentsForInterventionAdmin($id);
 
     }
     
-    
-    echo $page->render('infosInterventionIntervention.html.twig', ['interventions' => $interventions, 'commentaires' => $commentaires, 'commentaire' ]);
+    echo $page->render('infosInterventionStandariste.html.twig', ['interventions' => $interventions, 'commentaires' => $commentaires, 'commentaire' ]);
