@@ -14,4 +14,5 @@ if($page->session->isConnected() && $page->session->hasRole('standardiste'))
 else
 {
     header('Location : index.php');
+    exit();
 }

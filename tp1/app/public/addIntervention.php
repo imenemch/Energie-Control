@@ -4,10 +4,10 @@ require_once '../vendor/autoload.php';
 
     use App\Page;
     $page = new Page();
+    $msg = false;
 
     if($page->session->hasRole('admin') || $page->session->hasRole('standardiste'))
     {
-
             $intervenants =$page->getIntervenant();
             $degres =$page->getDegre();
             $statuts =$page->getStatut();
@@ -31,11 +31,8 @@ require_once '../vendor/autoload.php';
             ]);
 
         
-
+            // S'il n'existe pas, insertion du client dans la BDD
             if(!$user){
-
-                // Dans insertClient on fait en sorte de récupérer le dernier id insérer dans la table
-                // Pour pas tout le temps appeler getUser
                 $id_client = $page->insertClient('users', [
                     'email' => $_POST['email'],
                     'nom' => $_POST['nom'],
@@ -63,13 +60,13 @@ require_once '../vendor/autoload.php';
         
             foreach($id_intervenants as $inter)
             {
-                $page->insertInterUser('intervention_user', [
+               $success= $page->insertInterUser('intervention_user', [
                     'id_intervenant' => $inter,
                     'id_intervention' => $id_intervention
                 ]);
             }
 
-            if(isset($_POST['commentaires']) && $_POST['commentaires']= " ")
+            if(isset($_POST['commentaires']))
             {
                $id_commentaire = $page->insertCommentaire('commentaire',[
                    'id_intervention' => $id_intervention,
@@ -79,11 +76,21 @@ require_once '../vendor/autoload.php';
            
             }
 
+            if($id_intervention && $success)
+            {
+                $msg = "Une erreur est survenue lors de la création de l'intervention";
+                header("Refresh: 1; URL=addIntervention.php");
+            }
+            else
+            {
+                $msg= "Intervention créée avec succès !! ";
+                header("Refresh: 1; URL=addIntervention.php");
+            }
 
         }
 
     echo $page->render('addIntervention.html', ['intervenants' => $intervenants, 
-    'degres' => $degres, 'statuts' => $statuts, 'types' => $types]);
+    'degres' => $degres, 'statuts' => $statuts, 'types' => $types, 'msg' => $msg]);
 
     }
     else

@@ -8,10 +8,9 @@
 
     if($page->session->hasRole('standardiste'))
     {
-        $id = $_GET['id'];
-   
-       if($id)
+       if($_GET['id'])
        {
+           $id = $_GET['id'];
            $interventions = $page->getInterventionInfoAdmin($id);
            $commentaires = $page->getCommentsForInterventionAdmin($id);
            $idSession = $page->session->get('id');

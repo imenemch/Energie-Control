@@ -6,7 +6,7 @@
     
     $page = new Page();
 
-    if($page->session->hasRole('admin'))
+    if($page->session->isConnected() && $page->session->hasRole('admin'))
     {
         $id = $_GET['id'];
    

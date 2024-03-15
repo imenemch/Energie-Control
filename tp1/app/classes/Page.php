@@ -55,7 +55,7 @@ class Page
     public function updateUserInfos(array $data)
     {
         $sql = "UPDATE users SET email = :email, nom = :nom, prenom =:prenom, adresse = :adresse, tel =:tel, 
-        password = :password, role= :role WHERE id = :id"; 
+        role= :role WHERE id = :id"; 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($data);
     }

@@ -5,10 +5,10 @@
     use App\Page;
     
     $page = new Page();
-
+    $msg = false;
     if(isset($_POST['send']))
     {
-        $page->insertUsers('users', [
+        $success = $page->insertUsers('users', [
             'email' => $_POST['email'],
             'nom' => $_POST['nom'],
             'prenom' => $_POST['prenom'],
@@ -16,7 +16,17 @@
             'tel' => $_POST['tel'],
             'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
         ]);
-        header('Location: index.php');
+
+        if(!$success)
+        {
+            $msg = "Inscription réussie, vous allez être redirigé !! ";
+            header('Refresh: 3; URL=index.php');
+        }
+        else
+        {
+            $msg = "Une erreur est survenue lors de l'inscription";
+            header('Refresh: 3; URL=index.php');
+        }
     }
    
-    echo $page->render('register.html.twig', []);
+    echo $page->render('register.html.twig', ['msg' => $msg]);

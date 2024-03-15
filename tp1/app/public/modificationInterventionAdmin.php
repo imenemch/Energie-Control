@@ -57,11 +57,12 @@
                 header("Location: modificationInterventionAdmin.php?id=$id");
                 exit();
 
-        }
+            }
         }
         else
         {
             header('Location: index.php');
+            exit();
         }
 
     
@@ -76,4 +77,5 @@
     else
     {
         header('Location: index.php');
+        exit();
     }    
