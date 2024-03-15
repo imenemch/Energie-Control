@@ -6,12 +6,11 @@
     
     $page = new Page();
 
-    if($page->session->isConnected() && $page->session->hasRole('admin'))
+    if($page->session->hasRole('standardiste'))
     {
-        $id = $_GET['id'];
-   
-       if($id)
+       if($_GET['id'])
        {
+           $id = $_GET['id'];
            $interventions = $page->getInterventionInfoAdmin($id);
            $commentaires = $page->getCommentsForInterventionAdmin($id);
            $idSession = $page->session->get('id');
@@ -25,7 +24,7 @@
                    'infos' => $comment
                ] );
               
-               header("Location: infosInterventionAdmin.php?id=$id");
+               header("Location: infosInterventionStandardiste.php?id=$id");
                exit();
            }
        }
@@ -34,7 +33,7 @@
            header('Location: index.php');
        }    
       
-       echo $page->render('infosInterventionAdmin.html.twig', ['interventions' => $interventions, 
+       echo $page->render('infosInterventionStandardiste.html.twig', ['interventions' => $interventions, 
                            'commentaires' => $commentaires]);
     }
     else

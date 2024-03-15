@@ -13,9 +13,11 @@
         $page->suppUser($id);
         $msg = "Utilisateur supprimé avec succès !!";
         header('Location: listeUser.php');
+        exit();
     }
     else
     {
         header('Location: index.php');
+        exit();
     }
    

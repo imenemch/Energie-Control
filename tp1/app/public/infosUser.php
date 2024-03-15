@@ -6,14 +6,19 @@
     
     $page = new Page();
 
-    $id = $_GET['id'];
-
-    if($id)
+    if($page->session->hasRole('admin'))
     {
-        $infosUsers = $page->getInfosUser($id);
-       
+
+        if($_GET['id'])
+        {
+            $id = $_GET['id'];
+            $infosUsers = $page->getInfosUser($id);
+        }
+    
+        echo $page->render('infosUser.html', ['infosUsers' => $infosUsers]);
+
     }
-    
-    
-   
-    echo $page->render('infosUser.html', ['infosUsers' => $infosUsers]);
+    else
+    {
+        header('Location: index.php');
+    }

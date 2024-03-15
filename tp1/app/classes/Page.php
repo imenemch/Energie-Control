@@ -55,7 +55,7 @@ class Page
     public function updateUserInfos(array $data)
     {
         $sql = "UPDATE users SET email = :email, nom = :nom, prenom =:prenom, adresse = :adresse, tel =:tel, 
-        password = :password, role= :role WHERE id = :id"; 
+        role= :role WHERE id = :id"; 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($data);
     }
@@ -466,6 +466,14 @@ public function updateInterventionStandariste($id_intervention, $nom_client, $st
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getAllClient()
+    {
+        $sql = "SELECT * FROM users WHERE role = 'client'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function getStatut()
     {
         $sql = "SELECT * FROM statut";
@@ -512,6 +520,17 @@ public function updateInterventionStandariste($id_intervention, $nom_client, $st
     $stmt->execute(['idIntervenant' => $idIntervenant]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+// méthode pour pouvoir modifier le status sur la partie intervenant 
+public function updateInterventionStatus(int $idIntervention, int $newStatutId): bool
+{
+    $sql = "UPDATE intervention SET id_statut = :newStatutId WHERE id_intervention = :idIntervention";
 
-    
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['newStatutId' => $newStatutId, 'idIntervention' => $idIntervention]);
+
+    // Vérifie si la requête a réussi en comptant le nombre de lignes affectées
+    return $stmt->rowCount() > 0;
+}
+
+
 }
