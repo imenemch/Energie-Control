@@ -3,35 +3,35 @@
 {% block title %}Accueil-Client{% endblock %}
 
 {% block body %}
-    <h1>Interventions en cours</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>intervenant</th>
-                <th>Date</th>
-                <th>Statut</th>
-                <th>Degré</th>
-                {# <th>commentaire</th> #}
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for intervention in interventions %}
+    <div class="container">
+        <h1 class="title">Interventions en cours</h1>
+        <table class="interventions-table">
+            <thead>
                 <tr>
-                    <td>{{ intervention.description}}</td>
-                    <td>{{ intervention.nom_intervenant }} {{ intervention.prenom_intervenant }}</td>
-                    <td>{{ intervention.date }}</td>
-                    <td>{{ intervention.nom_statut }}</td>
-                    <td>{{ intervention.nom_degre }}</td>
-                    {# <td>{{ intervention.commentaire }}</td> #}
-                    <td>
-                   
-                    <a href="addEdit.php?id={{ intervention.id_intervention}}"><i class="bi bi-eye-fill"></i></a> 
-                    
-                    </td>
+                    <th>Description</th>
+                    <th>Intervenant</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                    <th>Degré</th>
+                    {# <th>Commentaire</th> #}
+                    <th>Action</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for intervention in interventions %}
+                    <tr>
+                        <td>{{ intervention.description }}</td>
+                        <td>{{ intervention.nom_intervenant }} {{ intervention.prenom_intervenant }}</td>
+                        <td>{{ intervention.date }}</td>
+                        <td>{{ intervention.nom_statut }}</td>
+                        <td>{{ intervention.nom_degre }}</td>
+                        {# <td>{{ intervention.commentaire }}</td> #}
+                        <td>
+                            <a href="addEdit.php?id={{ intervention.id_intervention }}"><i class="bi bi-eye-fill"></i></a> 
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
