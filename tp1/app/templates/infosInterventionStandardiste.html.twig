@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Informations sur l'intervention : </h2>
+                <h2 class="title">Informations sur l'intervention : </h2>
                 {% for intervention in interventions %}
                     <div class="card mb-3">
                         <div class="card-body">
@@ -14,7 +14,7 @@
                             <p class="card-text"><strong>Adresse :</strong> {{ intervention.adresse }}</p>
                             <p class="card-text"><strong>Degré :</strong> {{ intervention.degreIntervention }}</p>
                             <p class="card-text"><strong>Statut :</strong> {{ intervention.statutIntervention }}</p>
-                            <a href="listeInterventionStandariste.php" class="btn btn-secondary">Retour</a>
+                            <a href="listeIntervention_standariste.php" class="btn btn-secondary">Retour</a>
                         </div>
                     </div>
                 {% endfor %}

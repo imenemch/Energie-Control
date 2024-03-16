@@ -3,40 +3,41 @@
 {% block title %}Interventions-Admin{% endblock %}
 
 {% block body %}
-    <h1>Interventions en cours</h1>
-    <div class="button-wrapper">
-        <a href="addIntervention.php" class="btn">Nouvelle Intervention</a>
-    </div><br><br>
-    <table>
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>intervenant</th>
-                <th>Standardiste</th>
-                <th>Client</th>
-                <th>Date</th>
-                <th>Statut</th>
-                <th>Degré</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for allIntervention in allInterventions %}
+    <div class="list-container">
+        <h1 class="title">Interventions en cours</h1>
+        <div class="button-wrapper">
+            <a href="addIntervention.php" class="list-btn">Nouvelle Intervention</a>
+        </div><br><br>
+        <table class="list-table">
+            <thead>
                 <tr>
-                    <td>{{ allIntervention.description}}</td>
-                    <td>{{ allIntervention.intervenants }}</td>
-                    <td>{{ allIntervention.nomStandardiste }} {{ allIntervention.prenomStandardiste }}</td>
-                    <td>{{ allIntervention.nomClient }} {{ allIntervention.prenomClient }}</td>
-                    <td>{{ allIntervention.date }}</td>
-                    <td>{{ allIntervention.statutIntervention}}</td>
-                    <td>{{ allIntervention.degreIntervention }}</td>
-                    <td>
-                    <a href="modificationInterventionAdmin.php?id={{ allIntervention.id_intervention }}"><i class="bi bi-pencil-square" title="Modifier"></i></a>
-                    <a href="infosInterventionAdmin.php?id={{ allIntervention.id_intervention}}"><i class="bi bi-eye-fill"></i></a> 
-                    
-                    </td>
+                    <th>Description</th>
+                    <th>Intervenant</th>
+                    <th>Standardiste</th>
+                    <th>Client</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                    <th>Degré</th>
+                    <th>Action</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for allIntervention in allInterventions %}
+                    <tr>
+                        <td>{{ allIntervention.description}}</td>
+                        <td>{{ allIntervention.intervenants }}</td>
+                        <td>{{ allIntervention.nomStandardiste }} {{ allIntervention.prenomStandardiste }}</td>
+                        <td>{{ allIntervention.nomClient }} {{ allIntervention.prenomClient }}</td>
+                        <td>{{ allIntervention.date }}</td>
+                        <td>{{ allIntervention.statutIntervention}}</td>
+                        <td>{{ allIntervention.degreIntervention }}</td>
+                        <td>
+                            <a href="modificationInterventionAdmin.php?id={{ allIntervention.id_intervention }}"><i class="bi bi-pencil-square" title="Modifier"></i></a>
+                            <a href="infosInterventionAdmin.php?id={{ allIntervention.id_intervention}}"><i class="bi bi-eye-fill"></i></a> 
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

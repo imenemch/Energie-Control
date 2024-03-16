@@ -1,10 +1,13 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-
-<p> Bonjour {{email}}</p>
-
-
-<a href="logout.php">Deconnexion </a>
-
+<div class="login-container">
+    <div class="login-box">
+        <h1>Bienvenue</h1>
+        <p>Bonjour {{ email }}</p>
+        <form action="logout.php" method="post">
+            <input type="submit" value="Déconnexion" class="logout-button">
+        </form>
+    </div>
+</div>
 {% endblock %}

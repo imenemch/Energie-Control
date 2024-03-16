@@ -9,7 +9,7 @@ if ($page->session->isConnected() && $page->session->hasRole('standardiste')) {
 
     $id_standardiste = $page->session->get('id');
     $interventions = $page->getInterventionsOfStandardiste($id_standardiste);
-    echo $page->render('interventionstandaristes.html.twig', ['interventions' => $interventions]);
+    echo $page->render('interventionStandaristes.html.twig', ['interventions' => $interventions]);
 } 
 else 
 {
