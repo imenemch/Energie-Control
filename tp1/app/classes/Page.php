@@ -500,37 +500,35 @@ public function updateInterventionStandariste($id_intervention, $nom_client, $st
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+      // méthode pour la partie intervenants
+      public function getInterventionsByIntervenant($idIntervenant)
+      {
+          $sql = "SELECT intervention.*, degre.libelle AS degreIntervention, statut.statut AS statutIntervention 
+                  FROM intervention 
+                  JOIN degre ON intervention.id_degre = degre.id_degre 
+                  JOIN statut ON intervention.id_statut = statut.id_statut 
+                  JOIN intervention_user ON intervention.id_intervention = intervention_user.id_intervention 
+                  WHERE intervention_user.id_intervenant = :idIntervenant";
+          
+          $stmt = $this->pdo->prepare($sql);
+          $stmt->execute(['idIntervenant' => $idIntervenant]);
+          return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
+      // méthode pour pouvoir modifier le status sur la partie intervenant 
+      public function updateInterventionStatus($idIntervention, $newStatutId)
+      {
+            $sql = "UPDATE intervention SET id_statut = :id_statut WHERE id_intervention = :id_intervention";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([':id_intervention' => $idIntervention, ':id_statut' => $newStatutId]);
+      }
+      
+      
+
     public function render(string $name, array $data) :string
     {
         $templateName = $name . '.twig';
-        return $this->twig->render($name, $data);// Rendu du template Twig avec les données fournies
+        return $this->twig->render($name, $data);
     }
 
-    // méthode pour la partie intervenants
-    public function getInterventionsByIntervenant(int $idIntervenant): array
-{
-    $sql = "SELECT intervention.*, degre.libelle AS degreIntervention, statut.statut AS statutIntervention 
-            FROM intervention 
-            JOIN degre ON intervention.id_degre = degre.id_degre 
-            JOIN statut ON intervention.id_statut = statut.id_statut 
-            JOIN intervention_user ON intervention.id_intervention = intervention_user.id_intervention 
-            WHERE intervention_user.id_intervenant = :idIntervenant";
-    
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute(['idIntervenant' => $idIntervenant]);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-// méthode pour pouvoir modifier le status sur la partie intervenant 
-public function updateInterventionStatus(int $idIntervention, int $newStatutId): bool
-{
-    $sql = "UPDATE intervention SET id_statut = :newStatutId WHERE id_intervention = :idIntervention";
-
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute(['newStatutId' => $newStatutId, 'idIntervention' => $idIntervention]);
-
-    // Vérifie si la requête a réussi en comptant le nombre de lignes affectées
-    return $stmt->rowCount() > 0;
-}
-
-
+  
 }
