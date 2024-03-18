@@ -6,7 +6,7 @@
     
     $page = new Page();
 
-    if($page->session->hasRole('admin'))
+    if($page->session->isConnected() && $page->session->hasRole('admin'))
     {
         $allUsers = $page->getAllUsers();
         echo $page->render('listeUser.html', ['allUsers' => $allUsers]);
@@ -14,5 +14,6 @@
     else
     {
         header('Location: index.php');
+        exit();
     }
 

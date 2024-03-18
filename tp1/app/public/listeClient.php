@@ -6,7 +6,7 @@ use App\Page;
 
 $page = new Page();
 
-if($page->session->hasRole('client'))
+if($page->session->isConnected() && $page->session->hasRole('client'))
 {
 
     // Récupérer toutes les interventions clients de la base de données
@@ -43,5 +43,6 @@ if($page->session->hasRole('client'))
 else
 {
     header('Location: index.php');
+    exit();
 }
 

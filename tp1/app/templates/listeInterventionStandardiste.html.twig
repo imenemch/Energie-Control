@@ -1,47 +1,10 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste de toutes les interventions </title>
-    <link rel="stylesheet" href="../css/styles.css">
-    
-</head>
-<body>
-
 <div class="container">
-    <h2>Liste des Interventions</h2>
-    <a href="addIntervention.php" 
-  style=
-  "background-color: #0F4882;
-  border-radius: 30px;
-  color: white;
-  padding: 15px 32px;
-  text-align: left;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
-   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);" > + Ajouter une nouvelle intervention</a>
-
-   <a href= "interventionStandaristes.php" 
-   style="background-color: #0F4882;
-  border-radius: 30px;
-  color: white;
-  padding: 15px 32px;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
-   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);" > Voir mes propres interventions</a>
+    <h2 class="title">Liste des Interventions</h2>
+    <a href="addIntervention.php" class="button"> + Ajouter une nouvelle intervention</a>
+    <a href="interventionStandaristes.php" class="button">Voir mes propres interventions</a>
 
     <table class="interventions-table">
         <thead>
@@ -68,6 +31,4 @@
         </tbody>
     </table>
 </div>
-</body>
-</html>
 {% endblock %}

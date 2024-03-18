@@ -6,7 +6,7 @@
     
     $page = new Page();
 
-    if($page->session->hasRole('admin'))
+    if($page->session->isConnected() && $page->session->hasRole('admin'))
     {
         $allInterventions = $page->getAllInterventionsAdmin();
         echo $page->render('listeInterventionAdmin.html.twig', ['allInterventions' => $allInterventions]);
@@ -15,4 +15,5 @@
     else
     {
         header('Location: index.php');
+        exit();
     }

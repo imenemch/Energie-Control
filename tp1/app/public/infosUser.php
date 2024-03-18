@@ -8,10 +8,10 @@
 
     if($page->session->hasRole('admin'))
     {
-        $id = $_GET['id'];
 
-        if($id)
+        if($_GET['id'])
         {
+            $id = $_GET['id'];
             $infosUsers = $page->getInfosUser($id);
         }
     

@@ -1,12 +1,15 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-<h2>Ajouter un commentaire</h2>
-
-<form action="" method="post">
-    <label for="commentaire">Votre commentaire :</label><br>
-    <textarea id="commentaire" name="commentaire" rows="4" cols="50"></textarea><br>
-    <input type="submit" value="Ajouter commentaire" name = "send">
-</form>
-
+<div class="container">
+    <h2 class="title">Ajouter un commentaire</h2>
+    <form action="" method="post">
+        <div class="mb-3">
+            <label for="commentaire" class="form-label">Votre commentaire :</label>
+            <p>{{msg}}</p>
+            <textarea class="form-control" id="commentaire" name="commentaire" rows="4" cols="50"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" name="send">Ajouter commentaire</button>
+    </form>
+</div>
 {% endblock %}

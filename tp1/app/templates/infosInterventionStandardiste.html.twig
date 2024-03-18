@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Les informations sur l'intervention : </h2>
+                <h2 class="title">Informations sur l'intervention : </h2>
                 {% for intervention in interventions %}
                     <div class="card mb-3">
                         <div class="card-body">
@@ -14,6 +14,7 @@
                             <p class="card-text"><strong>Adresse :</strong> {{ intervention.adresse }}</p>
                             <p class="card-text"><strong>Degré :</strong> {{ intervention.degreIntervention }}</p>
                             <p class="card-text"><strong>Statut :</strong> {{ intervention.statutIntervention }}</p>
+                            <a href="listeIntervention_standariste.php" class="btn btn-secondary">Retour</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -22,8 +23,7 @@
         
         <div class="row">
             <div class="col-md-8 offset-md-2"> 
-      
-                <h3>Historique des commentaires:</h3>
+                <h3>Commentaires :</h3>
                 {% for commentaire in commentaires %}
                     <div class="card mb-3">
                         <div class="card-body">
@@ -43,7 +43,6 @@
             </div>
         </div>
     </div>
-               
             </div>
         </div>
     </div>

@@ -1,0 +1,48 @@
+{% extends 'base_auth.html.twig' %}
+
+{% block title %}Accueil-Client{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Liste des interventions attribuées</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for intervention in interventions %}
+                            <tr>
+                                <td>{{ intervention.description }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <select id="new_statut_id_{{ intervention.id_intervention }}" class="form-control mr-2">
+                                            {% for statut in statuts %}
+                                                <option value="{{ statut.id_statut }}" {% if statut.id_statut == intervention.id_statut %}selected{% endif %}>{{ statut.statut }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        {% block javascript %}
+                                            <script>
+                                                function updateStatut(interventionId) 
+                                                {
+                                                    var newStatutId = document.getElementById('new_statut_id_' + interventionId).value;
+                                                    window.location.href = 'updateStatuts.php?id=' + interventionId + '&idStatut=' + newStatutId;
+                                                }
+                                            </script>
+                                        {% endblock %}
+                                        <button type="button" class="btn btn-primary" onclick="updateStatut('{{ intervention.id_intervention }}')">Mettre à jour</button>
+                                    </div>
+                                </td>
+                                <td><a href="addCommentaire.php?id={{ intervention.id_intervention }}"><img src="../img/commentaire.png" alt="Ajouter un commentaire" style="width: 24px; height: 24px;" ></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

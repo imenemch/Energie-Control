@@ -6,7 +6,7 @@
     
     $page = new Page();
 
-    if($page->session->hasRole('standardiste'))
+    if($page->session->isConnected() && $page->session->hasRole('standardiste'))
     {
         $allClients = $page->getAllClient();
         echo $page->render('listeClientStandardiste.html', ['allClients' => $allClients]);
@@ -14,5 +14,6 @@
     else
     {
         header('Location: index.php');
+        exit();
     }
 

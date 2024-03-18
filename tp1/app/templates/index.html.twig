@@ -2,44 +2,34 @@
 
 {% block body %}
 
-<h1>Connexion</h1>
+<div class="login-container">
+    <div class="login-box">
+        <h1>Connexion</h1>
 
-<head>
-    <link rel="stylesheet" href="../css/styles.css">
-</head>
-    {% if msg %}
+        {% if msg %}
+            <div class="message">{{msg}}</div>
+        {% endif %}
 
-        <div>{{msg}}</div>
-        
-    {% endif %}<br>
+        <form action="" method="post">
 
-    <form action="" method="post">
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" name="email" id="email" placeholder="Entrez votre mail" required="required">
+            </div>
 
-    <div>
-        <label for="email">Email : </label>
-        <input type="email" 
-               name="email" 
-               id="email" 
-               placeholder="Entrez votre mail" 
-               required="required">
-    </div>
+            <div class="form-group">
+                <label for="password">Mot de passe :</label>
+                <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe" required="required">
+            </div>
 
-    <div>
-        <label for="password">Password : </label>
-        <input type="password" 
-               name="password" 
-               id="password" 
-               placeholder="Entrez votre mot de passe" 
-               required="required">
-    </div>
-
-    <div>
-        <input type="submit" value="Se connecter" name="send">
-    </div>
+            <div class="form-group">
+                <input type="submit" value="Se connecter" name="send">
+            </div>
    
-</form>
+        </form>
 
-<p><a href="register.php"> Pas encore de compte ?</a></p>
-
+        <p><a href="register.php" class="register-link">Pas encore de compte ?</a></p>
+    </div>
+</div>
 
 {% endblock %}

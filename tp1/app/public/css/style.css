@@ -1,0 +1,426 @@
+body {
+  background-color: #F2EFDF; /* Couleur de fond du corps */
+}
+/*style pour footer*/
+footer {
+  background-color: #D0D9D4; 
+  color: #59554C;
+  padding: 20px 0;
+  text-align: center; 
+}
+footer p {
+  margin-bottom: 0; 
+}
+/* Style pour la boîte de connexion */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: cover;
+  background-color: #F2EFDF; /* Couleur de fond du corps */
+}
+
+.login-box {
+  background-color: rgba(255, 255, 255, 0.8); /* Boîte semi-transparente */
+  padding: 20px;
+  border-radius: 15px; /* Augmentation du rayon pour arrondir les coins */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Augmentation de l'ombre portée */
+  text-align: center;
+  max-width: 400px;
+  width: 80%;
+}
+
+.login-box h1 {
+  margin-bottom: 20px;
+  color: #59554C; /* Couleur du texte */
+}
+
+.form-group {
+  margin-bottom: 20px; /* Espacement entre les éléments du formulaire */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #59554C; /* Couleur du texte */
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #AEBFBE; /* Couleur de la bordure */
+  border-radius: 5px;
+}
+
+.form-group input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px; /* Augmentation du rayon pour arrondir les coins */
+  background-color: #798C8C; /* Couleur de fond du bouton */
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-group input[type="submit"]:hover {
+  background-color: #AEBFBE; /* Couleur de fond du bouton au survol */
+}
+
+.register-link {
+  color: #798C8C; /* Couleur du lien */
+  text-decoration: none;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+.logout-button {
+  background-color: #798C8C; /* Couleur de fond du bouton */
+  color: #fff; /* Couleur du texte */
+  padding: 10px 20px; /* Espacement à l'intérieur du bouton */
+  border: none; /* Suppression de la bordure */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur de la souris */
+  transition: background-color 0.3s; /* Transition de couleur au survol */
+}
+
+.logout-button:hover {
+  background-color: #AEBFBE; /* Couleur de fond du bouton au survol */
+}
+/* style pour les liste des interventions*/
+/* Style pour la boîte de container */
+.container {
+  max-width: 800px;
+  margin: 0 auto; /* Centre le container horizontalement */
+  padding: 20px;
+}
+/* Style pour le titre */
+.title {
+  text-align: center; 
+  margin-bottom: 20px; 
+  color: #0F4882;
+  font-size: 24px;
+}
+
+/* Style pour les boutons */
+.button {
+  background-color: #0F4882;
+  border-radius: 30px;
+  color: white;
+  padding: 15px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  margin-bottom: 10px; /* Ajout d'une marge en bas */
+  display: inline-block; /* Affichage en ligne pour les boutons */
+}
+
+.button:first-child {
+  margin-right: 10px; /* Marge à droite uniquement pour le premier bouton */
+}
+
+/* Style pour le tableau */
+.interventions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px; /* Ajout d'une marge en haut du tableau */
+}
+
+.interventions-table th, .interventions-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.interventions-table th {
+  background-color: #f2f2f2;
+}
+
+.interventions-table tr:nth-child(even) {
+  background-color: #E9E9E9; /* Couleur de fond pour les lignes paires */
+}
+
+.interventions-table tr:nth-child(odd) {
+  background-color: #D9D9D9; /* Couleur de fond pour les lignes impaires */
+}
+
+.interventions-table tr:hover {
+  background-color: #ccc; /* Couleur de fond au survol */
+}
+.interventions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.interventions-table th,
+.interventions-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Bordure inférieure */
+}
+
+.interventions-table th {
+  background-color: #f2f2f2; /* Couleur de fond de l'en-tête */
+  font-weight: bold;
+  color:#000;
+}
+
+.interventions-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Couleur de fond des lignes paires */
+}
+
+.interventions-table tr:hover {
+  background-color: #f2f2f2; /* Couleur de fond au survol */
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+}
+
+.action-icons img {
+  margin-right: 5px; /* Espacement entre les icônes */
+}
+
+.container {
+  margin-top: 20px; /* Espacement depuis le haut */
+}
+
+.card {
+  margin-bottom: 20px; /* Espacement entre les cartes */
+}
+
+.card-body {
+  background-color: #F2F2F2; /* Couleur de fond de la carte */
+  border-radius: 10px; /* Coins arrondis */
+  padding: 20px; /* Espacement interne */
+}
+
+.card-body p {
+  margin-bottom: 10px; /* Espacement entre les paragraphes */
+}
+
+.btn-secondary {
+  background-color: #6C757D; /* Couleur de fond du bouton */
+  color: #fff; /* Couleur du texte */
+  border: none; /* Supprimer la bordure */
+  border-radius: 5px; /* Coins arrondis */
+  padding: 10px 20px; /* Espacement interne */
+  text-decoration: none; /* Supprimer la décoration de lien */
+}
+
+.btn-secondary:hover {
+  background-color: #5A6268; /* Couleur de fond du bouton au survol */
+}
+
+h3 {
+  margin-top: 30px; /* Espacement depuis le haut */
+  margin-bottom: 20px; /* Espacement depuis le bas */
+}
+
+.form-group {
+  margin-bottom: 20px; /* Espacement entre les groupes de formulaire */
+}
+
+.form-control {
+  width: 100%; /* Largeur du champ de texte */
+  padding: 10px; /* Espacement interne */
+  border-radius: 5px; /* Coins arrondis */
+  border: 1px solid #ccc; /* Bordure */
+}
+
+input[type="submit"] {
+  background-color: #0F4882; /* Couleur de fond du bouton */
+  color: #fff; /* Couleur du texte */
+  border: none; /* Supprimer la bordure */
+  border-radius: 5px; /* Coins arrondis */
+  padding: 10px 20px; /* Espacement interne */
+  cursor: pointer; /* Curseur pointeur au survol */
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3; /* Couleur de fond du bouton au survol */
+}
+.container {
+  margin-top: 20px; /* Espacement depuis le haut */
+}
+
+form {
+  max-width: 600px; /* Largeur maximale du formulaire */
+  margin: 0 auto; /* Centrage horizontal */
+  padding: 20px; /* Espacement interne */
+  border: 1px solid #ccc; /* Bordure */
+  border-radius: 10px; /* Coins arrondis */
+  background-color: #f9f9f9; /* Couleur de fond */
+}
+
+form h1 {
+  text-align: center; /* Centrage du titre */
+  margin-bottom: 20px; /* Espacement depuis le bas */
+}
+
+form label {
+  display: block; /* Affichage en bloc pour chaque label */
+  margin-bottom: 5px; /* Espacement depuis le bas */
+  font-weight: bold; /* Texte en gras */
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="time"],
+form textarea,
+form select {
+  width: 100%; /* Largeur de 100% */
+  padding: 10px; /* Espacement interne */
+  margin-bottom: 10px; /* Espacement depuis le bas */
+  border: 1px solid #ccc; /* Bordure */
+  border-radius: 5px; /* Coins arrondis */
+}
+
+form select {
+  height: 40px; /* Hauteur du select */
+}
+
+form input[type="submit"] {
+  width: 100%; /* Largeur de 100% */
+  padding: 10px; /* Espacement interne */
+  border: none; /* Supprimer la bordure */
+  border-radius: 5px; /* Coins arrondis */
+  background-color: #0F4882; /* Couleur de fond du bouton */
+  color: #fff; /* Couleur du texte */
+  cursor: pointer; /* Curseur pointeur au survol */
+}
+
+form input[type="submit"]:hover {
+  background-color: #0056b3; /* Couleur de fond du bouton au survol */
+}
+
+/* Ajout de style pour les champs multiselect */
+form select[multiple] {
+  height: auto; /* Hauteur automatique */
+}
+
+
+/*style partie ajout de commentaire*/
+.container {
+  margin-top: 20px; /* Espacement depuis le haut */
+}
+
+.title {
+  text-align: center; /* Centrage du titre */
+  margin-bottom: 20px; /* Espacement depuis le bas */
+}
+
+form {
+  max-width: 600px; /* Largeur maximale du formulaire */
+  margin: 0 auto; /* Centrage horizontal */
+  padding: 20px; /* Espacement interne */
+  border: 1px solid #ccc; /* Bordure */
+  border-radius: 10px; /* Coins arrondis */
+  background-color: #f9f9f9; /* Couleur de fond */
+}
+
+form label {
+  display: block; /* Affichage en bloc pour chaque label */
+  margin-bottom: 5px; /* Espacement depuis le bas */
+  font-weight: bold; /* Texte en gras */
+}
+
+form textarea {
+  width: 100%; /* Largeur de 100% */
+  padding: 10px; /* Espacement interne */
+  margin-bottom: 10px; /* Espacement depuis le bas */
+  border: 1px solid #ccc; /* Bordure */
+  border-radius: 5px; /* Coins arrondis */
+}
+
+form button[type="submit"] {
+  width: 100%; /* Largeur de 100% */
+  padding: 10px; /* Espacement interne */
+  border: none; /* Supprimer la bordure */
+  border-radius: 5px; /* Coins arrondis */
+  background-color: #0F4882; /* Couleur de fond du bouton */
+  color: #fff; /* Couleur du texte */
+  cursor: pointer; /* Curseur pointeur au survol */
+}
+
+form button[type="submit"]:hover {
+  background-color: #0056b3; /* Couleur de fond du bouton au survol */
+}
+/*admin*/
+/* Style pour le conteneur */
+.list-container {
+  margin: 50px auto;
+  width: 80%;
+}
+
+/* Style pour la table */
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Style pour les titres de colonnes */
+.list-table th {
+  background-color: #0F4882;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Style pour les lignes de la table */
+.list-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+/* Style pour les boutons */
+.list-btn {
+  background-color: #0F4882;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.list-btn:hover {
+  background-color: #0056b3;
+}
+/*partie client*/
+/* Style pour le conteneur */
+.container {
+  margin: 50px auto;
+  width: 80%;
+}
+
+/* Style pour la table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Style pour les titres de colonnes */
+table th {
+  background-color: #0F4882;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Style pour les lignes de la table */
+table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+/* Style pour les liens d'action */
+.action-link {
+  text-decoration: none;
+  color: #0F4882;
+}
