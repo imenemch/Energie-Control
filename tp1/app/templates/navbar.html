@@ -1,58 +1,55 @@
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">Mon Application</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    {% if role == 'admin' %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="listeInterventionAdmin.php">Les interventions</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="listeUser.php">Gestion des utilisateurs </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="logout.php">Déconnexion</a>
-                        </li>
-                    {% endif %}
-                    {% if role == 'standardiste' %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="listeIntervention_standariste.php">Toutes les interventions</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="interventionStandaristes.php">Mes interventions</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="listeClientStandardiste.php">La liste des clients</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="logout.php">Déconnexion</a>
-                        </li>
-                    {% endif %}
-
-                    {% if role == 'client' %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="listeClient.php">Mes interventions</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="logout.php">Déconnexion</a>
-                        </li>
-                    {% endif %}
-
-                    {% if role == 'intervenant' %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="intervenantPage.php">Mes interventions</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="logout.php">Déconnexion</a>
-                        </li>
-                    {% endif %}
-                   
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #002141; height: 70px;">
+    <div class="container">
+        <a class="navbar-brand mr-auto" href="login.php">
+            <img src="../img/logo.png" alt="Logo" style=" max-height: 50px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
+        </a>        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if role == 'admin' %}
+                    <li class="nav-item mr-md-3">
+                        <a class="nav-link text-white" href="listeInterventionAdmin.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Les interventions</a>
+                    </li>
+                    <li class="nav-item mr-md-3">
+                        <a class="nav-link text-white" href="listeUser.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Gestion des utilisateurs </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="logout.php" style="font-family: Arial, sans-serif;">Déconnexion</a>
+                    </li>
+                {% endif %}
+                {% if role == 'standardiste' %}
+                    <li class="nav-item mr-md-3">
+                        <a class="nav-link text-white" href="listeIntervention_standariste.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Toutes les interventions</a>
+                    </li>
+                    <li class="nav-item mr-md-3">
+                        <a class="nav-link text-white" href="interventionStandaristes.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Mes interventions</a>
+                    </li>
+                    <li class="nav-item mr-md-3">
+                        <a class="nav-link text-white" href="listeClientStandardiste.php" style="font-family: Arial, sans-serif; margin-right: 10px;">La liste des clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="logout.php" style="font-family: Arial, sans-serif;">Déconnexion</a>
+                    </li>
+                {% endif %}
+                {% if role == 'client' %}
+                    <li class="nav-item mr-md-3">
+                        <a class="nav-link text-white" href="listeClient.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Mes interventions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="logout.php" style="font-family: Arial, sans-serif;">Déconnexion</a>
+                    </li>
+                {% endif %}
+                {% if role == 'intervenant' %}
+                    <li class="nav-item mr-md-3">
+                        <a class="nav-link text-white" href="intervenantPage.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Mes interventions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="logout.php" style="font-family: Arial, sans-serif;">Déconnexion</a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
-    </nav>
-
-
+    </div>
+</nav>
