@@ -15,6 +15,7 @@ if(isset($_GET['id']))
     $intervenants =$page->getIntervenant();
     $degres = $page->getDegre();
     $statuts = $page->getStatut();
+    $role = $page->session->get('role');
 
     if($infosInterventions) {
     
@@ -81,6 +82,6 @@ else
     exit();
 }
 echo $page->render('updateIntervention.html', ['infosInterventions' => $infosInterventions,'intervenants' => $intervenants, 'degres' => $degres,
-'statuts' => $statuts, 'intervenantForInterventions' => $intervenantForIntevention]);
+'statuts' => $statuts, 'intervenantForInterventions' => $intervenantForIntevention, 'role'=> $role]);
 
 ?>

@@ -13,9 +13,10 @@
         {
             $id = $_GET['id'];
             $infosUsers = $page->getInfosUser($id);
+            $role = $page->session->get('role');
         }
     
-        echo $page->render('infosUser.html', ['infosUsers' => $infosUsers]);
+        echo $page->render('infosUser.html', ['infosUsers' => $infosUsers, 'role' => $role]);
 
     }
     else

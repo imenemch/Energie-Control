@@ -8,7 +8,7 @@
 
     if($page->session->isConnected() && $page->session->hasRole('admin'))
     {
-       
+        $role = $page->session->get('role');
        if(isset( $_GET['id']))
        {
            $id = $_GET['id'];
@@ -35,7 +35,7 @@
        }    
       
        echo $page->render('infosInterventionAdmin.html.twig', ['interventions' => $interventions, 
-                           'commentaires' => $commentaires]);
+                           'commentaires' => $commentaires, 'role'=> $role]);
     }
     else
     {

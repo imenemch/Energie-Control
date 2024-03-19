@@ -13,6 +13,7 @@ require_once '../vendor/autoload.php';
             $statuts =$page->getStatut();
             $types =$page->getType();
             $id_standardiste = $page->session->get('id');
+            $role = $page->session->get('role');
 
         if(isset($_POST['send']))
         {
@@ -90,7 +91,7 @@ require_once '../vendor/autoload.php';
         }
 
     echo $page->render('addIntervention.html', ['intervenants' => $intervenants, 
-    'degres' => $degres, 'statuts' => $statuts, 'types' => $types, 'msg' => $msg]);
+    'degres' => $degres, 'statuts' => $statuts, 'types' => $types, 'msg' => $msg, 'role'=> $role]);
 
     }
     else
