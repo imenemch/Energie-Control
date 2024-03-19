@@ -11,6 +11,7 @@
         <table class="interventions-table">
             <thead>
                 <tr>
+<<<<<<< HEAD
                     <th class="description-intervention">Description</th>
                     <th class="intervenant">Intervenant</th>
                     <th class="standardiste">Standardiste</th>
@@ -19,11 +20,22 @@
                     <th class="statut-intervention">Statut</th>
                     <th class="degre-intervention">Degré</th>
                     <th class="actions">Action</th>
+=======
+                    <th><a href="#" class="sort" data-column="description">Description</a></th>
+                    <th><a href="#" class="sort" data-column="intervenants">Intervenant</a></th>
+                    <th><a href="#" class="sort" data-column="nomStandardiste">Standardiste</a></th>
+                    <th><a href="#" class="sort" data-column="nomClient">Client</a></th>
+                    <th><a href="#" class="sort" data-column="date">Date</a></th>
+                    <th><a href="#" class="sort" data-column="statutIntervention">Statut</a></th>
+                    <th><a href="#" class="sort" data-column="degreIntervention">Degré</a></th>
+                    <th>Action</th>
+>>>>>>> 7e8afac7a49c0beb77af32308f734905f1956c8f
                 </tr>
             </thead>
             <tbody>
                 {% for allIntervention in allInterventions %}
                     <tr>
+<<<<<<< HEAD
                         <td>{{ allIntervention.description }}</td>
                         <td>{{ allIntervention.intervenants }}</td>
                         <td>{{ allIntervention.nomStandardiste }} {{ allIntervention.prenomStandardiste }}</td>
@@ -31,6 +43,15 @@
                         <td>{{ allIntervention.date }}</td>
                         <td>{{ allIntervention.statutIntervention }}</td>
                         <td>{{ allIntervention.degreIntervention }}</td>
+=======
+                        <td data-column="description">{{ allIntervention.description}}</td>
+                        <td data-column="intervenants">{{ allIntervention.intervenants }}</td>
+                        <td data-column="nomStandardiste">{{ allIntervention.nomStandardiste }} {{ allIntervention.prenomStandardiste }}</td>
+                        <td data-column="nomClient">{{ allIntervention.nomClient }} {{ allIntervention.prenomClient }}</td>
+                        <td data-column="date">{{ allIntervention.date }}</td>
+                        <td data-column="statutIntervention">{{ allIntervention.statutIntervention}}</td>
+                        <td data-column="degreIntervention">{{ allIntervention.degreIntervention }}</td>
+>>>>>>> 7e8afac7a49c0beb77af32308f734905f1956c8f
                         <td>
                             <a href="modificationInterventionAdmin.php?id={{ allIntervention.id_intervention }}"><i class="bi bi-pencil-square" title="Modifier"></i></a>
                             <a href="infosInterventionAdmin.php?id={{ allIntervention.id_intervention }}"><i class="bi bi-eye-fill"></i></a> 
@@ -41,4 +62,42 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortLinks = document.querySelectorAll('.sort');
+            sortLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const column = this.dataset.column;
+                    sortTable(column);
+                });
+            });
+
+            function sortTable(column) {
+                const table = document.querySelector('.list-table');
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                // Trie les lignes en fonction de la valeur de la colonne
+                rows.sort((a, b) => {
+                    const aValue = a.querySelector(`[data-column="${column}"]`).innerText;
+                    const bValue = b.querySelector(`[data-column="${column}"]`).innerText;
+                    return aValue.localeCompare(bValue);
+                });
+
+                // Inverse l'ordre si la colonne est déjà triée
+                if (table.dataset.sortedColumn === column) {
+                    rows.reverse();
+                    table.dataset.sortedColumn = '';
+                } else {
+                    table.dataset.sortedColumn = column;
+                }
+
+                // Met à jour l'ordre des lignes dans le tableau
+                tbody.innerHTML = '';
+                rows.forEach(row => tbody.appendChild(row));
+            }
+        });
+    </script>
 {% endblock %}

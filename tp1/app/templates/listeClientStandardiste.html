@@ -1,43 +1,68 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste de tous les clients</title>
-    <link rel="stylesheet" href="../css/styles.css">
-</head>
-<body>
-    <div class="container">
-        <h1 class="title">Liste de tous les clients</h1><br>
-        
-        <table class="interventions-table">
-            <thead>
+    <h1 class="title">Liste de tous les clients</h1><br>
+
+    <table class="sortable-table">
+        <thead>
+            <tr>
+                <th><a href="#" class="sort" data-column="id">ID</a></th>
+                <th><a href="#" class="sort" data-column="email">E-mail</a></th>
+                <th><a href="#" class="sort" data-column="nom">Nom</a></th>
+                <th><a href="#" class="sort" data-column="prenom">Prénom</a></th>
+                <th><a href="#" class="sort" data-column="adresse">Adresse</a></th>
+                <th><a href="#" class="sort" data-column="tel">Téléphone</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for allClient in allClients %}
                 <tr>
-                    <th class="id-intervention">ID</th>
-                    <th class="nom-client">E-mail</th>
-                    <th class="statut-intervention">Nom</th>
-                    <th class="degre-intervention">Prénom</th>
-                    <th class="description-intervention">Adresse</th>
-                    <th class="actions">Tel</th>
+                    <td data-column="id">{{ allClient.id }}</td>
+                    <td data-column="email">{{ allClient.email }}</td>
+                    <td data-column="nom">{{ allClient.nom }}</td>
+                    <td data-column="prenom">{{ allClient.prenom }}</td>
+                    <td data-column="adresse">{{ allClient.adresse }}</td>
+                    <td data-column="tel">{{ allClient.tel }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                {% for allClient in allClients %}
-                    <tr>
-                        <td>{{allClient.id}}</td>
-                        <td>{{allClient.email}}</td>
-                        <td>{{allClient.nom}}</td>
-                        <td>{{allClient.prenom}}</td>
-                        <td>{{allClient.adresse}}</td>
-                        <td>{{allClient.tel}}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortLinks = document.querySelectorAll('.sort');
+            sortLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const column = this.dataset.column;
+                    sortTable(column);
+                });
+            });
+
+            function sortTable(column) {
+                const table = document.querySelector('.sortable-table');
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                // Trie les lignes en fonction de la valeur de la colonne
+                rows.sort((a, b) => {
+                    const aValue = a.querySelector(`[data-column="${column}"]`).innerText;
+                    const bValue = b.querySelector(`[data-column="${column}"]`).innerText;
+                    return aValue.localeCompare(bValue);
+                });
+
+                // Inverse l'ordre si la colonne est déjà triée
+                if (table.dataset.sortedColumn === column) {
+                    rows.reverse();
+                    table.dataset.sortedColumn = '';
+                } else {
+                    table.dataset.sortedColumn = column;
+                }
+
+                // Met à jour l'ordre des lignes dans le tableau
+                tbody.innerHTML = '';
+                rows.forEach(row => tbody.appendChild(row));
+            }
+        });
+    </script>
 {% endblock %}

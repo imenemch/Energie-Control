@@ -5,31 +5,69 @@
 {% block body %}
     <div class="container">
         <h1 class="title">Interventions en cours</h1>
-        <table class="interventions-table">
+        <table class="interventions-table sortable-table">
             <thead>
                 <tr>
-                    <th>Description</th>
-                    <th>Intervenant</th>
-                    <th>Date</th>
-                    <th>Statut</th>
-                    <th>Degré</th>
+                    <th><a href="#" class="sort" data-column="description">Description</a></th>
+                    <th><a href="#" class="sort" data-column="nom_intervenant">Intervenant</a></th>
+                    <th><a href="#" class="sort" data-column="date">Date</a></th>
+                    <th><a href="#" class="sort" data-column="nom_statut">Statut</a></th>
+                    <th><a href="#" class="sort" data-column="nom_degre">Degré</a></th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for intervention in interventions %}
                     <tr>
-                        <td>{{ intervention.description }}</td>
-                        <td>{{ intervention.nom_intervenant }} {{ intervention.prenom_intervenant }}</td>
-                        <td>{{ intervention.date }}</td>
-                        <td>{{ intervention.nom_statut }}</td>
-                        <td>{{ intervention.nom_degre }}</td>
+                        <td data-column="description">{{ intervention.description }}</td>
+                        <td data-column="nom_intervenant">{{ intervention.nom_intervenant }} {{ intervention.prenom_intervenant }}</td>
+                        <td data-column="date">{{ intervention.date }}</td>
+                        <td data-column="nom_statut">{{ intervention.nom_statut }}</td>
+                        <td data-column="nom_degre">{{ intervention.nom_degre }}</td>
                         <td>
-                            <a href="addEdit.php?id={{ intervention.id_intervention }}"><i class="bi bi-eye-fill"></i></a> 
+                            <a href="infoClient.php?id={{ intervention.id_intervention }}"><i class="bi bi-eye-fill"></i></a> 
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortLinks = document.querySelectorAll('.sort');
+            sortLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const column = this.dataset.column;
+                    sortTable(column);
+                });
+            });
+
+            function sortTable(column) {
+                const table = document.querySelector('.sortable-table');
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                // Trie les lignes en fonction de la valeur de la colonne
+                rows.sort((a, b) => {
+                    const aValue = a.querySelector(`[data-column="${column}"]`).innerText;
+                    const bValue = b.querySelector(`[data-column="${column}"]`).innerText;
+                    return aValue.localeCompare(bValue);
+                });
+
+                // Inverse l'ordre si la colonne est déjà triée
+                if (table.dataset.sortedColumn === column) {
+                    rows.reverse();
+                    table.dataset.sortedColumn = '';
+                } else {
+                    table.dataset.sortedColumn = column;
+                }
+
+                // Met à jour l'ordre des lignes dans le tableau
+                tbody.innerHTML = '';
+                rows.forEach(row => tbody.appendChild(row));
+            }
+        });
+    </script>
 {% endblock %}

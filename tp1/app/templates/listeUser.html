@@ -1,47 +1,80 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-
-<div class="container">
     <h1 class="title">Liste de tous les utilisateurs</h1><br>
 
     {% if msg %}
-    <p>{{ msg }}</p>
+        <p>{{ msg }}</p>
     {% endif %}    
 
-    <table class="interventions-table">
+    <table class="sortable-table">
         <thead>
             <tr>
-                <th class="id">ID</th>
-                <th class="email">E-mail</th>
-                <th class="nom">Nom</th>
-                <th class="prenom">Prénom</th>
-                <th class="adresse">Adresse</th>
-                <th class="tel">Téléphone</th>
-                <th class="role">Rôle</th>
-                <th class="actions">Action</th>
-                <!-- Ajoutez plus de balises th pour chaque colonne supplémentaire -->
+                <th><a href="#" class="sort" data-column="id">ID</a></th>
+                <th><a href="#" class="sort" data-column="email">E-mail</a></th>
+                <th><a href="#" class="sort" data-column="nom">Nom</a></th>
+                <th><a href="#" class="sort" data-column="prenom">Prénom</a></th>
+                <th><a href="#" class="sort" data-column="adresse">Adresse</a></th>
+                <th><a href="#" class="sort" data-column="tel">Tel</a></th>
+                <th><a href="#" class="sort" data-column="role">Rôle</a></th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             {% for allUser in allUsers %}
                 <tr>
-                    <td>{{ allUser.id }}</td>
-                    <td>{{ allUser.email }}</td>
-                    <td>{{ allUser.nom }}</td>
-                    <td>{{ allUser.prenom }}</td>
-                    <td>{{ allUser.adresse }}</td>
-                    <td>{{ allUser.tel }}</td>
-                    <td>{{ allUser.role }}</td>
+                    <td data-column="id">{{ allUser.id }}</td>
+                    <td data-column="email">{{ allUser.email }}</td>
+                    <td data-column="nom">{{ allUser.nom }}</td>
+                    <td data-column="prenom">{{ allUser.prenom }}</td>
+                    <td data-column="adresse">{{ allUser.adresse }}</td>
+                    <td data-column="tel">{{ allUser.tel }}</td>
+                    <td data-column="role">{{ allUser.role }}</td>
                     <td>
                         <a href="modificationUser.php?id={{ allUser.id }}"><i class="bi bi-pencil-square" title="Modifier"></i></a>
-                        <a href="suppUser.php?id={{ allUser.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"> <i class="bi bi-trash" title="Supprimer"></i></a>
-                        <a href="infosUser.php?id={{ allUser.id }}"> <i class="bi bi-eye-fill"></i></a>
+                        <a href="suppUser.php?id={{ allUser.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"><i class="bi bi-trash" title="Supprimer"></i></a>
+                        <a href="infosUser.php?id={{ allUser.id }}"><i class="bi bi-eye-fill" title="Voir"></i></a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-</div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortLinks = document.querySelectorAll('.sort');
+            sortLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const column = this.dataset.column;
+                    sortTable(column);
+                });
+            });
+
+            function sortTable(column) {
+                const table = document.querySelector('.sortable-table');
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                // Trie les lignes en fonction de la valeur de la colonne
+                rows.sort((a, b) => {
+                    const aValue = a.querySelector(`[data-column="${column}"]`).innerText;
+                    const bValue = b.querySelector(`[data-column="${column}"]`).innerText;
+                    return aValue.localeCompare(bValue);
+                });
+
+                // Inverse l'ordre si la colonne est déjà triée
+                if (table.dataset.sortedColumn === column) {
+                    rows.reverse();
+                    table.dataset.sortedColumn = '';
+                } else {
+                    table.dataset.sortedColumn = column;
+                }
+
+                // Met à jour l'ordre des lignes dans le tableau
+                tbody.innerHTML = '';
+                rows.forEach(row => tbody.appendChild(row));
+            }
+        });
+    </script>
 {% endblock %}
