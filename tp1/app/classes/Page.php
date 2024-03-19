@@ -350,8 +350,6 @@ public function getInterventionsByID($interventions)
             $interventionsByID[$interventionId] = $intervention;
         }
     }
-
-    // Retourner le tableau des interventions par
     return $interventionsByID;
 }
 
@@ -363,8 +361,6 @@ public function ajouterCommentaire($interventionId, $commentaire, $userId, $date
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute([':interventionId' => $interventionId, ':id_user' => $userId, ':commentaire' => $commentaire, ':date' => $date]);
 }
-
-
 
 
 // Fonction pour récupérer toutes les interventions avec les détails nécessaires

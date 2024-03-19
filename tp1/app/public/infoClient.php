@@ -23,7 +23,7 @@ if($page->session->hasRole('client'))
         $page->ajouterCommentaire($interventionId, $nouveauCommentaire, $page->session->get('id'), $dateAjout);
 
         // Redirection vers la même page pour éviter la soumission multiple
-        header("Location: addEdit.php?id=$interventionId");
+        header("Location: infoClient.php?id=$interventionId");
         exit();
     }
     
@@ -44,5 +44,3 @@ else
 {
     header('Location: index.php');
 }
-
-    
