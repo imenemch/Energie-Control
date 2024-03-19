@@ -8,10 +8,10 @@
 
     if($page->session->isConnected() && $page->session->hasRole('admin'))
     {
-        $id = $_GET['id'];
-   
-       if($id)
+       
+       if(isset( $_GET['id']))
        {
+           $id = $_GET['id'];
            $interventions = $page->getInterventionInfoAdmin($id);
            $commentaires = $page->getCommentsForInterventionAdmin($id);
            $idSession = $page->session->get('id');

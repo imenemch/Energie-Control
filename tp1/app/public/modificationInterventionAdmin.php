@@ -17,12 +17,13 @@
              $standardistes = $page->getAllStandardiste();
              $degres = $page->getDegre();
              $statuts = $page->getStatut();
+
             if(isset($_POST['send']))
             {
                 $id_standardistes = $_POST['standardistes'];
                 foreach($id_standardistes as $standardiste)
                 {
-                     $page->updateInterventionInfosAdmin([
+                   $success1=  $page->updateInterventionInfosAdmin([
                          'id_intervention' => $id,
                          'id_standardiste' => $standardiste,
                          'id_statut' => $_POST['statut'],
@@ -33,27 +34,29 @@
                      ]);
                 }
             
-                $id_intervenants = $_POST['intervenants'];
-                $id_inter_users = $page->getIdInterUserForIntervention($id);
-
-                foreach($id_inter_users as $key => $idInterUser) {
-                    // Vérifier si l'index existe dans le tableau des intervenants
-                    if(isset($id_intervenants[$key])) {
-                        $inter = $id_intervenants[$key];
-                        $page->updateIntervenantInfosAdmin([
-                            'id_inter_user' => $idInterUser['id_inter_user'],
-                            'id_intervenant' => $inter
-                        ]);
-                    }
-                }
-
-                $page->updateClientInfosAdmin([
+                $success2 = $page->updateClientInfosAdmin([
                     'id' => $_POST['clientId'],
                     'nom' => $_POST['clientNom'],
                     'prenom'=> $_POST['clientPrenom'],
                     'adresse' => $_POST['adresse']
                 ]);
 
+                if(isset($_POST['intervenants']))
+                {
+                    $id_inter_users = $page->getIdInterUserForIntervention($id);
+                    foreach($id_inter_users as $id_inter_user)
+                    {
+                        $success3 = $page->SupInterUser($id_inter_user);
+                    }
+                    $id_intervenants = $_POST['intervenants'];
+                    foreach($id_intervenants as $id_intervenant)
+                    {
+                        $success4 = $page->insertInterUser('intervention_user',[
+                            'id_intervenant' => $id_intervenant,
+                            'id_intervention' => $id
+                         ]);  
+                    }     
+                }
                 header("Location: modificationInterventionAdmin.php?id=$id");
                 exit();
 

@@ -34,7 +34,7 @@
                         <td>
                             <a href="modificationInterventionAdmin.php?id={{ allIntervention.id_intervention }}"><i class="bi bi-pencil-square" title="Modifier"></i></a>
                             <a href="infosInterventionAdmin.php?id={{ allIntervention.id_intervention}}"><i class="bi bi-eye-fill"></i></a> 
-                        </td>
+                            <a href="suppIntervention.php?id={{ allIntervention.id_intervention}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette intervention ?')"> <i class="bi bi-trash" title="Supprimer"></i></a></td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Infos sur l'intervention : </h2>
+                <h2 class="title">Infos sur l'intervention : </h2>
                 {% for intervention in interventions %}
                     <div class="card mb-3">
                         <div class="card-body">
@@ -23,7 +23,7 @@
         
         <div class="row">
             <div class="col-md-8 offset-md-2"> 
-                <h3>Commentaires :</h3>
+                <h3 class="title">Commentaires :</h3>
                 {% for commentaire in commentaires %}
                     <div class="card mb-3">
                         <div class="card-body">
@@ -37,7 +37,7 @@
                     </div>
                 {% endfor %}
                 <div class="row">
-                    <h3>Ajouter un commentaire :</h3>
+                    <h3 class="title">Ajouter un commentaire :</h3>
                     <form method="post" action="">
                         <div class="form-group">
                             <p>{{msg}}</p>

@@ -1,7 +1,7 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-<h1> Modification des infos</h1>
+<h1 class="title"> Modification des infos</h1>
 
 <form action="" method="post">
 
@@ -69,7 +69,9 @@
 
     <div>
         <input type="submit" value="Modifier" name="send" onclick="return confirm('Êtes-vous sûr de vouloir faire cette modification?')">
-    </div>
+    </div><br><br>
+    <a href="listeUser.php" class="btn btn-secondary">Retour</a>
+
    
 </form>
 

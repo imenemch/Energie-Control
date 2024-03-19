@@ -13,7 +13,6 @@
                     <th>Date</th>
                     <th>Statut</th>
                     <th>Degré</th>
-                    {# <th>Commentaire</th> #}
                     <th>Action</th>
                 </tr>
             </thead>
@@ -25,7 +24,6 @@
                         <td>{{ intervention.date }}</td>
                         <td>{{ intervention.nom_statut }}</td>
                         <td>{{ intervention.nom_degre }}</td>
-                        {# <td>{{ intervention.commentaire }}</td> #}
                         <td>
                             <a href="addEdit.php?id={{ intervention.id_intervention }}"><i class="bi bi-eye-fill"></i></a> 
                         </td>

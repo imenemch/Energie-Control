@@ -11,7 +11,6 @@ require_once '../vendor/autoload.php';
       header('Location: index.php?msg=Vous ne passerez pas !!');
       exit();
     }
-
     $email = $page->session->get('email');
     $idSession = $page->session->get('id');
 

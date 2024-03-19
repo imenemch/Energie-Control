@@ -16,19 +16,61 @@ if(isset($_GET['id']))
     $statuts = $page->getStatut();
 
     if($infosInterventions) {
-        // Je te laisse modifier la partie update en fonction des nouvelles variables dans le .html
+    
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nom_client = $_POST['clientNom'];
+            $clientNom = $_POST['clientNom'];
+            $clientPrenom = $_POST['clientPrenom'];
+            $description = $_POST['description'];
             $statut_intervention = $_POST['statut'];
             $degre_intervention = $_POST['degre'];
-            $description_intervention = $_POST['description'];
+            $date = $_POST['date'];
+            $heure = $_POST['heure'];
+            $clientId = $_POST['clientId'];
+            $adresse = $_POST['adresse'];
 
-            $page->updateInterventionStandariste($id_intervention, $nom_client, $statut_intervention, $degre_intervention, $description_intervention);
-            header('Location: interventionStandaristes.php');
-            exit();
+            // Update des infos de l'intervention 
+            $success1 = $page->updateInterventionInfoStandardiste([
+                'id_intervention' => $id_intervention,
+                'id_statut' => $statut_intervention,
+                'id_degre' => $degre_intervention,
+                'description' => $description,
+                'date' => $date,
+                'heure' => $heure
+            ]);
+
+            // Update des infos du client
+            $success2 = $page->updateClientInfosAdmin([
+                'id' => $clientId,
+                'nom' => $clientNom,
+                'prenom'=> $clientPrenom,
+                'adresse' => $adresse
+            ]);
+
+            if(isset($_POST['intervenants']))
+            {
+                    $id_inter_users = $page->getIdInterUserForIntervention($id_intervention);
+                    foreach($id_inter_users as $id_inter_user)
+                    {
+                        $success3 = $page->SupInterUser($id_inter_user);
+                    }
+                    $id_intervenants = $_POST['intervenants'];
+                    foreach($id_intervenants as $id_intervenant)
+                    {
+                        $success4 = $page->insertInterUser('intervention_user',[
+                            'id_intervenant' => $id_intervenant,
+                            'id_intervention' => $id_intervention
+                         ]);  
+                    }     
+                
+                header("Location: updateIntervention.php?id=$id_intervention");
+                exit();
+            }
+               
         }
-    } else {
-        header('Location: erreur.php');
+    }
+     else
+    {
+        header('Location: index.php');
         exit();
     }
 } 
