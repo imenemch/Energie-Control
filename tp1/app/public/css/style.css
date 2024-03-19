@@ -1,5 +1,5 @@
 body {
-  background-color: #F2EFDF; /* Couleur de fond du corps */
+  background-image: url('../img/background.png'); 
 }
 /*style pour footer*/
 footer {
@@ -518,4 +518,8 @@ input[type="submit"]:hover {
 .welcome-box p {
   font-size: 18px; /* Taille de la police pour le texte */
   color: #03115e;
+}
+.sort{
+  text-decoration: none;
+  color:#000;
 }
