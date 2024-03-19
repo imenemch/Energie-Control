@@ -2,48 +2,46 @@
 
 {% block body %}
 
-<h1 class="title">Liste de tous les users</h1><br>
+<div class="container">
+    <h1 class="title">Liste de tous les utilisateurs</h1><br>
 
-{% if msg %}
-<p>{{ msg }}</p>
-{% endif %}    
+    {% if msg %}
+    <p>{{ msg }}</p>
+    {% endif %}    
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>E-mail</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Adresse</th>
-            <th>Tel</th>
-            <th>Rôle</th>
-            <th>Action</th>
-            <!-- Ajoutez plus de balises th pour chaque colonne supplémentaire -->
-        </tr>
-    </thead>
-    <tbody>
-        {% for allUser in allUsers %}
+    <table class="interventions-table">
+        <thead>
             <tr>
-                <td>{{allUser.id}}</td>
-                <td>{{allUser.email}}</td>
-                <td>{{allUser.nom}}</td>
-                <td>{{allUser.prenom}}</td>
-                <td>{{allUser.adresse}}</td>
-                <td>{{allUser.tel}}</td>
-                <td>{{allUser.role}}</td>
-                <td>
-                    <a href="modificationUser.php?id={{ allUser.id }}"><i class="bi bi-pencil-square" title="Modifier"></i></a>
-                    <a href="suppUser.php?id={{ allUser.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"> <i class="bi bi-trash" title="Supprimer"></i></a>
-                    <a href="infosUser.php?id={{ allUser.id }}"> <i class="bi bi-eye-fill"></i></a>
-                   
-                </td>
-                
-                
-
+                <th class="id">ID</th>
+                <th class="email">E-mail</th>
+                <th class="nom">Nom</th>
+                <th class="prenom">Prénom</th>
+                <th class="adresse">Adresse</th>
+                <th class="tel">Téléphone</th>
+                <th class="role">Rôle</th>
+                <th class="actions">Action</th>
+                <!-- Ajoutez plus de balises th pour chaque colonne supplémentaire -->
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for allUser in allUsers %}
+                <tr>
+                    <td>{{ allUser.id }}</td>
+                    <td>{{ allUser.email }}</td>
+                    <td>{{ allUser.nom }}</td>
+                    <td>{{ allUser.prenom }}</td>
+                    <td>{{ allUser.adresse }}</td>
+                    <td>{{ allUser.tel }}</td>
+                    <td>{{ allUser.role }}</td>
+                    <td>
+                        <a href="modificationUser.php?id={{ allUser.id }}"><i class="bi bi-pencil-square" title="Modifier"></i></a>
+                        <a href="suppUser.php?id={{ allUser.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"> <i class="bi bi-trash" title="Supprimer"></i></a>
+                        <a href="infosUser.php?id={{ allUser.id }}"> <i class="bi bi-eye-fill"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}

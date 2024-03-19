@@ -3,38 +3,39 @@
 {% block title %}Interventions-Admin{% endblock %}
 
 {% block body %}
-    <div class="list-container">
+    <div class="container">
         <h1 class="title">Interventions en cours</h1>
         <div class="button-wrapper">
             <a href="addIntervention.php" class="list-btn">Nouvelle Intervention</a>
         </div><br><br>
-        <table class="list-table">
+        <table class="interventions-table">
             <thead>
                 <tr>
-                    <th>Description</th>
-                    <th>Intervenant</th>
-                    <th>Standardiste</th>
-                    <th>Client</th>
-                    <th>Date</th>
-                    <th>Statut</th>
-                    <th>Degré</th>
-                    <th>Action</th>
+                    <th class="description-intervention">Description</th>
+                    <th class="intervenant">Intervenant</th>
+                    <th class="standardiste">Standardiste</th>
+                    <th class="client">Client</th>
+                    <th class="date">Date</th>
+                    <th class="statut-intervention">Statut</th>
+                    <th class="degre-intervention">Degré</th>
+                    <th class="actions">Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for allIntervention in allInterventions %}
                     <tr>
-                        <td>{{ allIntervention.description}}</td>
+                        <td>{{ allIntervention.description }}</td>
                         <td>{{ allIntervention.intervenants }}</td>
                         <td>{{ allIntervention.nomStandardiste }} {{ allIntervention.prenomStandardiste }}</td>
                         <td>{{ allIntervention.nomClient }} {{ allIntervention.prenomClient }}</td>
                         <td>{{ allIntervention.date }}</td>
-                        <td>{{ allIntervention.statutIntervention}}</td>
+                        <td>{{ allIntervention.statutIntervention }}</td>
                         <td>{{ allIntervention.degreIntervention }}</td>
                         <td>
                             <a href="modificationInterventionAdmin.php?id={{ allIntervention.id_intervention }}"><i class="bi bi-pencil-square" title="Modifier"></i></a>
-                            <a href="infosInterventionAdmin.php?id={{ allIntervention.id_intervention}}"><i class="bi bi-eye-fill"></i></a> 
-                            <a href="suppIntervention.php?id={{ allIntervention.id_intervention}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette intervention ?')"> <i class="bi bi-trash" title="Supprimer"></i></a></td>
+                            <a href="infosInterventionAdmin.php?id={{ allIntervention.id_intervention }}"><i class="bi bi-eye-fill"></i></a> 
+                            <a href="suppIntervention.php?id={{ allIntervention.id_intervention }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette intervention ?')"> <i class="bi bi-trash" title="Supprimer"></i></a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

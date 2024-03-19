@@ -1,32 +1,43 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-
-<h1 class="title">Liste de tous les clients</h1><br>
-
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>E-mail</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Adresse</th>
-            <th>Tel</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for allClient in allClients %}
-            <tr>
-                <td>{{allClient.id}}</td>
-                <td>{{allClient.email}}</td>
-                <td>{{allClient.nom}}</td>
-                <td>{{allClient.prenom}}</td>
-                <td>{{allClient.adresse}}</td>
-                <td>{{allClient.tel}}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste de tous les clients</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Liste de tous les clients</h1><br>
+        
+        <table class="interventions-table">
+            <thead>
+                <tr>
+                    <th class="id-intervention">ID</th>
+                    <th class="nom-client">E-mail</th>
+                    <th class="statut-intervention">Nom</th>
+                    <th class="degre-intervention">Prénom</th>
+                    <th class="description-intervention">Adresse</th>
+                    <th class="actions">Tel</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for allClient in allClients %}
+                    <tr>
+                        <td>{{allClient.id}}</td>
+                        <td>{{allClient.email}}</td>
+                        <td>{{allClient.nom}}</td>
+                        <td>{{allClient.prenom}}</td>
+                        <td>{{allClient.adresse}}</td>
+                        <td>{{allClient.tel}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
 {% endblock %}

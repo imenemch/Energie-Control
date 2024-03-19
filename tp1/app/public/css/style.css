@@ -465,3 +465,57 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #0056b3;
 }
+/*page login*/
+.welcome-container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-content {
+  text-align: center;
+  z-index: 1;
+  color: #fff;
+}
+
+.welcome-content h1 {
+  font-size: 3rem;
+}
+
+.welcome-content p {
+  font-size: 1.2rem;
+}
+
+.welcome-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/background.png'); 
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5; 
+}
+/* Style pour la boîte de bienvenue */
+.welcome-box {
+  background-color: rgba(255, 255, 255, 0.9); /* Couleur de fond semi-transparente */
+  border-radius: 10px; /* Coins arrondis */
+  padding: 20px; /* Espacement interne */
+  text-align: center; /* Alignement du texte */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Ombre douce */
+}
+
+/* Style pour le texte de bienvenue */
+.welcome-box h1 {
+  font-size: 36px; /* Taille de la police pour le titre */
+  margin-bottom: 10px; /* Marge inférieure */
+  color: #03115e;
+}
+
+.welcome-box p {
+  font-size: 18px; /* Taille de la police pour le texte */
+  color: #03115e;
+}

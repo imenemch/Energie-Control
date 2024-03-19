@@ -1,13 +1,15 @@
 {% extends "base_auth.html.twig" %}
 
+{% block title %}Bienvenue{% endblock %}
+
 {% block body %}
-<div class="login-container">
-    <div class="login-box">
-        <h1 class="title">Bienvenue</h1>
-        <p>Bonjour {{ email }}</p>
-        <form action="logout.php" method="post">
-            <input type="submit" value="Déconnexion" class="logout-button">
-        </form>
+<div class="welcome-container">
+    <div class="welcome-content">
+        <div class="welcome-box">
+            <h1>Bienvenue, {{ email }} !</h1>
+            <p>Nous sommes ravis de vous accueillir sur notre plateforme.</p>
+        </div>
     </div>
+    <div class="welcome-background"></div>
 </div>
 {% endblock %}
