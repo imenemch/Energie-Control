@@ -10,7 +10,7 @@
    
 </head>
 <body>
-    {% include 'navbar.html' %}
+    {% if (role) %}{% include 'navbar.html' %}{% endif %}
     {% block body %}{% endblock %}
 
     <footer>
