@@ -9,7 +9,8 @@ if ($page->session->isConnected() && $page->session->hasRole('intervenant')) {
 
     $id_intervenant = $page->session->get('id');
     $interventions = $page->getInterventionsByIntervenant($id_intervenant);
-    echo $page->render('intervenantPage.html.twig', ['interventions' => $interventions]);
+    $statuts = $page->getStatut();
+    echo $page->render('intervenantPage.html', ['interventions' => $interventions, 'statuts' => $statuts]);
 } 
 else 
 {
