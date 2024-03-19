@@ -1,5 +1,4 @@
 <?php
-
 require_once '../vendor/autoload.php';
 
 use App\Page;
@@ -19,10 +18,10 @@ if(isset($_GET['id']))
     if($infosInterventions) {
         // Je te laisse modifier la partie update en fonction des nouvelles variables dans le .html
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nom_client = $_POST['nom_client'];
-            $statut_intervention = $_POST['statut_intervention'];
-            $degre_intervention = $_POST['degre_intervention'];
-            $description_intervention = $_POST['description_intervention'];
+            $nom_client = $_POST['clientNom'];
+            $statut_intervention = $_POST['statut'];
+            $degre_intervention = $_POST['degre'];
+            $description_intervention = $_POST['description'];
 
             $page->updateInterventionStandariste($id_intervention, $nom_client, $statut_intervention, $degre_intervention, $description_intervention);
             header('Location: interventionStandaristes.php');

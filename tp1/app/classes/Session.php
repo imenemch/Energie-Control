@@ -32,7 +32,6 @@ class Session
 
     public function hasRole(string $role)
     {
-
         return isset($_SESSION['role']) && $_SESSION['role'] === $role;
     }
    
