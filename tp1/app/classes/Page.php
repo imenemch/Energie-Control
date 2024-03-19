@@ -99,6 +99,14 @@ class Page
         $stmt->execute($data);
     }
 
+    public function updateInterventionInfoStandardiste(array $data)
+    {
+        $sql = "UPDATE intervention SET id_statut = :id_statut, id_degre = :id_degre, description = :description,
+                date = :date, heure = :heure WHERE id_intervention = :id_intervention";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($data);
+    }
+    
     public function updateClientInfosAdmin(array $data)
     {
         $sql = "UPDATE users SET nom = :nom, prenom =:prenom, adresse = :adresse WHERE id = :id"; 

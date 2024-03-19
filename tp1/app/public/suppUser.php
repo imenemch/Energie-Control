@@ -11,7 +11,6 @@
     if(isset($id))
     {
         $page->suppUser($id);
-        $msg = "Utilisateur supprimé avec succès !!";
         header('Location: listeUser.php');
         exit();
     }
