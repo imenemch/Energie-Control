@@ -43,7 +43,7 @@ if(isset($_GET['id']))
             $success2 = $page->updateClientInfosAdmin([
                 'id' => $clientId,
                 'nom' => $clientNom,
-                'prenom'=> $clientNom,
+                'prenom'=> $clientPrenom,
                 'adresse' => $adresse
             ]);
 
