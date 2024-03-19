@@ -8,8 +8,9 @@ $page = new Page();
 
 if($page->session->isConnected() && $page->session->hasRole('standardiste'))
 {
+    $role = $page->session->get('role');
     $interventions = $page->getAllInterventionsStandardiste();
-    echo $page->render('listeInterventionStandardiste.html.twig', ['interventions' => $interventions]);
+    echo $page->render('listeInterventionStandardiste.html.twig', ['interventions' => $interventions, 'role' => $role]);
 }
 else
 {

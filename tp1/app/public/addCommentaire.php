@@ -13,6 +13,7 @@ if(isset($_GET['id']))
         $id = $_GET['id'];
         $commentaire = $_POST['commentaire'];
         $idSession = $page->session->get('id');
+        $role = $page->session->get('role');
 
         $insertion = $page->insertCommentaire('commentaire' ,[
             'id_intervention' => $id,
@@ -30,7 +31,7 @@ if(isset($_GET['id']))
         }
     }
 
-    echo $page->render('addCommentaire.html',['msg'=> $msg]);
+    echo $page->render('addCommentaire.html',['msg'=> $msg, 'role' => $role]);
 
 }
 else

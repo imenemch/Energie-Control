@@ -1,0 +1,58 @@
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Mon Application</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    {% if role == 'admin' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="listeInterventionAdmin.php">Les interventions</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="listeUser.php">Gestion des utilisateurs </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="logout.php">Déconnexion</a>
+                        </li>
+                    {% endif %}
+                    {% if role == 'standardiste' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="listeIntervention_standariste.php">Toutes les interventions</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="interventionStandaristes.php">Mes interventions</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="listeClientStandardiste.php">La liste des clients</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="logout.php">Déconnexion</a>
+                        </li>
+                    {% endif %}
+
+                    {% if role == 'client' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="listeClient.php">Mes interventions</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="logout.php">Déconnexion</a>
+                        </li>
+                    {% endif %}
+
+                    {% if role == 'intervenant' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="intervenantPage.php">Mes interventions</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="logout.php">Déconnexion</a>
+                        </li>
+                    {% endif %}
+                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+

@@ -8,7 +8,7 @@ $page = new Page();
 
 if($page->session->isConnected() && $page->session->hasRole('client'))
 {
-
+    $role = $page->session->get('role');
     // Récupérer toutes les interventions clients de la base de données
     $client_interventions = $page->getAllInterventions();
 
@@ -35,7 +35,8 @@ if($page->session->isConnected() && $page->session->hasRole('client'))
 
     // Afficher la page d'accueil des clients
     echo $page->render('listeClient.html.twig', [
-        'interventions' => $client_interventions
+        'interventions' => $client_interventions,
+        'role'=> $role
     ]);
 
 

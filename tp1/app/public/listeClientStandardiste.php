@@ -8,8 +8,9 @@
 
     if($page->session->isConnected() && $page->session->hasRole('standardiste'))
     {
+        $role = $page->session->get('role');
         $allClients = $page->getAllClient();
-        echo $page->render('listeClientStandardiste.html', ['allClients' => $allClients]);
+        echo $page->render('listeClientStandardiste.html', ['allClients' => $allClients, 'role'=> $role]);
     }
     else
     {

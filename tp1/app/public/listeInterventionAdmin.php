@@ -8,8 +8,9 @@
 
     if($page->session->isConnected() && $page->session->hasRole('admin'))
     {
+        $role = $page->session->get('role');
         $allInterventions = $page->getAllInterventionsAdmin();
-        echo $page->render('listeInterventionAdmin.html.twig', ['allInterventions' => $allInterventions]);
+        echo $page->render('listeInterventionAdmin.html.twig', ['allInterventions' => $allInterventions, 'role'=> $role]);
 
     }
     else

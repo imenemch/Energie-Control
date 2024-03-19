@@ -8,6 +8,7 @@
 
     if($page->session->hasRole('standardiste'))
     {
+        $role = $page->session->get('role');
        if($_GET['id'])
        {
            $id = $_GET['id'];
@@ -34,7 +35,7 @@
        }    
       
        echo $page->render('infosInterventionStandardiste.html.twig', ['interventions' => $interventions, 
-                           'commentaires' => $commentaires]);
+                           'commentaires' => $commentaires, 'role' => $role]);
     }
     else
     {

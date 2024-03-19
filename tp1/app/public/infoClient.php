@@ -10,6 +10,7 @@ if($page->session->hasRole('client'))
 {
     // Récupérer l'ID de l'intervention 
     $interventionId = $_GET['id'];
+    $role = $page->session->get('role');
 
     // Vérifier si des données de commentaire sont soumises
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment'])) {
@@ -36,7 +37,8 @@ if($page->session->hasRole('client'))
     // Afficher toutes les informations sur l'intervention
     echo $page->render('infoInterventionClient.html',[
         'commentaires' => $commentaires,
-        'interventions'=> $interventionInfo
+        'interventions'=> $interventionInfo,
+        'role' => $role
     ]);
 
 }

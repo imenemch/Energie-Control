@@ -14,6 +14,8 @@
             $id = $_GET['id'];
 
             $infosUser = $page->getInfosUser($id);
+            $role = $page->session->get('role');
+
 
 
             if(isset($_POST['send']))
@@ -43,7 +45,7 @@
 
             }
 
-            echo $page->render('modificationUser.html', ['infosUser' => $infosUser, 'msg'=> $msg]);
+            echo $page->render('modificationUser.html', ['infosUser' => $infosUser, 'msg'=> $msg, 'role' => $role]);
 
         }
         else

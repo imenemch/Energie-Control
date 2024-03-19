@@ -17,6 +17,8 @@
              $standardistes = $page->getAllStandardiste();
              $degres = $page->getDegre();
              $statuts = $page->getStatut();
+            $role = $page->session->get('role');
+
 
             if(isset($_POST['send']))
             {
@@ -73,7 +75,7 @@
    
         echo $page->render('modificationInterventionAdmin.html', ['infosInterventions' => $infosInterventions, 
         'intervenants'=> $intervenants, 'standardistes'=> $standardistes, 'degres' => $degres, 'statuts' => $statuts, 
-        'intervenantForInteventions'=>$intervenantForIntevention]);
+        'intervenantForInteventions'=>$intervenantForIntevention, 'role'=> $role]);
 
 
     }    
