@@ -106,7 +106,7 @@ class Page
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($data);
     }
-    
+
     public function updateClientInfosAdmin(array $data)
     {
         $sql = "UPDATE users SET nom = :nom, prenom =:prenom, adresse = :adresse WHERE id = :id"; 
@@ -114,9 +114,9 @@ class Page
         $stmt->execute($data);
     }
 
-    public function updateIntervenantInfosAdmin(array $data)
+    public function SupInterUser(array $data)
     {
-        $sql = "UPDATE intervention_user SET id_intervenant = :id_intervenant WHERE id_inter_user = :id_inter_user";
+        $sql = "DELETE FROM intervention_user WHERE id_inter_user = :id_inter_user";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($data);
     }

@@ -47,16 +47,37 @@ if(isset($_GET['id']))
                 'adresse' => $adresse
             ]);
 
-
+            if(isset($_POST['intervenants']))
+            {
+                    $id_inter_users = $page->getIdInterUserForIntervention($id_intervention);
+                    foreach($id_inter_users as $id_inter_user)
+                    {
+                        $success3 = $page->SupInterUser($id_inter_user);
+                    }
+                    $id_intervenants = $_POST['intervenants'];
+                    foreach($id_intervenants as $id_intervenant)
+                    {
+                        $success4 = $page->insertInterUser('intervention_user',[
+                            'id_intervenant' => $id_intervenant,
+                            'id_intervention' => $id_intervention
+                         ]);  
+                    }     
+                
+                header("Location: updateIntervention.php?id=$id_intervention");
+                exit();
+            }
+               
         }
-    } else {
-        // header('Location: erreur.php');
+    }
+     else
+    {
+        header('Location: index.php');
         exit();
     }
 } 
 else
  {
-    // header('Location: index.php');
+    header('Location: index.php');
     exit();
 }
 echo $page->render('updateIntervention.html', ['infosInterventions' => $infosInterventions,'intervenants' => $intervenants, 'degres' => $degres,
