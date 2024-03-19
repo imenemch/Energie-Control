@@ -6,29 +6,67 @@
     <a href="addIntervention.php" class="button"> + Ajouter une nouvelle intervention</a>
     <a href="interventionStandaristes.php" class="button">Voir mes propres interventions</a>
 
-    <table class="interventions-table">
+    <table class="interventions-table sortable-table">
         <thead>
             <tr>
-                <th class="id-intervention">ID Intervention</th>
-                <th class="nom-client">Nom du Client</th>
-                <th class="statut-intervention">Statut de l'intervention</th>
-                <th class="degre-intervention">Degré de l'intervention</th>
-                <th class="description-intervention">Description de l'intervention</th>
+                <th class="id-intervention"><a href="#" class="sort" data-column="id_intervention">ID Intervention</a></th>
+                <th class="nom-client"><a href="#" class="sort" data-column="nom_client">Nom du Client</a></th>
+                <th class="statut-intervention"><a href="#" class="sort" data-column="nom_statut">Statut de l'intervention</a></th>
+                <th class="degre-intervention"><a href="#" class="sort" data-column="nom_degre">Degré de l'intervention</a></th>
+                <th class="description-intervention"><a href="#" class="sort" data-column="description_intervention">Description de l'intervention</a></th>
                 <th class="actions">Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for intervention in interventions %}
             <tr>
-                <td>{{ intervention.id_intervention }}</td>
-                <td>{{ intervention.nom_client }} {{ intervention.prenom_client }}</td>
-                <td>{{ intervention.nom_statut }}</td>
-                <td>{{ intervention.nom_degre }}</td>
-                <td>{{ intervention.description_intervention }}</td>
-               <td><a href="addCommentaire.php?id={{ intervention.id_intervention }}"><img src="../img/commentaire.png" alt="Ajouter un commentaire" style="width: 24px; height: 24px;" ></a></td>
+                <td data-column="id_intervention">{{ intervention.id_intervention }}</td>
+                <td data-column="nom_client">{{ intervention.nom_client }} {{ intervention.prenom_client }}</td>
+                <td data-column="nom_statut">{{ intervention.nom_statut }}</td>
+                <td data-column="nom_degre">{{ intervention.nom_degre }}</td>
+                <td data-column="description_intervention">{{ intervention.description_intervention }}</td>
+                <td><a href="addCommentaire.php?id={{ intervention.id_intervention }}"><img src="../img/commentaire.png" alt="Ajouter un commentaire" style="width: 24px; height: 24px;"></a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sortLinks = document.querySelectorAll('.sort');
+        sortLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const column = this.dataset.column;
+                sortTable(column);
+            });
+        });
+
+        function sortTable(column) {
+            const table = document.querySelector('.sortable-table');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+
+            // Trie les lignes en fonction de la valeur de la colonne
+            rows.sort((a, b) => {
+                const aValue = a.querySelector(`[data-column="${column}"]`).innerText;
+                const bValue = b.querySelector(`[data-column="${column}"]`).innerText;
+                return aValue.localeCompare(bValue);
+            });
+
+            // Inverse l'ordre si la colonne est déjà triée
+            if (table.dataset.sortedColumn === column) {
+                rows.reverse();
+                table.dataset.sortedColumn = '';
+            } else {
+                table.dataset.sortedColumn = column;
+            }
+
+            // Met à jour l'ordre des lignes dans le tableau
+            tbody.innerHTML = '';
+            rows.forEach(row => tbody.appendChild(row));
+        }
+    });
+</script>
 {% endblock %}
