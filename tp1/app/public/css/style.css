@@ -1,6 +1,9 @@
 body {
-  background-image: url('../img/background.png'); 
+  background-image: url('../img/background.png');
+  background-size: cover; 
+  background-repeat: no-repeat; 
 }
+
 /*style pour footer*/
 footer {
   background-color: #D0D9D4; 
@@ -488,17 +491,6 @@ input[type="submit"]:hover {
   font-size: 1.2rem;
 }
 
-.welcome-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../img/background.png'); 
-  background-size: cover;
-  background-position: center;
-  opacity: 0.5; 
-}
 /* Style pour la boîte de bienvenue */
 .welcome-box {
   background-color: rgba(255, 255, 255, 0.9); /* Couleur de fond semi-transparente */
