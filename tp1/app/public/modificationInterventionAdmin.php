@@ -17,6 +17,7 @@
              $standardistes = $page->getAllStandardiste();
              $degres = $page->getDegre();
              $statuts = $page->getStatut();
+             
             if(isset($_POST['send']))
             {
                 $id_standardistes = $_POST['standardistes'];
