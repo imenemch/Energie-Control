@@ -521,15 +521,17 @@ public function updateInterventionStandariste($id_intervention, $nom_client, $st
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 // méthode pour pouvoir modifier le status sur la partie intervenant 
-public function updateInterventionStatus(int $idIntervention, int $newStatutId): bool
+public function updateInterventionStatus($interventionId, $newStatutId)
 {
-    $sql = "UPDATE intervention SET id_statut = :newStatutId WHERE id_intervention = :idIntervention";
-
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute(['newStatutId' => $newStatutId, 'idIntervention' => $idIntervention]);
-
-    // Vérifie si la requête a réussi en comptant le nombre de lignes affectées
-    return $stmt->rowCount() > 0;
+    try {
+        $sql = "UPDATE intervention SET id_statut = ? WHERE id_intervention = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$newStatutId, $interventionId]);
+        return true; // Retourner true si la mise à jour a réussi
+    } catch (PDOException $e) {
+        // Gérez l'erreur selon votre logique d'application
+        return false; // et false dans le cas contraire
+    }
 }
 
 

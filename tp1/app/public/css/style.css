@@ -424,3 +424,44 @@ table td {
   text-decoration: none;
   color: #0F4882;
 }
+.register-container {
+  width: 80%; /* ajustez la largeur selon vos besoins */
+  margin: 0 auto; /* centre le contenu horizontalement */
+}
+
+.register-form {
+  width: 100%; /* prend toute la largeur de son conteneur */
+}
+
+.form-group {
+  margin-bottom: 20px; /* espace entre chaque groupe de formulaire */
+}
+
+label {
+  display: block; /* affiche les labels en tant que bloc, un en-dessous de l'autre */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}

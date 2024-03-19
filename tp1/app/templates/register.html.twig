@@ -1,36 +1,52 @@
 {% extends "base_auth.html.twig" %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="styles.css">
+{% endblock %}
+
 {% block body %}
-<div class="login-container">
-    <div class="login-box">
-        <h1>Créez votre compte</h1>
-
-        {% if msg %}
-            <div class="message">{{msg}}</div>
-        {% endif %}
-
-        <form action="" method="post">
-
+    <div class="register-container">
+        <h1 class="title">Créez votre compte</h1>
+        
+        <form action="" method="post" class="register-form">
+            <p>{{msg}}</p>
+            
+            <!-- E-mail -->
             <div class="form-group">
                 <label for="email">Email :</label>
                 <input type="email" name="email" id="email" placeholder="Entrez votre mail" required="required">
             </div>
 
             <div class="form-group">
-                <label for="email-cfg">Confirmez votre email :</label>
+                <label for="email-cfg">Email confirmation :</label>
                 <input type="email" name="email-cfg" id="email-cfg" placeholder="Confirmez votre mail" required="required">
             </div>
 
+            <!-- Nom -->
             <div class="form-group">
                 <label for="nom">Nom :</label>
-                <input type="text" name="nom" id="nom" placeholder="Entrez votre nom" required="required">
+                <input type="text" name="nom" id="nom" placeholder="Entrez votre nom*" required="required">
             </div>
 
+            <!-- Prénom -->
             <div class="form-group">
                 <label for="prenom">Prénom :</label>
-                <input type="text" name="prenom" id="prenom" placeholder="Entrez votre prénom" required="required">
+                <input type="text" name="prenom" id="prenom" placeholder="Votre prénom*" required="required">
             </div>
 
+            <!-- Adresse -->
+            <div class="form-group">
+                <label for="adresse">Adresse :</label>
+                <input type="text" name="adresse" id="adresse" placeholder="Ex: 7 Quai de Grenelle*" required="required">
+            </div>
+
+            <!-- Tel -->
+            <div class="form-group">
+                <label for="tel">Tel :</label>
+                <input type="tel" name="tel" id="tel" placeholder="Ex: 065678990*" required="required">
+            </div>
+
+            <!-- Mot de passe -->
             <div class="form-group">
                 <label for="password">Mot de passe :</label>
                 <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe" required="required">
@@ -44,10 +60,10 @@
             <div class="form-group">
                 <input type="submit" value="Créer" name="send">
             </div>
-   
+        <p>
+            <a href="index.php">Déjà un compte ?</a>
+        </p>
         </form>
 
-        <p><a href="index.php" class="register-link">Déjà un compte ?</a></p>
     </div>
-</div>
 {% endblock %}
