@@ -6,7 +6,7 @@ body {
 
 /*style pour footer*/
 footer {
-  background-color: #333; /* Couleur de fond du footer */
+  background-color: #1c3563; /* Couleur de fond du footer */
   color: #fff; /* Couleur du texte */
   padding: 20px 0; /* Espacement intérieur du footer */
   text-align: center; /* Centrer le texte */
@@ -495,24 +495,25 @@ input[type="submit"]:hover {
 
 /* Style pour la boîte de bienvenue */
 .welcome-box {
-  background-color: rgba(255, 255, 255, 0.9); /* Couleur de fond semi-transparente */
-  border-radius: 10px; /* Coins arrondis */
-  padding: 20px; /* Espacement interne */
+  background-color: #f8f9fa; /* Couleur de fond */
+  border-radius: 15px; /* Coins arrondis */
+  padding: 40px; /* Espacement interne */
   text-align: center; /* Alignement du texte */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
 }
 
-/* Style pour le texte de bienvenue */
 .welcome-box h1 {
-  font-size: 36px; /* Taille de la police pour le titre */
-  margin-bottom: 10px; /* Marge inférieure */
-  color: #03115e;
+  font-size: 2.8rem; /* Taille de la police pour le titre */
+  margin-bottom: 30px; /* Marge inférieure plus importante */
+  color: #03115e; /* Couleur du texte */
 }
 
 .welcome-box p {
-  font-size: 18px; /* Taille de la police pour le texte */
-  color: #03115e;
+  font-size: 1.4rem; /* Taille de la police pour le texte */
+  color: #495057; /* Couleur du texte */
+  line-height: 1.6; /* Hauteur de ligne pour une meilleure lisibilité */
 }
+
 .sort{
   text-decoration: none;
   color:#000;
