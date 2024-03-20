@@ -21,6 +21,7 @@
             if(isset($_POST['send']))
             {
 
+                $role = strtolower($_POST['role']);
                $success = $page->updateUserInfos([
                     'id' => $id,
                     'email' => $_POST['email'],
@@ -28,7 +29,7 @@
                     'prenom' => $_POST['prenom'],
                     'adresse' => $_POST['adresse'],
                     'tel' => $_POST['tel'],
-                    'role' => $_POST['role']
+                    'role' => $role
                 ]);
 
                 if($success)
