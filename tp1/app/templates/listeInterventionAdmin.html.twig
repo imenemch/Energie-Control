@@ -3,22 +3,22 @@
 {% block title %}Interventions-Admin{% endblock %}
 
 {% block body %}
-    <div class="list-container">
+    <div class="container">
         <h1 class="title">Interventions en cours</h1>
         <div class="button-wrapper">
             <a href="addIntervention.php" class="list-btn">Nouvelle Intervention</a>
         </div><br><br>
-        <table class="list-table">
+        <table class="interventions-table sortable-table">
             <thead>
                 <tr>
-                    <th><a href="#" class="sort" data-column="description">Description</a></th>
-                    <th><a href="#" class="sort" data-column="intervenants">Intervenant</a></th>
-                    <th><a href="#" class="sort" data-column="nomStandardiste">Standardiste</a></th>
-                    <th><a href="#" class="sort" data-column="nomClient">Client</a></th>
-                    <th><a href="#" class="sort" data-column="date">Date</a></th>
-                    <th><a href="#" class="sort" data-column="statutIntervention">Statut</a></th>
-                    <th><a href="#" class="sort" data-column="degreIntervention">Degré</a></th>
-                    <th>Action</th>
+                    <th class="description-intervention sortable-column"><a href="#" class="sort" data-column="description">Description</a></th>
+                    <th class="intervenants sortable-column"><a href="#" class="sort" data-column="intervenants">Intervenant</a></th>
+                    <th class="nom-standardiste sortable-column"><a href="#" class="sort" data-column="nomStandardiste">Standardiste</a></th>
+                    <th class="nom-client sortable-column"><a href="#" class="sort" data-column="nomClient">Client</a></th>
+                    <th class="date-intervention sortable-column"><a href="#" class="sort" data-column="date">Date</a></th>
+                    <th class="statut-intervention sortable-column"><a href="#" class="sort" data-column="statutIntervention">Statut</a></th>
+                    <th class="degre-intervention sortable-column"><a href="#" class="sort" data-column="degreIntervention">Degré</a></th>
+                    <th class="actions">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +53,7 @@
             });
 
             function sortTable(column) {
-                const table = document.querySelector('.list-table');
+                const table = document.querySelector('.interventions-table');
                 const tbody = table.querySelector('tbody');
                 const rows = Array.from(tbody.querySelectorAll('tr'));
 

@@ -6,14 +6,16 @@ body {
 
 /*style pour footer*/
 footer {
-  background-color: #D0D9D4; 
-  color: #59554C;
-  padding: 20px 0;
-  text-align: center; 
+  background-color: #333; /* Couleur de fond du footer */
+  color: #fff; /* Couleur du texte */
+  padding: 20px 0; /* Espacement intérieur du footer */
+  text-align: center; /* Centrer le texte */
 }
+
 footer p {
-  margin-bottom: 0; 
+  margin: 0; /* Supprimer les marges par défaut */
 }
+
 /* Style pour la boîte de connexion */
 
 .login-container {
