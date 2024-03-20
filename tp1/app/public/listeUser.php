@@ -11,7 +11,7 @@
         $role = $page->session->get('role');
         $allUsers = $page->getAllUsers();
         $foot = "foot";
-        echo $page->render('listeUser.html', [
+        echo $page->render('listeUser.html.twig', [
             'allUsers' => $allUsers, 
             'role'=> $role,
             'foot' => $foot

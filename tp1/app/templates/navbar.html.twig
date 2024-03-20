@@ -10,10 +10,10 @@
             <ul class="navbar-nav ml-auto">
                 {% if role == 'admin' %}
                     <li class="nav-item mr-md-3">
-                        <a class="nav-link text-white" href="listeInterventionAdmin.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Les interventions</a>
+                        <a class="nav-link text-white" href="listeInterventionAdmin.php" style="font-family: Arial, sans-serif; margin-right: 100px; margin-left: 10px">Les interventions</a>
                     </li>
                     <li class="nav-item mr-md-3">
-                        <a class="nav-link text-white" href="listeUser.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Gestion des utilisateurs </a>
+                        <a class="nav-link text-white" href="listeUser.php" style="font-family: Arial, sans-serif; margin-right: 100px;">Gestion des utilisateurs </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="logout.php" style="font-family: Arial, sans-serif;">Déconnexion</a>
@@ -21,7 +21,7 @@
                 {% endif %}
                 {% if role == 'standardiste' %}
                     <li class="nav-item mr-md-3">
-                        <a class="nav-link text-white" href="listeIntervention_standariste.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Toutes les interventions</a>
+                        <a class="nav-link text-white" href="listeIntervention_standariste.php" style="font-family: Arial, sans-serif; margin-right: 10px; ">Toutes les interventions</a>
                     </li>
                     <li class="nav-item mr-md-3">
                         <a class="nav-link text-white" href="interventionStandaristes.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Mes interventions</a>
@@ -35,7 +35,7 @@
                 {% endif %}
                 {% if role == 'client' %}
                     <li class="nav-item mr-md-3">
-                        <a class="nav-link text-white" href="listeClient.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Mes interventions</a>
+                        <a class="nav-link text-white" href="listeClient.php" style="font-family: Arial, sans-serif; margin-right: 100px; margin-left: 100px;">Mes interventions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="logout.php" style="font-family: Arial, sans-serif;">Déconnexion</a>
@@ -43,7 +43,7 @@
                 {% endif %}
                 {% if role == 'intervenant' %}
                     <li class="nav-item mr-md-3">
-                        <a class="nav-link text-white" href="intervenantPage.php" style="font-family: Arial, sans-serif; margin-right: 10px;">Mes interventions</a>
+                        <a class="nav-link text-white" href="intervenantPage.php" style="font-family: Arial, sans-serif; margin-right: 100px;  margin-left: 100px;">Mes interventions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="logout.php" style="font-family: Arial, sans-serif;">Déconnexion</a>

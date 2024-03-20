@@ -35,7 +35,7 @@ if($page->session->hasRole('client'))
     $commentaires = $page->getCommentsForIntervention($interventionId);
 
     // Afficher toutes les informations sur l'intervention
-    echo $page->render('infoInterventionClient.html',[
+    echo $page->render('infoInterventionClient.html.twig',[
         'commentaires' => $commentaires,
         'interventions'=> $interventionInfo,
         'role' => $role

@@ -73,7 +73,7 @@
     
     
    
-        echo $page->render('modificationInterventionAdmin.html', ['infosInterventions' => $infosInterventions, 
+        echo $page->render('modificationInterventionAdmin.html.twig', ['infosInterventions' => $infosInterventions, 
         'intervenants'=> $intervenants, 'standardistes'=> $standardistes, 'degres' => $degres, 'statuts' => $statuts, 
         'intervenantForInteventions'=>$intervenantForIntevention, 'role'=> $role]);
 

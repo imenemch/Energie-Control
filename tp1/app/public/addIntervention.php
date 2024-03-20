@@ -90,7 +90,7 @@ require_once '../vendor/autoload.php';
 
         }
 
-    echo $page->render('addIntervention.html', ['intervenants' => $intervenants, 
+    echo $page->render('addIntervention.html.twig', ['intervenants' => $intervenants, 
     'degres' => $degres, 'statuts' => $statuts, 'types' => $types, 'msg' => $msg, 'role'=> $role]);
 
     }

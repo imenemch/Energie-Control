@@ -28,7 +28,7 @@ if(isset($_GET['id'])) {
     }
     $foot = "foot";
 
-    echo $page->render('addCommentaire.html', ['msg' => $msg, 'role' => $role, 'foot' => $foot]);
+    echo $page->render('addCommentaire.html.twig', ['msg' => $msg, 'role' => $role, 'foot' => $foot]);
 } else {
     header('Location: index.php');
 }

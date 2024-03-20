@@ -12,7 +12,7 @@ if ($page->session->isConnected() && $page->session->hasRole('intervenant')) {
     $interventions = $page->getInterventionsByIntervenant($id_intervenant);
     $statuts = $page->getStatut();
     $foot = "foot";
-    echo $page->render('intervenantPage.html', ['interventions' => $interventions, 'statuts' => $statuts, 'role'=> $role, 'foot' => $foot]);
+    echo $page->render('intervenantPage.html.twig', ['interventions' => $interventions, 'statuts' => $statuts, 'role'=> $role, 'foot' => $foot]);
 } 
 else 
 {

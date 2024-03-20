@@ -80,7 +80,7 @@ else
     header('Location: index.php');
     exit();
 }
-echo $page->render('updateIntervention.html', ['infosInterventions' => $infosInterventions,'intervenants' => $intervenants, 'degres' => $degres,
+echo $page->render('updateIntervention.html.twig', ['infosInterventions' => $infosInterventions,'intervenants' => $intervenants, 'degres' => $degres,
 'statuts' => $statuts, 'intervenantForInterventions' => $intervenantForIntevention, 'role'=> $role]);
 
 ?>

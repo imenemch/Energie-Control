@@ -16,7 +16,7 @@
             $role = $page->session->get('role');
         }
     
-        echo $page->render('infosUser.html', ['infosUsers' => $infosUsers, 'role' => $role]);
+        echo $page->render('infosUser.html.twig', ['infosUsers' => $infosUsers, 'role' => $role]);
 
     }
     else

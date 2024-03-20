@@ -11,7 +11,7 @@
         $role = $page->session->get('role');
         $allClients = $page->getAllClient();
         $foot = "foot";
-        echo $page->render('listeClientStandardiste.html', ['allClients' => $allClients, 'role'=> $role, 'foot' => $foot]);
+        echo $page->render('listeClientStandardiste.html.twig', ['allClients' => $allClients, 'role'=> $role, 'foot' => $foot]);
     }
     else
     {

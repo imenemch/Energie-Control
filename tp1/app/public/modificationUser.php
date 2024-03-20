@@ -46,7 +46,7 @@
 
             }
 
-            echo $page->render('modificationUser.html', ['infosUser' => $infosUser, 'msg'=> $msg, 'role' => $role]);
+            echo $page->render('modificationUser.html.twig', ['infosUser' => $infosUser, 'msg'=> $msg, 'role' => $role]);
 
         }
         else
