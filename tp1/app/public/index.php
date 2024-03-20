@@ -30,6 +30,6 @@
             }
         }
     }
-
+    $foot = "foot";
     echo $page->render('index.html.twig', [
-        'msg' => $msg]);
+        'msg' => $msg, 'foot' => $foot]);

@@ -26,8 +26,9 @@ if(isset($_GET['id'])) {
             $msg = "Une erreur est survenue lors de l'ajout du commentaire";
         }
     }
+    $foot = "foot";
 
-    echo $page->render('addCommentaire.html', ['msg' => $msg, 'role' => $role]);
+    echo $page->render('addCommentaire.html', ['msg' => $msg, 'role' => $role, 'foot' => $foot]);
 } else {
     header('Location: index.php');
 }

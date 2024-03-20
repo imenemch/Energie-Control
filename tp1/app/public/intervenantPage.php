@@ -11,7 +11,8 @@ if ($page->session->isConnected() && $page->session->hasRole('intervenant')) {
     $id_intervenant = $page->session->get('id');
     $interventions = $page->getInterventionsByIntervenant($id_intervenant);
     $statuts = $page->getStatut();
-    echo $page->render('intervenantPage.html', ['interventions' => $interventions, 'statuts' => $statuts, 'role'=> $role]);
+    $foot = "foot";
+    echo $page->render('intervenantPage.html', ['interventions' => $interventions, 'statuts' => $statuts, 'role'=> $role, 'foot' => $foot]);
 } 
 else 
 {

@@ -11,7 +11,11 @@ if (!$page->session->isConnected()) {
 }
 
 $email = $page->session->get('email');
-$role = $page->session->get('role'); //partie navbar
-
-echo $page->render('login.html.twig', ['email' => $email, 'role' => $role]);
+$role = $page->session->get('role'); 
+$foot = "foot";
+echo $page->render('login.html.twig', [
+    'email' => $email, 
+    'role' => $role,
+    'foot' => $foot
+]);
 ?>

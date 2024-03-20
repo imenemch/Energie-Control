@@ -32,11 +32,12 @@ if($page->session->isConnected() && $page->session->hasRole('client'))
 
     // Convertir le tableau associatif en un simple tableau pour l'affichage
     $client_interventions = array_values($interventionsByID);
-
+    $foot = "foot";
     // Afficher la page d'accueil des clients
     echo $page->render('listeClient.html.twig', [
         'interventions' => $client_interventions,
-        'role'=> $role
+        'role'=> $role,
+        'foot' => $foot
     ]);
 
 

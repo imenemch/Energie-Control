@@ -10,7 +10,12 @@
     {
         $role = $page->session->get('role');
         $allInterventions = $page->getAllInterventionsAdmin();
-        echo $page->render('listeInterventionAdmin.html.twig', ['allInterventions' => $allInterventions, 'role'=> $role]);
+        $foot = "foot";
+        echo $page->render('listeInterventionAdmin.html.twig', [
+            'allInterventions' => $allInterventions, 
+            'role'=> $role,
+            'foot' => $foot
+        ]);
 
     }
     else

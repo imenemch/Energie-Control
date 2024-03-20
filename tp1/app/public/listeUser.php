@@ -10,7 +10,12 @@
     {
         $role = $page->session->get('role');
         $allUsers = $page->getAllUsers();
-        echo $page->render('listeUser.html', ['allUsers' => $allUsers, 'role'=> $role]);
+        $foot = "foot";
+        echo $page->render('listeUser.html', [
+            'allUsers' => $allUsers, 
+            'role'=> $role,
+            'foot' => $foot
+        ]);
     }
     else
     {

@@ -10,7 +10,8 @@
     {
         $role = $page->session->get('role');
         $allClients = $page->getAllClient();
-        echo $page->render('listeClientStandardiste.html', ['allClients' => $allClients, 'role'=> $role]);
+        $foot = "foot";
+        echo $page->render('listeClientStandardiste.html', ['allClients' => $allClients, 'role'=> $role, 'foot' => $foot]);
     }
     else
     {
